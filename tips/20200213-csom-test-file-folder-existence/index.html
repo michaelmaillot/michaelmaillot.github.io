@@ -1,0 +1,456 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Blog articles about Office 365 / SharePoint / Azure">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.2">
+    
+    
+      
+        <title>[CSOM] Test in your C# code if a SharePoint File or Folder exists - Michaël Maillot</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.adb8469c.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.86422ebf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700%7C&display=fallback">
+        <style>body,input{font-family:"Poppins","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="black" data-md-color-accent="light-blue">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#csom-test-in-your-c-code-if-a-sharepoint-file-or-folder-exists" tabindex="0" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="Michaël Maillot" aria-label="Michaël Maillot" class="md-header-nav__button md-logo">
+          
+            <img alt="logo" src="../../images/puzzle.png" width="24" height="24">
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Michaël Maillot
+            </span>
+            <span class="md-header-nav__topic">
+              
+                [CSOM] Test in your C# code if a SharePoint File or Folder exists
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="Michaël Maillot" class="md-nav__button md-logo">
+      
+        <img alt="logo" src="../../images/puzzle.png" width="48" height="48">
+      
+    </a>
+    Michaël Maillot
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../about/" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-simple-use-case" class="md-nav__link">
+    A Simple Use Case
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bonus-using-the-windows-credential-manager" class="md-nav__link">
+    Bonus : Using the Windows Credential Manager
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#useful-links" class="md-nav__link">
+    Useful Links
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="csom-test-in-your-c-code-if-a-sharepoint-file-or-folder-exists">[CSOM] Test in your C# code if a SharePoint File or Folder exists</h1>
+<h2 id="a-simple-use-case">A Simple Use Case</h2>
+<p>When you want to know if a file or folder already exists on a SharePoint Site (in a migration use case for example, before perform a copy / move), you can have some bad surprises.</p>
+<p>Let's try with a simple folder case example.</p>
+<p>```csharp class:"lineNo"
+string userName = "user@tenant.onmicrosoft.com";
+SecureString securePassword = new SecureString();
+foreach (var cc in "yourPlainTextPassword")
+{
+    securePassword.AppendChar(cc);
+}</p>
+<p>using (ClientContext spContext = new ClientContext("SharePointSiteUrl"))
+{
+    spContext.Credentials = new SharePointOnlineCredentials(userName, securePassword);
+    spContext.ExecuteQuery();</p>
+<pre><code>Web currentWeb = spContext.Web;
+List docLibrary = currentWeb.Lists.GetByTitle("Documents");
+spContext.Load(docLibrary);
+spContext.Load(docLibrary.RootFolder);
+spContext.ExecuteQuery();
+
+string folderPath = docLibrary.RootFolder.ServerRelativeUrl + "/MyFolderThatDoesNotExists";
+
+Folder folderToGet = currentWeb.GetFolderByServerRelativeUrl(folderPath);
+spContext.Load(folderToGet, f =&gt; f.Exists);
+
+try
+{
+    spContext.ExecuteQuery();
+
+    if (folderToGet.Exists)
+    {
+        // Do something
+    }
+    else
+    {
+        // Do something else
+    }
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
+</code></pre>
+<p>}</p>
+<pre><code>
+The twisted thing here's that the ```if (folderToGet.Exists)``` line won't be reached. Because if you use the &quot;GetFolderByServerRelativeUrl&quot; and the folder actually doesn't exists (or any parent folder in the hierarchy), it'll throw an exception. But if it exists, then you'll be able to test the value of ```folderToGet.Exists``` property (which obviously will return ```true```). Clever.
+
+So you want to test if a folder exists but without to constantly catch the error... Good news : the [SharePointPnPCoreOnline](https://www.nuget.org/packages/SharePointPnPCoreOnline) Package implements this ! Let's try it :
+
+```csharp
+// Credentials declaration like above
+...
+using (ClientContext spContext = new ClientContext(&quot;SharePointSiteUrl&quot;))
+{
+    // Connection like above
+    ...
+
+    string folderPath = docLibrary.RootFolder.ServerRelativeUrl + &quot;/MyFileThatDoesNotExists&quot;;
+
+    bool exists = currentWeb.DoesFolderExists(folderPath);
+
+    if (exists)
+    {
+        // Do something
+    }
+    else
+    {
+        // Do something else
+    }
+}
+</code></pre>
+
+<p>And that's it ! The <code>DoesFolderExists</code> Method provides this test. And it also works with folder hierarchy containing special characters 😉.</p>
+<p>For testing the existance of a file, there's not any equivalent. So if you try to get a file that doesn't exists :</p>
+<pre><code class="csharp">// Credentials declaration like above
+...
+
+using (ClientContext spContext = new ClientContext(&quot;SharePointSiteUrl&quot;))
+{
+    // Connection like above
+    ...
+
+    string filePath = docLibrary.RootFolder.ServerRelativeUrl + &quot;/MyFileThatDoesNotExists&quot;;
+
+    File fileToGet = currentWeb.GetFileByServerRelativeUrl(filePath);
+    spContext.Load(fileToGet, f =&gt; f.Exists);
+
+    try
+    {
+        spContext.ExecuteQuery();
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+</code></pre>
+
+<p>It'll also throw an exception.</p>
+<p>So the thing here is to use the <code>GetFileByServerRelativePath</code> method which returns a File object, whether it exists or not. And there : the "Exists" property can be used. The great thing about this method is that it also works if you file (or your folder hierarchy) contains special characters:</p>
+<pre><code class="csharp">// Credentials declaration like above
+...
+
+using (ClientContext spContext = new ClientContext(&quot;SharePointSiteUrl&quot;))
+{
+    // Connection like above
+    ...
+
+    string filePath = docLibrary.RootFolder.ServerRelativeUrl + &quot;/# My Tricky File ühühü.docx&quot;;
+
+    File fileToGet = currentWeb.GetFileByServerRelativePath(ResourcePath.FromDecodedUrl(filePath));
+    spContext.Load(fileToGet, f =&gt; f.Exists);
+
+    try
+    {
+        spContext.ExecuteQuery();
+
+        if (fileToGet.Exists)
+        {
+            // Do something
+        }
+        else
+        {
+            // Do something else
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+</code></pre>
+
+<h2 id="bonus-using-the-windows-credential-manager">Bonus : Using the Windows Credential Manager</h2>
+<p>For Windows users, if you don't want to always write your credentials and if you already know the <a href="https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/add-pnpstoredcredential?view=sharepoint-ps">Add</a>/<a href="https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/get-pnpstoredcredential?view=sharepoint-ps">Get</a>-PnPStoredCredential cmdlets, you might be interested to use the CredentialManager class provided by the Adys Tech company. You can fin the Nugget package <a href="https://www.nuget.org/packages/AdysTech.CredentialManager/">here</a>.</p>
+<p>Then, when referencing it, you just have to use it like this:</p>
+<pre><code class="csharp">var cred = CredentialManager.GetCredentials(&quot;PnPPS:CredentialsName&quot;);
+string user = cred.UserName;
+SecureString pwd = cred.SecurePassword;
+</code></pre>
+
+<h2 id="useful-links">Useful Links</h2>
+<ul>
+<li><a href="https://docs.microsoft.com/fr-fr/dotnet/api/microsoft.sharepoint.client.filefolderextensions.doesfolderexists?view=sharepointpnpcoreonline-2.18.1709.0">FileFolderExtensions.DoesFolderExists from SharePoint Online PnP Core</a></li>
+<li><a href="https://docs.microsoft.com/en-us/sharepoint/dev/solution-guidance/supporting-and-in-file-and-folder-with-the-resourcepath-api#new-apis-based-on-resourcepath-that-support--and-">Supporting % and # in files and folders with the ResourcePath API</a></li>
+</ul>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://twitter.com/michaelmaillot" target="_blank" rel="noopener" title="twitter" class="md-footer-social__link fa fa-twitter"></a>
+    
+      <a href="http://github.com/michaelmaillot" target="_blank" rel="noopener" title="github" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.c33a9706.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

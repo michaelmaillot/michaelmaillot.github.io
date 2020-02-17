@@ -248,15 +248,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#with-the-azure-active-directory-aad-powershell-module" class="md-nav__link">
-    With the Azure Active Directory (AAD) PowerShell module
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#with-office-365-cli" class="md-nav__link">
-    With Office 365 CLI
+  <a href="#with-code" class="md-nav__link">
+    With code
   </a>
   
 </li>
@@ -302,15 +295,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#with-the-sharepointpnppowershellonline-module" class="md-nav__link">
-    With The SharePointPnPPowerShellOnline module
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#with-office-365-cli_1" class="md-nav__link">
-    With Office 365 CLI
+  <a href="#with-code_1" class="md-nav__link">
+    With code
   </a>
   
 </li>
@@ -388,18 +374,29 @@
 <p>Throught the UI, you have to delete the Group then permanently delete it</p>
 <p><img alt="alt text" src="../../images/articles/20200211/delete-group.png" title="Delete Group" /></p>
 <p><img alt="alt text" src="../../images/articles/20200211/perm-delete-group.png" title="Permanently Delete Group" /></p>
-<h3 id="with-the-azure-active-directory-aad-powershell-module">With the Azure Active Directory (AAD) PowerShell module</h3>
-<p>With the AAD PowerShell <strong>2.0-preview</strong> module, use the following commands</p>
-<pre><code class="powershell">Connect-AzureAD -TenantId &quot;TenantId&quot;
-Remove-AzureADGroup -ObjectId &quot;GroupId&quot;
-Remove-AzureADMSDeletedDirectoryObject -Id &quot;GroupId&quot;
-</code></pre>
-
-<h3 id="with-office-365-cli">With Office 365 CLI</h3>
-<pre><code class="cli">aad o365group remove --id &quot;groupId&quot; --confirm
-</code></pre>
-
-<p>(As there's no CLI command to permanently delete a Group, you'll have to do it through the UI)</p>
+<h3 id="with-code">With code</h3>
+<div class="superfences-tabs">
+<input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
+<label for="__tab_1_0">PowerShell</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="c"># With the AAD PowerShell **2.0-preview** module</span>
+<span class="nb">Connect-AzureAD</span> <span class="n">-TenantId</span> <span class="s2">&quot;TenantId&quot;</span>
+<span class="nb">Remove-AzureADGroup</span> <span class="n">-ObjectId</span> <span class="s2">&quot;GroupId&quot;</span>
+<span class="nb">Remove-AzureADMSDeletedDirectoryObject</span> <span class="n">-Id</span> <span class="s2">&quot;GroupId&quot;</span>
+</code></pre></div>
+</td></tr></table></div>
+<input name="__tabs_1" type="radio" id="__tab_1_1" />
+<label for="__tab_1_1">Office 365 CLI</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="c1"># (As there&#39;s no CLI command to permanently delete a Group,</span>
+<span class="c1"># you&#39;ll have to do it through the UI)</span>
+aad o365group remove --id <span class="s2">&quot;groupId&quot;</span> --confirm
+</code></pre></div>
+</td></tr></table></div>
+</div>
 <h2 id="delete-team-if-necessary">Delete Team (if necessary)</h2>
 <p>Sometimes, once a Group is permanently deleted, the Team still exists. If it's the case and once again, you don't want for the Job to delete it, you can do it yourself. But don't be surprise if the following commands throw an error : maybe the Job has already worked.</p>
 <h3 id="with-interface_1">With Interface</h3>
@@ -408,28 +405,46 @@ Remove-AzureADMSDeletedDirectoryObject -Id &quot;GroupId&quot;
 <p><center><strong>OR</strong></center></p>
 <p><img alt="alt text" src="../../images/articles/20200211/delete-team-admin.png" title="Delete Team from Admin Interface" /></p>
 <h3 id="with-the-teams-powershell-module">With the Teams PowerShell module</h3>
-<pre><code class="powershell">Connect-MicrosoftTeams -TenantId &quot;TenantId&quot;
-Remove-Team -GroupId &quot;GroupId&quot;
-</code></pre>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="nb">Connect-MicrosoftTeams</span> <span class="n">-TenantId</span> <span class="s2">&quot;TenantId&quot;</span>
+<span class="nb">Remove-Team</span> <span class="n">-GroupId</span> <span class="s2">&quot;GroupId&quot;</span>
+</code></pre></div>
+</td></tr></table>
 
 <h2 id="delete-site-collection">Delete Site Collection</h2>
 <p>As I told you before (even if you did the previous steps), if you try to delete the Teams Site from the SharePoint Admin Center, you won't be able to remove it from the Site Collection Recycle Bin (because of the O365 Job Tenant update process).</p>
-<h3 id="with-the-sharepointpnppowershellonline-module">With The SharePointPnPPowerShellOnline module</h3>
+<h3 id="with-code_1">With code</h3>
 <p>So the solution here is to delete the Site with PowerShell (SharePoint PnP PoweShell module), like this:</p>
-<pre><code class="powershell"># If you are familiar with the Get-PnPStoredCredential cmdlet, you can use it here
-# With the &quot;-Credential&quot; Argument
-Connect-PnPOnline -TenantId &quot;TenantId&quot;
-Remove-PnPTenantSite -Url &quot;TeamsSiteUrl&quot; -Force -SkipRecycleBin
+<div class="superfences-tabs">
+<input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
+<label for="__tab_2_0">PowerShell</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="c"># If you are familiar with the Get-PnPStoredCredential cmdlet,</span>
+<span class="c"># you can use it here with the &quot;-Credential&quot; Argument</span>
+<span class="nb">Connect-PnPOnline</span> <span class="n">-TenantId</span> <span class="s2">&quot;TenantId&quot;</span>
+<span class="nb">Remove-PnPTenantSite</span> <span class="n">-Url</span> <span class="s2">&quot;TeamsSiteUrl&quot;</span> <span class="n">-Force</span> <span class="n">-SkipRecycleBin</span>
 
-# If it's already in Recycle Bin
-Clear-PnPTenantRecycleBinItem -Url &quot;TeamsSiteUrl&quot; -Force -Wait
-</code></pre>
+<span class="c"># If it&#39;s already in Recycle Bin</span>
+<span class="nb">Clear-PnPTenantRecycleBinItem</span> <span class="n">-Url</span> <span class="s2">&quot;TeamsSiteUrl&quot;</span> <span class="n">-Force</span> <span class="n">-Wait</span>
+</code></pre></div>
+</td></tr></table></div>
+<input name="__tabs_2" type="radio" id="__tab_2_1" />
+<label for="__tab_2_1">Office 365 CLI</label>
+<div class="superfences-content"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="c1"># (If it&#39;s already in Site Collection Recycle Bin, you&#39;ll have to delete it</span>
+<span class="c1"># from the UI or through another API like SharePoint or Graph)</span>
 
-<h3 id="with-office-365-cli_1">With Office 365 CLI</h3>
-<pre><code class="cli">spo site classic remove -u &quot;url&quot; --skipRecycleBin --confirm --wait
-</code></pre>
-
-<p>(If it's already in Site Collection Recycle Bin, you'll have to delete it from the UI or through another API like SharePoint or Graph)</p>
+spo site classic remove -u <span class="s2">&quot;url&quot;</span> --skipRecycleBin --confirm --wait
+</code></pre></div>
+</td></tr></table></div>
+</div>
 <h2 id="thats-it">That's it</h2>
 <p>Et voilà ! You can start over your process until it's ready to use.</p>
 <p>Of course, you could also make those tasks with the SharePoint Online Management Shell or with the Graph API, but here I've covered the most common ways of working with Teams / Group / SharePoint administration.</p>

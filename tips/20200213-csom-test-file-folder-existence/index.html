@@ -260,143 +260,258 @@
 <h2 id="a-simple-use-case">A Simple Use Case</h2>
 <p>When you want to know if a file or folder already exists on a SharePoint Site (in a migration use case for example, before perform a copy / move), you can have some bad surprises.</p>
 <p>Let's try with a simple folder case example.</p>
-<p>```csharp class:"lineNo"
-string userName = "user@tenant.onmicrosoft.com";
-SecureString securePassword = new SecureString();
-foreach (var cc in "yourPlainTextPassword")
-{
-    securePassword.AppendChar(cc);
-}</p>
-<p>using (ClientContext spContext = new ClientContext("SharePointSiteUrl"))
-{
-    spContext.Credentials = new SharePointOnlineCredentials(userName, securePassword);
-    spContext.ExecuteQuery();</p>
-<pre><code>Web currentWeb = spContext.Web;
-List docLibrary = currentWeb.Lists.GetByTitle("Documents");
-spContext.Load(docLibrary);
-spContext.Load(docLibrary.RootFolder);
-spContext.ExecuteQuery();
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="n">string</span><span class="w"> </span><span class="n">userName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;user@tenant.onmicrosoft.com&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">SecureString</span><span class="w"> </span><span class="n">securePassword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SecureString</span><span class="p">();</span><span class="w"></span>
+<span class="n">foreach</span><span class="w"> </span><span class="p">(</span><span class="nf">var</span><span class="w"> </span><span class="n">cc</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="ss">&quot;yourPlainTextPassword&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">securePassword</span><span class="p">.</span><span class="n">AppendChar</span><span class="p">(</span><span class="n">cc</span><span class="p">);</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
 
-string folderPath = docLibrary.RootFolder.ServerRelativeUrl + "/MyFolderThatDoesNotExists";
+<span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="n">ClientContext</span><span class="w"> </span><span class="n">spContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientContext</span><span class="p">(</span><span class="ss">&quot;SharePointSiteUrl&quot;</span><span class="p">))</span><span class="w"></span>
+<span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">spContext</span><span class="p">.</span><span class="n">Credentials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SharePointOnlineCredentials</span><span class="p">(</span><span class="n">userName</span><span class="p">,</span><span class="w"> </span><span class="n">securePassword</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">spContext</span><span class="p">.</span><span class="n">ExecuteQuery</span><span class="p">();</span><span class="w"></span>
 
-Folder folderToGet = currentWeb.GetFolderByServerRelativeUrl(folderPath);
-spContext.Load(folderToGet, f =&gt; f.Exists);
+<span class="w">    </span><span class="n">Web</span><span class="w"> </span><span class="n">currentWeb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spContext</span><span class="p">.</span><span class="n">Web</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">List</span><span class="w"> </span><span class="n">docLibrary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">currentWeb</span><span class="p">.</span><span class="n">Lists</span><span class="p">.</span><span class="n">GetByTitle</span><span class="p">(</span><span class="ss">&quot;Documents&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">spContext</span><span class="p">.</span><span class="k">Load</span><span class="p">(</span><span class="n">docLibrary</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">spContext</span><span class="p">.</span><span class="k">Load</span><span class="p">(</span><span class="n">docLibrary</span><span class="p">.</span><span class="n">RootFolder</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">spContext</span><span class="p">.</span><span class="n">ExecuteQuery</span><span class="p">();</span><span class="w"></span>
 
-try
-{
-    spContext.ExecuteQuery();
+<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">folderPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">docLibrary</span><span class="p">.</span><span class="n">RootFolder</span><span class="p">.</span><span class="n">ServerRelativeUrl</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot;/MyFolderThatDoesNotExists&quot;</span><span class="p">;</span><span class="w"></span>
 
-    if (folderToGet.Exists)
-    {
-        // Do something
-    }
-    else
-    {
-        // Do something else
-    }
-}
-catch (Exception ex)
-{
-    Console.WriteLine(ex.Message);
-}
-</code></pre>
-<p>}</p>
-<pre><code>
-The twisted thing here's that the ```if (folderToGet.Exists)``` line won't be reached. Because if you use the &quot;GetFolderByServerRelativeUrl&quot; and the folder actually doesn't exists (or any parent folder in the hierarchy), it'll throw an exception. But if it exists, then you'll be able to test the value of ```folderToGet.Exists``` property (which obviously will return ```true```). Clever.
+<span class="w">    </span><span class="n">Folder</span><span class="w"> </span><span class="n">folderToGet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">currentWeb</span><span class="p">.</span><span class="n">GetFolderByServerRelativeUrl</span><span class="p">(</span><span class="n">folderPath</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">spContext</span><span class="p">.</span><span class="k">Load</span><span class="p">(</span><span class="n">folderToGet</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="ow">Exists</span><span class="p">);</span><span class="w"></span>
 
-So you want to test if a folder exists but without to constantly catch the error... Good news : the [SharePointPnPCoreOnline](https://www.nuget.org/packages/SharePointPnPCoreOnline) Package implements this ! Let's try it :
+<span class="w">    </span><span class="k">try</span><span class="w"></span>
+<span class="w">    </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">spContext</span><span class="p">.</span><span class="n">ExecuteQuery</span><span class="p">();</span><span class="w"></span>
 
-```csharp
-// Credentials declaration like above
-...
-using (ClientContext spContext = new ClientContext(&quot;SharePointSiteUrl&quot;))
-{
-    // Connection like above
-    ...
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">folderToGet</span><span class="p">.</span><span class="ow">Exists</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="err">{</span><span class="w"></span>
+<span class="w">            </span><span class="o">//</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">something</span><span class="w"></span>
+<span class="w">        </span><span class="err">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="err">{</span><span class="w"></span>
+<span class="w">            </span><span class="o">//</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">something</span><span class="w"> </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="err">}</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="k">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</code></pre></div>
+</td></tr></table>
 
-    string folderPath = docLibrary.RootFolder.ServerRelativeUrl + &quot;/MyFileThatDoesNotExists&quot;;
+<p>The twisted thing here's that the <code>if (folderToGet.Exists)</code> line won't be reached. Because if you use the "GetFolderByServerRelativeUrl" and the folder actually doesn't exists (or any parent folder in the hierarchy), it'll throw an exception. But if it exists, then you'll be able to test the value of <code>folderToGet.Exists</code> property (which obviously will return <code>true</code>). Clever.</p>
+<p>So you want to test if a folder exists but without to constantly catch the error... Good news : the <a href="https://www.nuget.org/packages/SharePointPnPCoreOnline">SharePointPnPCoreOnline</a> Package implements this ! Let's try it :</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="c1">// Credentials declaration like above</span>
+<span class="p">...</span>
+<span class="k">using</span> <span class="p">(</span><span class="n">ClientContext</span> <span class="n">spContext</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ClientContext</span><span class="p">(</span><span class="s">&quot;SharePointSiteUrl&quot;</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="c1">// Connection like above</span>
+    <span class="p">...</span>
 
-    bool exists = currentWeb.DoesFolderExists(folderPath);
+    <span class="kt">string</span> <span class="n">folderPath</span> <span class="p">=</span> <span class="n">docLibrary</span><span class="p">.</span><span class="n">RootFolder</span><span class="p">.</span><span class="n">ServerRelativeUrl</span> <span class="p">+</span> <span class="s">&quot;/MyFileThatDoesNotExists&quot;</span><span class="p">;</span>
 
-    if (exists)
-    {
-        // Do something
-    }
-    else
-    {
-        // Do something else
-    }
-}
-</code></pre>
+    <span class="kt">bool</span> <span class="n">exists</span> <span class="p">=</span> <span class="n">currentWeb</span><span class="p">.</span><span class="n">DoesFolderExists</span><span class="p">(</span><span class="n">folderPath</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">exists</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Do something</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="c1">// Do something else</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
 
 <p>And that's it ! The <code>DoesFolderExists</code> Method provides this test. And it also works with folder hierarchy containing special characters 😉.</p>
 <p>For testing the existance of a file, there's not any equivalent. So if you try to get a file that doesn't exists :</p>
-<pre><code class="csharp">// Credentials declaration like above
-...
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="c1">// Credentials declaration like above</span>
+<span class="p">...</span>
 
-using (ClientContext spContext = new ClientContext(&quot;SharePointSiteUrl&quot;))
-{
-    // Connection like above
-    ...
+<span class="k">using</span> <span class="p">(</span><span class="n">ClientContext</span> <span class="n">spContext</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ClientContext</span><span class="p">(</span><span class="s">&quot;SharePointSiteUrl&quot;</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="c1">// Connection like above</span>
+    <span class="p">...</span>
 
-    string filePath = docLibrary.RootFolder.ServerRelativeUrl + &quot;/MyFileThatDoesNotExists&quot;;
+    <span class="kt">string</span> <span class="n">filePath</span> <span class="p">=</span> <span class="n">docLibrary</span><span class="p">.</span><span class="n">RootFolder</span><span class="p">.</span><span class="n">ServerRelativeUrl</span> <span class="p">+</span> <span class="s">&quot;/MyFileThatDoesNotExists&quot;</span><span class="p">;</span>
 
-    File fileToGet = currentWeb.GetFileByServerRelativeUrl(filePath);
-    spContext.Load(fileToGet, f =&gt; f.Exists);
+    <span class="n">File</span> <span class="n">fileToGet</span> <span class="p">=</span> <span class="n">currentWeb</span><span class="p">.</span><span class="n">GetFileByServerRelativeUrl</span><span class="p">(</span><span class="n">filePath</span><span class="p">);</span>
+    <span class="n">spContext</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">fileToGet</span><span class="p">,</span> <span class="n">f</span> <span class="p">=&gt;</span> <span class="n">f</span><span class="p">.</span><span class="n">Exists</span><span class="p">);</span>
 
-    try
-    {
-        spContext.ExecuteQuery();
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.Message);
-    }
-}
-</code></pre>
+    <span class="k">try</span>
+    <span class="p">{</span>
+        <span class="n">spContext</span><span class="p">.</span><span class="n">ExecuteQuery</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
 
 <p>It'll also throw an exception.</p>
 <p>So the thing here is to use the <code>GetFileByServerRelativePath</code> method which returns a File object, whether it exists or not. And there : the "Exists" property can be used. The great thing about this method is that it also works if you file (or your folder hierarchy) contains special characters:</p>
-<pre><code class="csharp">// Credentials declaration like above
-...
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="c1">// Credentials declaration like above</span>
+<span class="p">...</span>
 
-using (ClientContext spContext = new ClientContext(&quot;SharePointSiteUrl&quot;))
-{
-    // Connection like above
-    ...
+<span class="k">using</span> <span class="p">(</span><span class="n">ClientContext</span> <span class="n">spContext</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ClientContext</span><span class="p">(</span><span class="s">&quot;SharePointSiteUrl&quot;</span><span class="p">))</span>
+<span class="p">{</span>
+    <span class="c1">// Connection like above</span>
+    <span class="p">...</span>
 
-    string filePath = docLibrary.RootFolder.ServerRelativeUrl + &quot;/# My Tricky File ühühü.docx&quot;;
+    <span class="kt">string</span> <span class="n">filePath</span> <span class="p">=</span> <span class="n">docLibrary</span><span class="p">.</span><span class="n">RootFolder</span><span class="p">.</span><span class="n">ServerRelativeUrl</span> <span class="p">+</span> <span class="s">&quot;/# My Tricky File ühühü.docx&quot;</span><span class="p">;</span>
 
-    File fileToGet = currentWeb.GetFileByServerRelativePath(ResourcePath.FromDecodedUrl(filePath));
-    spContext.Load(fileToGet, f =&gt; f.Exists);
+    <span class="n">File</span> <span class="n">fileToGet</span> <span class="p">=</span> <span class="n">currentWeb</span><span class="p">.</span><span class="n">GetFileByServerRelativePath</span><span class="p">(</span><span class="n">ResourcePath</span><span class="p">.</span><span class="n">FromDecodedUrl</span><span class="p">(</span><span class="n">filePath</span><span class="p">));</span>
+    <span class="n">spContext</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">fileToGet</span><span class="p">,</span> <span class="n">f</span> <span class="p">=&gt;</span> <span class="n">f</span><span class="p">.</span><span class="n">Exists</span><span class="p">);</span>
 
-    try
-    {
-        spContext.ExecuteQuery();
+    <span class="k">try</span>
+    <span class="p">{</span>
+        <span class="n">spContext</span><span class="p">.</span><span class="n">ExecuteQuery</span><span class="p">();</span>
 
-        if (fileToGet.Exists)
-        {
-            // Do something
-        }
-        else
-        {
-            // Do something else
-        }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.Message);
-    }
-}
-</code></pre>
+        <span class="k">if</span> <span class="p">(</span><span class="n">fileToGet</span><span class="p">.</span><span class="n">Exists</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">// Do something</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="c1">// Do something else</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
 
 <h2 id="bonus-using-the-windows-credential-manager">Bonus : Using the Windows Credential Manager</h2>
 <p>For Windows users, if you don't want to always write your credentials and if you already know the <a href="https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/add-pnpstoredcredential?view=sharepoint-ps">Add</a>/<a href="https://docs.microsoft.com/en-us/powershell/module/sharepoint-pnp/get-pnpstoredcredential?view=sharepoint-ps">Get</a>-PnPStoredCredential cmdlets, you might be interested to use the CredentialManager class provided by the Adys Tech company. You can fin the Nugget package <a href="https://www.nuget.org/packages/AdysTech.CredentialManager/">here</a>.</p>
 <p>Then, when referencing it, you just have to use it like this:</p>
-<pre><code class="csharp">var cred = CredentialManager.GetCredentials(&quot;PnPPS:CredentialsName&quot;);
-string user = cred.UserName;
-SecureString pwd = cred.SecurePassword;
-</code></pre>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="kt">var</span> <span class="n">cred</span> <span class="p">=</span> <span class="n">CredentialManager</span><span class="p">.</span><span class="n">GetCredentials</span><span class="p">(</span><span class="s">&quot;PnPPS:CredentialsName&quot;</span><span class="p">);</span>
+<span class="kt">string</span> <span class="n">user</span> <span class="p">=</span> <span class="n">cred</span><span class="p">.</span><span class="n">UserName</span><span class="p">;</span>
+<span class="n">SecureString</span> <span class="n">pwd</span> <span class="p">=</span> <span class="n">cred</span><span class="p">.</span><span class="n">SecurePassword</span><span class="p">;</span>
+</code></pre></div>
+</td></tr></table>
 
 <h2 id="useful-links">Useful Links</h2>
 <ul>

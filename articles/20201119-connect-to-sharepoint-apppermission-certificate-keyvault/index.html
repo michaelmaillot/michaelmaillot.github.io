@@ -537,7 +537,7 @@
 <p>This article will show how to work with a SharePoint site through an API or a Web Application, only with AAD Application permissions.</p>
 <p>It will demonstrate how to setup everything and how to connect with a certificate stored in a Key Vault, step by step, in UI, PowerShell and Azure CLI.</p>
 <p>Let's see the final result below</p>
-<p><img alt="alt text" src="../../images/articles/20201100/schema.png" title="Architecture" /></p>
+<p><img alt="alt text" src="../../images/articles/20201119/schema.png" title="Architecture" /></p>
 <p>The Web Application (or API)...</p>
 <ol>
 <li>Requests access to the Key Vault, in order to get the stored certificate</li>
@@ -778,7 +778,7 @@ az account show --query <span class="s1">&#39;[user.name,tenantId]&#39;</span>
 <h2 id="create-key-vault-and-the-ressource-group">Create Key Vault (and the Ressource Group)</h2>
 <p>The first step is to create the Key Vault that will store the certificate.</p>
 <h3 id="create-key-vault-through-interface">Create Key Vault through interface</h3>
-<p><img alt="alt text" src="../../images/articles/20201100/keyvault-add.png" title="Create Key Vault" /></p>
+<p><img alt="alt text" src="../../images/articles/20201119/keyvault-add.png" title="Create Key Vault" /></p>
 <h3 id="create-key-vault-with-code">Create Key Vault with code</h3>
 <div class="superfences-tabs">
 <input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
@@ -811,7 +811,7 @@ az keyvault create --resource-group <span class="s2">&quot;rg-common&quot;</span
 <h2 id="add-certificate-to-key-vault">Add certificate to Key Vault</h2>
 <p>Once the Key Vault is created, we'll use its certificate creation feature to init one.</p>
 <h3 id="add-certificate-through-interface">Add certificate through interface</h3>
-<p><img alt="alt text" src="../../images/articles/20201100/keyvault-create-cert.png" title="Create certificate" /></p>
+<p><img alt="alt text" src="../../images/articles/20201119/keyvault-create-cert.png" title="Create certificate" /></p>
 <h3 id="add-certificate-with-code">Add certificate with code</h3>
 <div class="superfences-tabs">
 <input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
@@ -853,8 +853,8 @@ az keyvault certificate create --vault-name <span class="s2">&quot;kvwecommon&qu
 </ul>
 <p>As we'll authenticate with a certificate, the only way is to use the AAD Application context.</p>
 <h3 id="register-aad-app-through-interface">Register AAD App through interface</h3>
-<p><img alt="alt text" src="../../images/articles/20201100/aad-add-spapp.png" title="Add SP AAD Application" /></p>
-<p><img alt="alt text" src="../../images/articles/20201100/spaad-set-permissions.png" title="Set SP AAD App API permission" /></p>
+<p><img alt="alt text" src="../../images/articles/20201119/aad-add-spapp.png" title="Add SP AAD Application" /></p>
+<p><img alt="alt text" src="../../images/articles/20201119/spaad-set-permissions.png" title="Set SP AAD App API permission" /></p>
 <h3 id="register-aad-app-with-code">Register AAD App with code</h3>
 <p>To register Application permissions, you have to indicate which API you want to use and check the permissions required for you needs. If it's transparent for you when you register through the Azure Portal, let me explain how does it work under the hood.</p>
 <p>Whether you want to work with SharePoint, Microsoft Graph, Dynamics or else, each service is registered as a service principal (Enterprise Application in AAD). And each of these contains <em>AppRoles</em> (for Application permissions) and <em>Oauth2Permissions</em> (Delegated permissions).</p>
@@ -1063,9 +1063,9 @@ az ad app permission admin-consent --id <span class="s2">&quot;AAD_APP_OBJECT_ID
 <p>In this example, it will be a Web Application (but in the end, the code used for connecting to SharePoint will be the same).</p>
 <p>Once the Web Application created, you will have to enable Managed Identity, in order to allow the resource to access the Key Vault. This will lead in the creation of a service principal you'll be able to find in the AAD Enterprise Applications page.</p>
 <h3 id="register-the-resource-through-interface">Register the resource through interface</h3>
-<p><img alt="alt text" src="../../images/articles/20201100/aad-add-webapp.png" title="Add Web Application" /></p>
+<p><img alt="alt text" src="../../images/articles/20201119/aad-add-webapp.png" title="Add Web Application" /></p>
 <h3 id="enable-managed-identity-through-interface">Enable Managed Identity through interface</h3>
-<p><img alt="alt text" src="../../images/articles/20201100/webapp-enable-identity.png" title="Enable Managed Identity" /></p>
+<p><img alt="alt text" src="../../images/articles/20201119/webapp-enable-identity.png" title="Enable Managed Identity" /></p>
 <h3 id="register-the-resource-with-code-and-enable-managed-identity">Register the resource with code (and enable Managed Identity)</h3>
 <div class="superfences-tabs">
 <input name="__tabs_7" type="radio" id="__tab_7_0" checked="checked" />
@@ -1108,7 +1108,7 @@ az webapp create --resource-group <span class="s2">&quot;rg-common&quot;</span> 
 <h2 id="upload-key-vault-certificate-into-aad-application">Upload Key Vault Certificate into AAD Application</h2>
 <p>By importing the certificate (created with the Key Vault) in the AAD Application, you allow an authentication to SharePoint when requesting access to the Tenant, with a Client ID / Certificate.</p>
 <h3 id="upload-through-interface">Upload through interface</h3>
-<p><img alt="alt text" src="../../images/articles/20201100/aad-upload-cert.png" title="Upload KeyVault Certificate to SP AAD" /></p>
+<p><img alt="alt text" src="../../images/articles/20201119/aad-upload-cert.png" title="Upload KeyVault Certificate to SP AAD" /></p>
 <h3 id="upload-with-code">Upload with code</h3>
 <div class="superfences-tabs">
 <input name="__tabs_8" type="radio" id="__tab_8_0" checked="checked" />
@@ -1144,7 +1144,7 @@ az ad sp credential reset --name <span class="s2">&quot;AAD_APP_OBJECT_ID&quot;<
 <p>When using <a href="https://www.nuget.org/packages/Microsoft.Azure.KeyVault/" target="_blank">Microsoft.Azure.KeyVault</a> library, we used to grant certificate (GET) access policy to certificate. But as this library is replaced by the Azure.Security .NET Libraries, we have to use the Keyvault.Secrets service because until now, there's no method provided to get a Key Vault Certificate with the certificate (GET) access policy. Furthermore, the Certificate in Key Vault is more a <a href="https://docs.microsoft.com/en-us/azure/key-vault/certificates/about-certificates" target="_blank">concept</a> than just a type of Secret.</p>
 <p>That's why we're going to setup a secret (GET) access policy.</p>
 <h3 id="grant-access-through-interface">Grant access through interface</h3>
-<p><img alt="alt text" src="../../images/articles/20201100/keyvault-set-policy.png" title="Set KeyVault Policy" /></p>
+<p><img alt="alt text" src="../../images/articles/20201119/keyvault-set-policy.png" title="Set KeyVault Policy" /></p>
 <h3 id="grant-access-with-code">Grant access with code</h3>
 <div class="superfences-tabs">
 <input name="__tabs_9" type="radio" id="__tab_9_0" checked="checked" />
@@ -1311,7 +1311,7 @@ az keyvault set-policy --name <span class="s2">&quot;kvwecommon&quot;</span> --o
 <p>Then select <em>Azure</em> as target, <em>Azure App Service (Windows)</em> and select the correct Azure account, the subscription used until now, the resource group and the Web Application we created together (here <strong>rg-common</strong> and <strong>MyWebApplicationForSharePoint</strong>).</p>
 <h2 id="thats-it">That's it</h2>
 <p>You should see something like this :</p>
-<p><img alt="alt text" src="../../images/articles/20201100/webapp.png" title="Web Application SharePoint Site Title" /></p>
+<p><img alt="alt text" src="../../images/articles/20201119/webapp.png" title="Web Application SharePoint Site Title" /></p>
 <p>If you have any question or if you encounter any problem during the execution of the commands, feel free to send a Tweet or a DM 😉</p>
 <h2 id="useful-links">Useful Links</h2>
 <ul>

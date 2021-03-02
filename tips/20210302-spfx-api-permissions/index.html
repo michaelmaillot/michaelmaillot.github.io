@@ -336,7 +336,7 @@
 </li>
 </ol>
 <h2 id="with-graph-api">With Graph API</h2>
-<p>First, we're going to play with Graph API through the <a href="https://docs.microsoft.com/fr-fr/graph/toolkit/overview">Microsoft Graph Toolkit</a>.</p>
+<p>First, we're going to play with Graph API through the <a href="https://docs.microsoft.com/fr-fr/graph/toolkit/overview" target="_blank">Microsoft Graph Toolkit</a>.</p>
 <h3 id="prepare-your-sample">Prepare your sample</h3>
 <p>Init a SPFx project (WebPart one with React, let's call it <em>HelloApi</em>), then add the Microsoft Graph Toolkit by executing <code>npm i @microsoft/mgt @microsoft/mgt-react</code> from the project's root path.</p>
 <p>Once done, open your main component file (let's say here <strong>HelloApi.tsx</strong>) and add the <code>PeoplePicker</code> component like this:</p>
@@ -422,7 +422,7 @@
 <p><img alt="alt text" src="../../images/tips/20210302/peoplepicker-ui-success.png" title="PeoplePicker UI success" /></p>
 <h2 id="with-custom-api">With custom API</h2>
 <p>When using a custom API, it's a little bit more tricky but easy to handle anyway.</p>
-<p>You can follow <a href="https://docs.microsoft.com/fr-fr/sharepoint/dev/spfx/use-aadhttpclient-enterpriseapi">this Microsoft article</a> until the <a href="https://docs.microsoft.com/en-us/sharepoint/dev/spfx/use-aadhttpclient-enterpriseapi#deploy-the-solution-to-the-sharepoint-app-catalog">"Deploy the solution"</a> part.</p>
+<p>You can follow <a href="https://docs.microsoft.com/fr-fr/sharepoint/dev/spfx/use-aadhttpclient-enterpriseapi" target="_blank">this Microsoft article</a> until the <a href="https://docs.microsoft.com/en-us/sharepoint/dev/spfx/use-aadhttpclient-enterpriseapi#deploy-the-solution-to-the-sharepoint-app-catalog" target="_blank">"Deploy the solution"</a> part.</p>
 <p>Instead of bundling and shipping, we'll add the AAD App (called <em>contoso-api-dp20200915</em> if we follow the mentioned article) created from the Azure Function Authentication part in the SharePoint Service Principal.</p>
 <h3 id="add-your-aad-application-to-the-sharepoint-service-principal">Add your AAD Application to the SharePoint Service Principal</h3>
 <p>Display again the AAD page, then select the <strong>App Registration</strong> menu, select <strong>All Applications</strong> and click on <strong>SharePoint Online Client Extensibility Web Application Principal</strong>. Once here, click on <strong>Add a permission</strong>, then select the <strong>My APIs</strong> tab and select the fresh added AAD App created before. Select the <strong>user_impersonation</strong> permission, then confirm.</p>

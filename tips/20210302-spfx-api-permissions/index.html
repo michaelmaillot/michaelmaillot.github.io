@@ -248,8 +248,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-graph-api" class="md-nav__link">
-    Add Graph API
+  <a href="#add-graph-api-through-ui" class="md-nav__link">
+    Add Graph API through UI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-graph-api-through-cli-for-microsoft-365" class="md-nav__link">
+    Add Graph API through CLI for Microsoft 365
   </a>
   
 </li>
@@ -277,6 +284,13 @@
           <li class="md-nav__item">
   <a href="#add-your-aad-application-to-the-sharepoint-service-principal" class="md-nav__link">
     Add your AAD Application to the SharePoint Service Principal
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-custom-api-through-cli-for-microsoft-365" class="md-nav__link">
+    Add custom API through CLI for Microsoft 365
   </a>
   
 </li>
@@ -405,7 +419,7 @@
 <p>Display your developer toolbox (F12) and go to the browser console, you should see the following error:</p>
 <p><img alt="alt text" src="../../images/tips/20210302/peoplepicker-console-fail.png" title="PeoplePicker console fail" /></p>
 <p>As you can see, it's a 403 error, which is well-known when using Graph API endpoints that have not been allowed on the first place.</p>
-<h3 id="add-graph-api">Add Graph API</h3>
+<h3 id="add-graph-api-through-ui">Add Graph API through UI</h3>
 <p>From the Azure portal, display the <em>Azure Active Directory</em> (AAD), then select the <strong>App Registration</strong> menu and select <strong>All Applications</strong>, then click on <strong>SharePoint Online Client Extensibility Web Application Principal</strong>. It's the AAD Application that holds the connection to the API (Microsoft and others) from SharePoint (SPFx or every other development) using the <em>Implicit Flow</em>.</p>
 <p>Once here, click on <strong>Add a permission</strong>, then select <strong>Microsoft Graph</strong> and add the [<em>People.Read</em>] Graph API <ins>delegated permission</ins> (you can type the name of the permission in the available search box to get it easily).</p>
 <p><img alt="alt text" src="../../images/tips/20210302/aad-app-spo-api-graph.png" title="AAD App SPO Graph API" /></p>
@@ -416,6 +430,17 @@
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>It can take a couple of minutes before consented permissions is effective, so don't be surprised if it's not working right away after approval.</p>
+</div>
+<h3 id="add-graph-api-through-cli-for-microsoft-365">Add Graph API through CLI for Microsoft 365</h3>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>m365 login <span class="c1"># Don&#39;t execute that command if you&#39;re already connected</span>
+m365 spo serviceprincipal grant add --resource <span class="s1">&#39;Microsoft Graph&#39;</span> --scope <span class="s1">&#39;People.Read&#39;</span>
+</code></pre></div>
+</td></tr></table>
+
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Don't be surprised if by that way, the permission appears in the "Other permissions granted for [your tenant]": it won't prevent your SPFx solution to work.</p>
 </div>
 <h3 id="try-again">Try again</h3>
 <p>Now try to use the <code>PeoplePicker</code> component again: you'll see that with the addition of the Graph API permission, you should be able to use that component!</p>
@@ -430,6 +455,21 @@
 <p>Finally, grant this permission by clicking on <strong>Grant admin consent for contoso</strong>.</p>
 <p>If you go again in the <em>API access</em> page, you should see something like this:</p>
 <p><img alt="alt text" src="../../images/tips/20210302/api-access-custom-approved.png" title="API access custom approved" /></p>
+<h3 id="add-custom-api-through-cli-for-microsoft-365">Add custom API through CLI for Microsoft 365</h3>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code>m365 login <span class="c1"># Don&#39;t execute that command if you&#39;re already connected</span>
+m365 spo serviceprincipal grant add --resource <span class="s1">&#39;contoso-api-dp20200915&#39;</span> --scope <span class="s1">&#39;user_impersonation&#39;</span>
+</code></pre></div>
+</td></tr></table>
+
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Don't be surprised if by that way, the permission appears in the "Other permissions granted for [your tenant]": it won't prevent your SPFx solution to work.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you use an Azure Function as an API and enable <strong>Managed Identity</strong> for any reason, you better have to rename the linked AAD Application to give it a different name than both your Function and its <strong>Managed Identity</strong>. Otherwise, the command will try to find a scope on it instead of the AAD App and fail.</p>
+</div>
 <h3 id="updated-sample">Updated sample</h3>
 <p>To run your custom API from your SPFx component, you can update your sample like below:</p>
 <div class="superfences-tabs">

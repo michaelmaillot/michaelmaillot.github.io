@@ -602,15 +602,15 @@ m365 spo serviceprincipal grant add --resource <span class="s1">&#39;contoso-api
 
 <span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">HelloApi</span> <span class="k">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="nx">IHelloApiProps</span><span class="p">,</span> <span class="nx">IHelloApiState</span><span class="o">&gt;</span> <span class="p">{</span>
 
- <span class="k">public</span> <span class="kr">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">public</span> <span class="kr">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
 
     <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">ordersToDisplay</span>: <span class="kt">null</span>
     <span class="p">};</span>
- <span class="p">}</span>
+<span class="p">}</span>
 
- <span class="k">public</span> <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
+<span class="k">public</span> <span class="nx">componentDidMount</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">aadFactory</span>
       <span class="p">.</span><span class="nx">getClient</span><span class="p">(</span><span class="s1">&#39;https://contoso-api-dp20191109.azurewebsites.net&#39;</span><span class="p">)</span>
       <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">client</span>: <span class="kt">AadHttpClient</span><span class="p">)</span><span class="o">:</span> <span class="ow">void</span> <span class="p">=&gt;</span> <span class="p">{</span>
@@ -638,7 +638,7 @@ m365 spo serviceprincipal grant add --resource <span class="s1">&#39;contoso-api
               <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">title</span> <span class="p">}</span><span class="o">&gt;</span><span class="nx">Welcome</span> <span class="nx">to</span> <span class="nx">SharePoint</span><span class="o">!&lt;</span><span class="err">/span&gt;</span>
               <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">subTitle</span> <span class="p">}</span><span class="o">&gt;</span><span class="nx">Customize</span> <span class="nx">SharePoint</span> <span class="nx">experiences</span> <span class="nx">using</span> <span class="nx">Web</span> <span class="nx">Parts</span><span class="p">.</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
               <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span> <span class="nx">styles</span><span class="p">.</span><span class="nx">description</span> <span class="p">}</span><span class="o">&gt;</span>
-               <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+              <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
                     <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">ordersToDisplay</span> <span class="o">&amp;&amp;</span>
                         <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">ordersToDisplay</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">o</span> <span class="p">=&gt;</span> <span class="p">{</span>
                             <span class="k">return</span> <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">o</span><span class="p">.</span><span class="nx">rep</span><span class="p">}</span><span class="o">:</span> <span class="p">{</span><span class="nx">o</span><span class="p">.</span><span class="nx">total</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/li&gt;</span>

@@ -738,8 +738,7 @@
 <p>As you can see, the <em>AzureAD</em> Module provides more options just in this example.</p>
 <p>And as stated <a href="https://github.com/Azure/azure-powershell/issues/13360#issuecomment-724098630" target="_blank">here</a>, the <em>AzureAD</em> module is the one to use when working with AAD.</p>
 <h2 id="connect-to-azure">Connect to Azure</h2>
-<div class="tabbed-set" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Az PowerShell</label><div class="tabbed-content"></div>
-</div>
+<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Az PowerShell</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -751,8 +750,8 @@
 <span class="c"># Check if the context is correct</span>
 </code></pre></div>
 </td></tr></table>
-<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Azure AD PowerShell</label><div class="tabbed-content"></div>
 </div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Azure AD PowerShell</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -764,8 +763,8 @@
 <span class="c"># Check if the context is correct</span>
 </code></pre></div>
 </td></tr></table>
-<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Azure CLI</label><div class="tabbed-content"></div>
 </div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Azure CLI</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -777,13 +776,14 @@ az account show --query <span class="s1">&#39;[user.name,tenantId]&#39;</span>
 <span class="c1"># Check if the context is correct</span>
 </code></pre></div>
 </td></tr></table>
+</div>
+</div>
 <h2 id="create-key-vault-and-the-ressource-group">Create Key Vault (and the Ressource Group)</h2>
 <p>The first step is to create the Key Vault that will store the certificate.</p>
 <h3 id="create-key-vault-through-interface">Create Key Vault through interface</h3>
 <p><img alt="alt text" src="../../images/articles/20201119/keyvault-add.png" title="Create Key Vault" /></p>
 <h3 id="create-key-vault-with-code">Create Key Vault with code</h3>
-<div class="tabbed-set" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">Az PowerShell</label><div class="tabbed-content"></div>
-</div>
+<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Az PowerShell</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -795,8 +795,8 @@ az account show --query <span class="s1">&#39;[user.name,tenantId]&#39;</span>
 <span class="nb">New-AzKeyVault</span> <span class="n">-VaultName</span> <span class="s2">&quot;kvwecommon&quot;</span> <span class="n">-ResourceGroupName</span> <span class="s2">&quot;rg-common&quot;</span> <span class="n">-Location</span> <span class="s2">&quot;westeurope&quot;</span>
 </code></pre></div>
 </td></tr></table>
-<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">Azure CLI</label><div class="tabbed-content"></div>
 </div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Azure CLI</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -808,13 +808,14 @@ az group create -l westeurope -n <span class="s2">&quot;rg-common&quot;</span> <
 az keyvault create --resource-group <span class="s2">&quot;rg-common&quot;</span> --name <span class="s2">&quot;kvwecommon&quot;</span>
 </code></pre></div>
 </td></tr></table>
+</div>
+</div>
 <h2 id="add-certificate-to-key-vault">Add certificate to Key Vault</h2>
 <p>Once the Key Vault is created, we'll use its certificate creation feature to init one.</p>
 <h3 id="add-certificate-through-interface">Add certificate through interface</h3>
 <p><img alt="alt text" src="../../images/articles/20201119/keyvault-create-cert.png" title="Create certificate" /></p>
 <h3 id="add-certificate-with-code">Add certificate with code</h3>
-<div class="tabbed-set" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">Az PowerShell</label><div class="tabbed-content"></div>
-</div>
+<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">Az PowerShell</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -828,8 +829,8 @@ az keyvault create --resource-group <span class="s2">&quot;rg-common&quot;</span
 <span class="nb">Add-AzKeyVaultCertificate</span> <span class="n">-VaultName</span> <span class="s2">&quot;kvwecommon&quot;</span> <span class="n">-Name</span> <span class="s2">&quot;MyCert&quot;</span> <span class="n">-CertificatePolicy</span> <span class="nv">$policy</span>
 </code></pre></div>
 </td></tr></table>
-<div class="tabbed-set" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">Azure CLI</label><div class="tabbed-content"></div>
 </div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Azure CLI</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -843,6 +844,8 @@ az keyvault set-policy --name <span class="s2">&quot;kvwecommon&quot;</span> --o
 az keyvault certificate create --vault-name <span class="s2">&quot;kvwecommon&quot;</span> -n <span class="s2">&quot;MyCert&quot;</span> -p <span class="s2">&quot;</span><span class="k">$(</span>az keyvault certificate get-default-policy<span class="k">)</span><span class="s2">&quot;</span>
 </code></pre></div>
 </td></tr></table>
+</div>
+</div>
 <h2 id="register-aad-application-and-apply-admin-consent">Register AAD Application (and apply admin consent)</h2>
 <p>Like said before, to connect to SharePoint as an application, you have two options:</p>
 <ul>
@@ -861,8 +864,7 @@ az keyvault certificate create --vault-name <span class="s2">&quot;kvwecommon&qu
 <p>Instead of the AAD Application registration user interface, you have to declare both AAD Application and its service principal (the Enterprise Application)</p>
 <p>Now that you know this, we'll see how to register the appropriate permissions and especially when admin consent is required.</p>
 <h4 id="register-aad-app-with-powershell">Register AAD App with PowerShell</h4>
-<div class="tabbed-set" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">Azure AD PowerShell</label><div class="tabbed-content"></div>
-</div>
+<div class="tabbed-set" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">Azure AD PowerShell</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -946,9 +948,10 @@ az keyvault certificate create --vault-name <span class="s2">&quot;kvwecommon&qu
 <span class="nb">New-AzureADServiceAppRoleAssignment</span> <span class="n">-ObjectId</span> <span class="nv">$aadspapp</span><span class="p">.</span><span class="n">ObjectId</span> <span class="n">-Id</span> <span class="nv">$roleId</span> <span class="n">-PrincipalId</span> <span class="nv">$aadspapp</span><span class="p">.</span><span class="n">ObjectId</span> <span class="n">-ResourceId</span> <span class="nv">$adspSPO</span><span class="p">.</span><span class="n">ObjectId</span>
 </code></pre></div>
 </td></tr></table>
-<h4 id="register-aad-app-with-azure-cli">Register AAD App with Azure CLI</h4>
-<div class="tabbed-set" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">Azure CLI</label><div class="tabbed-content"></div>
 </div>
+</div>
+<h4 id="register-aad-app-with-azure-cli">Register AAD App with Azure CLI</h4>
+<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">Azure CLI</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -1006,11 +1009,12 @@ az ad sp create --id <span class="s2">&quot;AAD_APP_OBJECT_ID&quot;</span>
 az ad app permission admin-consent --id <span class="s2">&quot;AAD_APP_OBJECT_ID&quot;</span>
 </code></pre></div>
 </td></tr></table>
+</div>
+</div>
 <h4 id="optional-grant-admin-consent-on-delegated-permissions-with-powershell">(optional) Grant Admin Consent on Delegated permissions with PowerShell</h4>
 <p>For now, if you want to work with delegated permissions on PowerShell, there's no cmdlet to grant admin consent (instead of Azure CLI, as you've see before).</p>
 <p>The only approach is to use Microsoft Graph, which provides methods to add / consent Delegated permissions. Full example <a href="https://stackoverflow.com/a/63295541/2481152" target="_blank">here</a>.</p>
-<div class="tabbed-set" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">Az PowerShell</label><div class="tabbed-content"></div>
-</div>
+<div class="tabbed-set" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">Az PowerShell</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -1039,17 +1043,19 @@ az ad app permission admin-consent --id <span class="s2">&quot;AAD_APP_OBJECT_ID
 
 <span class="c"># Declare the scopes you want to grant access (enter the same)</span>
 <span class="nv">$body</span> <span class="p">=</span> <span class="p">@{</span>
-    <span class="n">clientId</span> <span class="p">=</span> <span class="nv">$aadspapp</span><span class="p">.</span><span class="n">ObjectId</span>
-    <span class="n">consentType</span> <span class="p">=</span> <span class="s2">&quot;AllPrincipals&quot;</span>
-    <span class="n">principalId</span> <span class="p">=</span> <span class="nv">$null</span>
-    <span class="n">resourceId</span> <span class="p">=</span> <span class="nv">$adspSPO</span><span class="p">.</span><span class="n">ObjectId</span>
-    <span class="n">scope</span> <span class="p">=</span> <span class="s2">&quot;AllSites.FullControl&quot;</span>
+        <span class="n">clientId</span> <span class="p">=</span> <span class="nv">$aadspapp</span><span class="p">.</span><span class="n">ObjectId</span>
+        <span class="n">consentType</span> <span class="p">=</span> <span class="s2">&quot;AllPrincipals&quot;</span>
+        <span class="n">principalId</span> <span class="p">=</span> <span class="nv">$null</span>
+        <span class="n">resourceId</span> <span class="p">=</span> <span class="nv">$adspSPO</span><span class="p">.</span><span class="n">ObjectId</span>
+        <span class="n">scope</span> <span class="p">=</span> <span class="s2">&quot;AllSites.FullControl&quot;</span>
 <span class="p">}</span>
 
 <span class="nv">$apiUrl</span> <span class="p">=</span> <span class="s2">&quot;https://graph.microsoft.com/v1.0/oauth2PermissionGrants&quot;</span>
 <span class="nb">Invoke-RestMethod</span> <span class="n">-Uri</span> <span class="nv">$apiUrl</span> <span class="n">-Headers</span> <span class="p">@{</span><span class="n">Authorization</span> <span class="p">=</span> <span class="s2">&quot;Bearer </span><span class="p">$(</span><span class="nv">$graphToken</span><span class="p">)</span><span class="s2">&quot;</span> <span class="p">}</span>  <span class="n">-Method</span> <span class="n">POST</span> <span class="n">-Body</span> <span class="p">$(</span><span class="nv">$body</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span><span class="p">)</span> <span class="n">-ContentType</span> <span class="s2">&quot;application/json&quot;</span>
 </code></pre></div>
 </td></tr></table>
+</div>
+</div>
 <h2 id="register-web-application-api-application">Register Web Application / API Application</h2>
 <p>Now, we're going to create the resource that will query the SharePoint site. It can be a Web Application or an API.</p>
 <p>In this example, it will be a Web Application (but in the end, the code used for connecting to SharePoint will be the same).</p>
@@ -1059,8 +1065,7 @@ az ad app permission admin-consent --id <span class="s2">&quot;AAD_APP_OBJECT_ID
 <h3 id="enable-managed-identity-through-interface">Enable Managed Identity through interface</h3>
 <p><img alt="alt text" src="../../images/articles/20201119/webapp-enable-identity.png" title="Enable Managed Identity" /></p>
 <h3 id="register-the-resource-with-code-and-enable-managed-identity">Register the resource with code (and enable Managed Identity)</h3>
-<div class="tabbed-set" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">Az PowerShell</label><div class="tabbed-content"></div>
-</div>
+<div class="tabbed-set" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">Az PowerShell</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -1082,8 +1087,8 @@ az ad app permission admin-consent --id <span class="s2">&quot;AAD_APP_OBJECT_ID
 <span class="nb">Set-AzWebApp</span> <span class="n">-ResourceGroupName</span> <span class="s2">&quot;rg-common&quot;</span> <span class="n">-Name</span> <span class="s2">&quot;MyWebApplicationForSharePoint&quot;</span> <span class="n">-AssignIdentity</span> <span class="nv">$true</span>
 </code></pre></div>
 </td></tr></table>
-<div class="tabbed-set" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">Azure CLI</label><div class="tabbed-content"></div>
 </div>
+<input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><label for="__tabbed_7_2">Azure CLI</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -1095,13 +1100,14 @@ az appservice plan create --resource-group <span class="s2">&quot;rg-common&quot
 az webapp create --resource-group <span class="s2">&quot;rg-common&quot;</span> --name <span class="s2">&quot;MyWebApplicationForSharePoint&quot;</span> --plan <span class="s2">&quot;asp-we-rgcommon&quot;</span> --runtime <span class="s2">&quot;aspnet|V4.8&quot;</span> --assign-identity
 </code></pre></div>
 </td></tr></table>
+</div>
+</div>
 <h2 id="upload-key-vault-certificate-into-aad-application">Upload Key Vault Certificate into AAD Application</h2>
 <p>By importing the certificate (created with the Key Vault) in the AAD Application, you allow an authentication to SharePoint when requesting access to the Tenant, with a Client ID / Certificate.</p>
 <h3 id="upload-through-interface">Upload through interface</h3>
 <p><img alt="alt text" src="../../images/articles/20201119/aad-upload-cert.png" title="Upload KeyVault Certificate to SP AAD" /></p>
 <h3 id="upload-with-code">Upload with code</h3>
-<div class="tabbed-set" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><label for="__tabbed_13_1">Az PowerShell</label><div class="tabbed-content"></div>
-</div>
+<div class="tabbed-set" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">Az PowerShell</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -1115,8 +1121,8 @@ az webapp create --resource-group <span class="s2">&quot;rg-common&quot;</span> 
 <span class="nb">New-AzADAppCredential</span> <span class="n">-ObjectId</span> <span class="nv">$aadApp</span><span class="p">.</span><span class="n">ObjectId</span> <span class="n">-CertValue</span> <span class="nv">$certString</span> <span class="n">-StartDate</span> <span class="nv">$myCert</span><span class="p">.</span><span class="n">NotBefore</span> <span class="n">-EndDate</span> <span class="nv">$myCert</span><span class="p">.</span><span class="n">NotAfter</span>
 </code></pre></div>
 </td></tr></table>
-<div class="tabbed-set" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><label for="__tabbed_14_1">Azure CLI</label><div class="tabbed-content"></div>
 </div>
+<input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><label for="__tabbed_8_2">Azure CLI</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -1128,14 +1134,15 @@ az keyvault certificate download --vault-name <span class="s2">&quot;kvwecommon&
 az ad sp credential reset --name <span class="s2">&quot;AAD_APP_OBJECT_ID&quot;</span> --cert <span class="s2">&quot;@~/MyCert.pem&quot;</span>
 </code></pre></div>
 </td></tr></table>
+</div>
+</div>
 <h2 id="grant-web-application-to-get-key-vault-secret">Grant Web Application to get Key Vault Secret</h2>
 <p>When using <a href="https://www.nuget.org/packages/Microsoft.Azure.KeyVault/" target="_blank">Microsoft.Azure.KeyVault</a> library, we used to grant certificate (GET) access policy to certificate. But as this library is replaced by the Azure.Security .NET Libraries, we have to use the Keyvault.Secrets service because until now, there's no method provided to get a Key Vault Certificate with the certificate (GET) access policy. Furthermore, the Certificate in Key Vault is more a <a href="https://docs.microsoft.com/en-us/azure/key-vault/certificates/about-certificates" target="_blank">concept</a> than just a type of Secret.</p>
 <p>That's why we're going to setup a secret (GET) access policy.</p>
 <h3 id="grant-access-through-interface">Grant access through interface</h3>
 <p><img alt="alt text" src="../../images/articles/20201119/keyvault-set-policy.png" title="Set KeyVault Policy" /></p>
 <h3 id="grant-access-with-code">Grant access with code</h3>
-<div class="tabbed-set" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><label for="__tabbed_15_1">Az PowerShell</label><div class="tabbed-content"></div>
-</div>
+<div class="tabbed-set" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">Az PowerShell</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -1147,8 +1154,8 @@ az ad sp credential reset --name <span class="s2">&quot;AAD_APP_OBJECT_ID&quot;<
 <span class="nb">Set-AzKeyVaultAccessPolicy</span> <span class="n">-VaultName</span> <span class="s2">&quot;kvwecommon&quot;</span> <span class="n">-ObjectId</span> <span class="nv">$webappsp</span><span class="p">.</span><span class="n">Id</span> <span class="n">-PermissionsToSecrets</span> <span class="n">get</span> <span class="n">-PassThru</span>
 </code></pre></div>
 </td></tr></table>
-<div class="tabbed-set" data-tabs="16:1"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><label for="__tabbed_16_1">Azure CLI</label><div class="tabbed-content"></div>
 </div>
+<input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><label for="__tabbed_9_2">Azure CLI</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -1160,6 +1167,8 @@ az ad sp list --display-name <span class="s2">&quot;MyWebApplicationForSharePoin
 az keyvault set-policy --name <span class="s2">&quot;kvwecommon&quot;</span> --object-id <span class="s2">&quot;WEB_APPLICATION_SERVICE_PRINCIPAL_OBJECT_ID&quot;</span> --secret-permissions get
 </code></pre></div>
 </td></tr></table>
+</div>
+</div>
 <h2 id="init-aspnet-web-application-project">Init ASP.NET Web Application Project</h2>
 <p>To init your project (.NET Framework 4.8 C#), you can follow <a href="https://docs.microsoft.com/en-us/azure/app-service/quickstart-dotnet-framework" target="_blank">this quickstart</a> (and if you want to try with an API deployed in an Azure API, just select "Web API" instead of "MVC").</p>
 <h2 id="get-nuget-packages-azure-sharepoint">Get Nuget Packages (Azure, SharePoint)</h2>
@@ -1226,8 +1235,7 @@ az keyvault set-policy --name <span class="s2">&quot;kvwecommon&quot;</span> --o
 </td></tr></table>
 <h2 id="get-web-info">Get Web Info</h2>
 <p>With the <code>ClientContext</code> object instantiated before, you can get for example info about your site.</p>
-<div class="tabbed-set" data-tabs="17:1"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><label for="__tabbed_17_1">HomeController.cs</label><div class="tabbed-content"></div>
-</div>
+<div class="tabbed-set" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">HomeController.cs</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -1267,8 +1275,8 @@ az keyvault set-policy --name <span class="s2">&quot;kvwecommon&quot;</span> --o
 <span class="c1">// ...</span>
 </code></pre></div>
 </td></tr></table>
-<div class="tabbed-set" data-tabs="18:1"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><label for="__tabbed_18_1">Index.cshtml</label><div class="tabbed-content"></div>
 </div>
+<input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><label for="__tabbed_10_2">Index.cshtml</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -1282,12 +1290,14 @@ az keyvault set-policy --name <span class="s2">&quot;kvwecommon&quot;</span> --o
 }
 
 <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-   Title of the SP Web : @ViewBag.WebTitle
+    Title of the SP Web : @ViewBag.WebTitle
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 
 <span class="c">&lt;!--...--&gt;</span>
 </code></pre></div>
 </td></tr></table>
+</div>
+</div>
 <h2 id="deploy-the-solution">Deploy the solution</h2>
 <p>Once you got everything, you can test your Web Application locally then by publishing it (right-click on the project and select <em>Publish</em>).</p>
 <p>Then select <em>Azure</em> as target, <em>Azure App Service (Windows)</em> and select the correct Azure account, the subscription used until now, the resource group and the Web Application we created together (here <strong>rg-common</strong> and <strong>MyWebApplicationForSharePoint</strong>).</p>

@@ -11,15 +11,15 @@
       
       
       <link rel="icon" href="../../images/puzzle.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.3">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.4">
     
     
       
-        <title>How to quickly and properly delete a Teams Team (without waiting) - Michaël Maillot</title>
+        <title>How to quickly and properly delete a Team (without waiting) - Michaël Maillot</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.62128196.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2a4617e2.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
@@ -43,6 +43,16 @@
     <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../..":"../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
     
       
+  
+
+
+  
+  
+
+
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-9BSLGY6C2M"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&gtag("event","search",{search_term:this.value})}),"undefined"!=typeof location$&&location$.subscribe(function(e){gtag("config","G-9BSLGY6C2M",{page_path:e.pathname})})})</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9BSLGY6C2M"></script>
+
 
     
     
@@ -64,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#how-to-quickly-and-properly-delete-a-teams-team-without-waiting" class="md-skip">
+        <a href="#how-to-quickly-and-properly-delete-a-team-without-waiting" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              How to quickly and properly delete a Teams Team (without waiting)
+              How to quickly and properly delete a Team (without waiting)
             
           </span>
         </div>
@@ -344,29 +354,28 @@
               
                 
 
-<h1 id="how-to-quickly-and-properly-delete-a-teams-team-without-waiting">How to quickly and properly delete a Teams Team (without waiting)</h1>
+<h1 id="how-to-quickly-and-properly-delete-a-team-without-waiting">How to quickly and properly delete a Team (without waiting)</h1>
 <div class="admonition note">
-<p class="admonition-title">Article updates</p>
-<p><strong>2021-12-03</strong>: article update following CLI for Microsoft 365 updates, adding permanent AAD Group removal and Teams team deletion (optional), adding new PnP PowerShell commands.</p>
-<p><strong>2020-11-29</strong>: article update following CLI for Microsoft 365 updates, adding a new command for permanently delete a Site Collection.</p>
+<p class="admonition-title">Article update</p>
+<p>2020-11-29 : I've updated the article following the update of the CLI for Microsoft 365, adding a new command for permanently delete a site collection.</p>
 </div>
 <h2 id="use-case">Use Case</h2>
 <p>You work for a company that wants to automatically create a Team with Tabs, Channels and other stuff that will make a new project team ready to rock the stage.</p>
-<p>You are preparing the process and for mastering it, you have createed / tested / destroyed / retried. But when you want to clean up your mess you have to know that, during 30 days:</p>
+<p>You are preparing the process and for mastering it, you have create / test / destroy / retry. But when you want to clean up your mess, you have to know that, during 30 days:</p>
 <ul>
 <li>Your Team still exists as a Group (you can find it in the "Deleted Groups" menu on AAD), same for the associated e-mail address</li>
-<li>The Teams site also still exists</li>
+<li>The Team Site also still exists</li>
 </ul>
 <p>So let's says that you made a mistake during the creation of a Team and want to "start over" (with same name of course), if you don't want to wait for the Office 365 Job to update your environment and re-create the Team with same name:</p>
 <ul>
 <li>
-<p>The SharePoint site URL takes a number at the end of its address (of course, because the older one's still here)</p>
+<p>The SharePoint Site URL takes a number at the end of its address (of course, because the older one's still here)</p>
 </li>
 <li>
-<p>You can't permanently delete the Teams site, as the SharePoint Admin Center detects that the related Group still exists</p>
+<p>You can't permanently delete the Teams Site, as the SharePoint Admin Center detects that the related Group still exists</p>
 </li>
 </ul>
-<p>Here's a step by step process to delete quickly a Team! I recommend to follow them in this order to make everything's work.</p>
+<p>Here's a step by step process to delete quickly a Team ! I recommand to follow them in this order to make everything's work.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <ol>
 <li>An Office 365 (Dev) Tenant or a Partner Demo Tenant</li>
@@ -380,7 +389,7 @@
 </ul>
 </li>
 <li>Command Interface (one of these)<ul>
-<li>PowerShell (with <a href="https://docs.microsoft.com/en-us/powershell/azure/active-directory/install-adv2?view=azureadps-2.0" target="_blank">AzureAD PowerShell</a>, <a href="https://pnp.github.io/powershell/" target="_blank">PnP PowerShell</a> and <a href="https://docs.microsoft.com/en-us/powershell/teams/?view=teams-ps" target="_blank">Microsoft Teams PowerShell</a>)</li>
+<li>PowerShell (with <a href="https://docs.microsoft.com/en-us/powershell/azure/active-directory/install-adv2?view=azureadps-2.0" target="_blank">AzureAD PowerShell</a>, <a href="https://docs.microsoft.com/en-us/powershell/sharepoint/sharepoint-pnp/sharepoint-pnp-cmdlets?view=sharepoint-ps" target="_blank">PnP PowerShell</a> and <a href="https://docs.microsoft.com/en-us/powershell/teams/?view=teams-ps" target="_blank">Microsoft Teams PowerShell</a>)</li>
 <li><a href="https://pnp.github.io/cli-microsoft365/" target="_blank">CLI for Microsoft 365</a></li>
 </ul>
 </li>
@@ -391,40 +400,21 @@
 <p><img alt="alt text" src="../../images/articles/20200211/delete-group.png" title="Delete Group" /></p>
 <p><img alt="alt text" src="../../images/articles/20200211/perm-delete-group.png" title="Permanently Delete Group" /></p>
 <h3 id="delete-group-with-code">Delete Group with code</h3>
-<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">PnP PowerShell</label><div class="tabbed-content">
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span>
-<span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c"># If you are familiar with the Get-PnPStoredCredential cmdlet,</span>
-<span class="c"># you can use it here with the &quot;-Credential&quot; Argument</span>
-<span class="nb">Connect-PnPOnline</span> <span class="n">-Url</span> <span class="s2">&quot;https://contoso-admin.sharepoint.com&quot;</span>
-
-<span class="c"># Remove the Group</span>
-<span class="nb">Remove-PnPMicrosoft365Group</span> <span class="n">-Identity</span> <span class="s2">&quot;GroupId&quot;</span>
-
-<span class="c"># Remove the Group from AAD deleted groups (can take a few seconds to be reflected in the UI)</span>
-<span class="nb">Remove-PnPDeletedMicrosoft365Group</span> <span class="n">-Identity</span> <span class="s2">&quot;GroupId&quot;</span>
-</code></pre></div>
-</td></tr></table>
-</div>
-<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">CLI for Microsoft 365</label><div class="tabbed-content">
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>m365 login
-m365 aad o365group remove --id <span class="s2">&quot;GroupId&quot;</span> --skipRecycleBin --confirm
-</code></pre></div>
-</td></tr></table>
-</div>
-<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Azure AD PowerShell</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Azure AD PowerShell</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">Connect-AzureAD</span> <span class="n">-TenantId</span> <span class="s2">&quot;TenantId&quot;</span>
 <span class="nb">Remove-AzureADGroup</span> <span class="n">-ObjectId</span> <span class="s2">&quot;GroupId&quot;</span>
 <span class="nb">Remove-AzureADMSDeletedDirectoryObject</span> <span class="n">-Id</span> <span class="s2">&quot;GroupId&quot;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">CLI for Microsoft 365</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># (As there&#39;s no CLI command to permanently delete a Group,</span>
+<span class="c1"># you&#39;ll have to do it through the UI)</span>
+aad o365group remove --id <span class="s2">&quot;GroupId&quot;</span> --confirm
 </code></pre></div>
 </td></tr></table>
 </div>
@@ -437,25 +427,7 @@ m365 aad o365group remove --id <span class="s2">&quot;GroupId&quot;</span> --ski
 <p><center><strong>OR</strong></center></p>
 <p><img alt="alt text" src="../../images/articles/20200211/delete-team-admin.png" title="Delete Team from Admin Interface" /></p>
 <h3 id="delete-team-with-code">Delete Team with code</h3>
-<div class="admonition warning">
-<p class="admonition-title">Warning<p>As the AAD Group removal triggers automatically the Teams Team deletion you can skip this part.</p>
-</p>
-</div>
-<div class="tabbed-set" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">PnP PowerShell</label><div class="tabbed-content">
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c"># Remove the Team</span>
-<span class="nb">Remove-PnPTeamsTeam</span> <span class="n">-Identity</span> <span class="s2">&quot;GroupId&quot;</span> <span class="n">-Force</span>
-</code></pre></div>
-</td></tr></table>
-</div>
-<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">CLI for Microsoft 365</label><div class="tabbed-content">
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Remove the Team</span>
-m365 teams team remove --teamId <span class="s2">&quot;GroupId&quot;</span> --confirm
-</code></pre></div>
-</td></tr></table>
-</div>
-<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">Microsoft Teams PowerShell</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Microsoft Teams PowerShell</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">Connect-MicrosoftTeams</span> <span class="n">-TenantId</span> <span class="s2">&quot;TenantId&quot;</span>
 <span class="nb">Remove-Team</span> <span class="n">-GroupId</span> <span class="s2">&quot;GroupId&quot;</span>
@@ -464,19 +436,39 @@ m365 teams team remove --teamId <span class="s2">&quot;GroupId&quot;</span> --co
 </div>
 </div>
 <h2 id="delete-site-collection">Delete Site Collection</h2>
-<p>As I told you before (even if you did the previous steps), if you try to delete the Teams site from the SharePoint Admin Center, you won't be able to remove it from the Site Collection Recycle Bin (because of the O365 Job Tenant update process).</p>
+<p>As I told you before (even if you did the previous steps), if you try to delete the Teams Site from the SharePoint Admin Center, you won't be able to remove it from the Site Collection Recycle Bin (because of the O365 Job Tenant update process).</p>
 <h3 id="delete-site-with-code">Delete site with code</h3>
 <div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">PnP PowerShell</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c"># Remove the site</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c"># If you are familiar with the Get-PnPStoredCredential cmdlet,</span>
+<span class="c"># you can use it here with the &quot;-Credential&quot; Argument</span>
+<span class="nb">Connect-PnPOnline</span> <span class="n">-TenantId</span> <span class="s2">&quot;TenantId&quot;</span>
+
+<span class="c"># Remove the site</span>
 <span class="nb">Remove-PnPTenantSite</span> <span class="n">-Url</span> <span class="s2">&quot;TeamsSiteUrl&quot;</span> <span class="n">-Force</span> <span class="n">-SkipRecycleBin</span>
+
+<span class="c"># Remove the site from the Site Collection Recycle Bin</span>
+<span class="nb">Clear-PnPTenantRecycleBinItem</span> <span class="n">-Url</span> <span class="s2">&quot;TeamsSiteUrl&quot;</span> <span class="n">-Force</span> <span class="n">-Wait</span>
 </code></pre></div>
 </td></tr></table>
 </div>
 <input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">CLI for Microsoft 365</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Remove the site</span>
-m365 spo site remove -u <span class="s2">&quot;TeamsSiteUrl&quot;</span> --skipRecycleBin --confirm --wait
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Remove the site</span>
+spo site classic remove -u <span class="s2">&quot;TeamsSiteUrl&quot;</span> --skipRecycleBin --confirm --wait
+
+<span class="c1"># Remove the site from the Site Collection Recycle Bin</span>
+spo tenant recyclebinitem remove -u <span class="s2">&quot;TeamsSiteUrl&quot;</span> --confirm --wait
 </code></pre></div>
 </td></tr></table>
 </div>
@@ -541,10 +533,10 @@ m365 spo site remove -u <span class="s2">&quot;TeamsSiteUrl&quot;</span> --skipR
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.01824240.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.ca141e46.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.e0abf5b0.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6baa0517.min.js"></script>
       
     
   </body>

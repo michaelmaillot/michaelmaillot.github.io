@@ -11,7 +11,7 @@
       
       
       <link rel="icon" href="../../images/puzzle.ico">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.0.4">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.4">
     
     
       
@@ -19,10 +19,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.2a4617e2.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bb3983ee.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.9204c3b2.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
         
           
           
@@ -40,7 +40,7 @@
       
     
     
-    <script>function __md_scope(e,t,_){return new URL(_||(t===localStorage?"../..":"../.."),location).pathname+"."+e}function __md_get(e,t=localStorage,_){return JSON.parse(t.getItem(__md_scope(e,t,_)))}function __md_set(e,t,_=localStorage,o){try{_.setItem(__md_scope(e,_,o),JSON.stringify(t))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -317,47 +317,47 @@
 <span class="normal">38</span>
 <span class="normal">39</span>
 <span class="normal">40</span>
-<span class="normal">41</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>string userName = &quot;user@tenant.onmicrosoft.com&quot;;
-SecureString securePassword = new SecureString();
-foreach (var cc in &quot;yourPlainTextPassword&quot;)
-{
-    securePassword.AppendChar(cc);
-}
+<span class="normal">41</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kt">string</span><span class="w"> </span><span class="n">userName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;user@tenant.onmicrosoft.com&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="n">SecureString</span><span class="w"> </span><span class="n">securePassword</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SecureString</span><span class="p">();</span><span class="w"></span>
+<span class="k">foreach</span><span class="w"> </span><span class="p">(</span><span class="kt">var</span><span class="w"> </span><span class="n">cc</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s">&quot;yourPlainTextPassword&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">securePassword</span><span class="p">.</span><span class="n">AppendChar</span><span class="p">(</span><span class="n">cc</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-using (ClientContext spContext = new ClientContext(&quot;SharePointSiteUrl&quot;))
-{
-    spContext.Credentials = new SharePointOnlineCredentials(userName, securePassword);
-    spContext.ExecuteQuery();
+<span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="n">ClientContext</span><span class="w"> </span><span class="n">spContext</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientContext</span><span class="p">(</span><span class="s">&quot;SharePointSiteUrl&quot;</span><span class="p">))</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">spContext</span><span class="p">.</span><span class="n">Credentials</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SharePointOnlineCredentials</span><span class="p">(</span><span class="n">userName</span><span class="p">,</span><span class="w"> </span><span class="n">securePassword</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">spContext</span><span class="p">.</span><span class="n">ExecuteQuery</span><span class="p">();</span><span class="w"></span>
 
-    Web currentWeb = spContext.Web;
-    List docLibrary = currentWeb.Lists.GetByTitle(&quot;Documents&quot;);
-    spContext.Load(docLibrary);
-    spContext.Load(docLibrary.RootFolder);
-    spContext.ExecuteQuery();
+<span class="w">    </span><span class="n">Web</span><span class="w"> </span><span class="n">currentWeb</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">spContext</span><span class="p">.</span><span class="n">Web</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">List</span><span class="w"> </span><span class="n">docLibrary</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">currentWeb</span><span class="p">.</span><span class="n">Lists</span><span class="p">.</span><span class="n">GetByTitle</span><span class="p">(</span><span class="s">&quot;Documents&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">spContext</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">docLibrary</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">spContext</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">docLibrary</span><span class="p">.</span><span class="n">RootFolder</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">spContext</span><span class="p">.</span><span class="n">ExecuteQuery</span><span class="p">();</span><span class="w"></span>
 
-    string folderPath = docLibrary.RootFolder.ServerRelativeUrl + &quot;/MyFolderThatDoesNotExists&quot;;
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">folderPath</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">docLibrary</span><span class="p">.</span><span class="n">RootFolder</span><span class="p">.</span><span class="n">ServerRelativeUrl</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="s">&quot;/MyFolderThatDoesNotExists&quot;</span><span class="p">;</span><span class="w"></span>
 
-    Folder folderToGet = currentWeb.GetFolderByServerRelativeUrl(folderPath);
-    spContext.Load(folderToGet, f =&gt; f.Exists);
+<span class="w">    </span><span class="n">Folder</span><span class="w"> </span><span class="n">folderToGet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">currentWeb</span><span class="p">.</span><span class="n">GetFolderByServerRelativeUrl</span><span class="p">(</span><span class="n">folderPath</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">spContext</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">folderToGet</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">Exists</span><span class="p">);</span><span class="w"></span>
 
-    try
-    {
-        spContext.ExecuteQuery();
+<span class="w">    </span><span class="k">try</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">spContext</span><span class="p">.</span><span class="n">ExecuteQuery</span><span class="p">();</span><span class="w"></span>
 
-        if (folderToGet.Exists)
-        {
-            // Do something
-        }
-        else
-        {
-            // Do something else
-        }
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.Message);
-    }
-}
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">folderToGet</span><span class="p">.</span><span class="n">Exists</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// Do something</span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// Do something else</span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <p>The twisted thing here's that the <code>if (folderToGet.Exists)</code> line won't be reached. Because if you use the "GetFolderByServerRelativeUrl" and the folder actually doesn't exists (or any parent folder in the hierarchy), it'll throw an exception. But if it exists, then you'll be able to test the value of <code>folderToGet.Exists</code> property (which obviously will return <code>true</code>). Clever.</p>
@@ -382,25 +382,25 @@ using (ClientContext spContext = new ClientContext(&quot;SharePointSiteUrl&quot;
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">// Credentials declaration like above</span>
-<span class="p">...</span>
-<span class="k">using</span> <span class="p">(</span><span class="n">ClientContext</span> <span class="n">spContext</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ClientContext</span><span class="p">(</span><span class="s">&quot;SharePointSiteUrl&quot;</span><span class="p">))</span>
-<span class="p">{</span>
-    <span class="c1">// Connection like above</span>
-    <span class="p">...</span>
+<span class="p">...</span><span class="w"></span>
+<span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="n">ClientContext</span><span class="w"> </span><span class="n">spContext</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientContext</span><span class="p">(</span><span class="s">&quot;SharePointSiteUrl&quot;</span><span class="p">))</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Connection like above</span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
 
-    <span class="kt">string</span> <span class="n">folderPath</span> <span class="p">=</span> <span class="n">docLibrary</span><span class="p">.</span><span class="n">RootFolder</span><span class="p">.</span><span class="n">ServerRelativeUrl</span> <span class="p">+</span> <span class="s">&quot;/MyFileThatDoesNotExists&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">folderPath</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">docLibrary</span><span class="p">.</span><span class="n">RootFolder</span><span class="p">.</span><span class="n">ServerRelativeUrl</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="s">&quot;/MyFileThatDoesNotExists&quot;</span><span class="p">;</span><span class="w"></span>
 
-    <span class="kt">bool</span> <span class="n">exists</span> <span class="p">=</span> <span class="n">currentWeb</span><span class="p">.</span><span class="n">DoesFolderExists</span><span class="p">(</span><span class="n">folderPath</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">bool</span><span class="w"> </span><span class="n">exists</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">currentWeb</span><span class="p">.</span><span class="n">DoesFolderExists</span><span class="p">(</span><span class="n">folderPath</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">exists</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">// Do something</span>
-    <span class="p">}</span>
-    <span class="k">else</span>
-    <span class="p">{</span>
-        <span class="c1">// Do something else</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">exists</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Do something</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// Do something else</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <p>And that's it ! The <code>DoesFolderExists</code> Method provides this test. And it also works with folder hierarchy containing special characters 😉.</p>
@@ -427,27 +427,27 @@ using (ClientContext spContext = new ClientContext(&quot;SharePointSiteUrl&quot;
 <span class="normal">20</span>
 <span class="normal">21</span>
 <span class="normal">22</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">// Credentials declaration like above</span>
-<span class="p">...</span>
+<span class="p">...</span><span class="w"></span>
 
-<span class="k">using</span> <span class="p">(</span><span class="n">ClientContext</span> <span class="n">spContext</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ClientContext</span><span class="p">(</span><span class="s">&quot;SharePointSiteUrl&quot;</span><span class="p">))</span>
-<span class="p">{</span>
-    <span class="c1">// Connection like above</span>
-    <span class="p">...</span>
+<span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="n">ClientContext</span><span class="w"> </span><span class="n">spContext</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientContext</span><span class="p">(</span><span class="s">&quot;SharePointSiteUrl&quot;</span><span class="p">))</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Connection like above</span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
 
-    <span class="kt">string</span> <span class="n">filePath</span> <span class="p">=</span> <span class="n">docLibrary</span><span class="p">.</span><span class="n">RootFolder</span><span class="p">.</span><span class="n">ServerRelativeUrl</span> <span class="p">+</span> <span class="s">&quot;/MyFileThatDoesNotExists&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">filePath</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">docLibrary</span><span class="p">.</span><span class="n">RootFolder</span><span class="p">.</span><span class="n">ServerRelativeUrl</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="s">&quot;/MyFileThatDoesNotExists&quot;</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">File</span> <span class="n">fileToGet</span> <span class="p">=</span> <span class="n">currentWeb</span><span class="p">.</span><span class="n">GetFileByServerRelativeUrl</span><span class="p">(</span><span class="n">filePath</span><span class="p">);</span>
-    <span class="n">spContext</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">fileToGet</span><span class="p">,</span> <span class="n">f</span> <span class="p">=&gt;</span> <span class="n">f</span><span class="p">.</span><span class="n">Exists</span><span class="p">);</span>
+<span class="w">    </span><span class="n">File</span><span class="w"> </span><span class="n">fileToGet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">currentWeb</span><span class="p">.</span><span class="n">GetFileByServerRelativeUrl</span><span class="p">(</span><span class="n">filePath</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">spContext</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">fileToGet</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">Exists</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">try</span>
-    <span class="p">{</span>
-        <span class="n">spContext</span><span class="p">.</span><span class="n">ExecuteQuery</span><span class="p">();</span>
-    <span class="p">}</span>
-    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">    </span><span class="k">try</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">spContext</span><span class="p">.</span><span class="n">ExecuteQuery</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <p>It'll also throw an exception.</p>
@@ -483,36 +483,36 @@ using (ClientContext spContext = new ClientContext(&quot;SharePointSiteUrl&quot;
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">// Credentials declaration like above</span>
-<span class="p">...</span>
+<span class="p">...</span><span class="w"></span>
 
-<span class="k">using</span> <span class="p">(</span><span class="n">ClientContext</span> <span class="n">spContext</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ClientContext</span><span class="p">(</span><span class="s">&quot;SharePointSiteUrl&quot;</span><span class="p">))</span>
-<span class="p">{</span>
-    <span class="c1">// Connection like above</span>
-    <span class="p">...</span>
+<span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="n">ClientContext</span><span class="w"> </span><span class="n">spContext</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ClientContext</span><span class="p">(</span><span class="s">&quot;SharePointSiteUrl&quot;</span><span class="p">))</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// Connection like above</span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
 
-    <span class="kt">string</span> <span class="n">filePath</span> <span class="p">=</span> <span class="n">docLibrary</span><span class="p">.</span><span class="n">RootFolder</span><span class="p">.</span><span class="n">ServerRelativeUrl</span> <span class="p">+</span> <span class="s">&quot;/# My Tricky File ühühü.docx&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">filePath</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">docLibrary</span><span class="p">.</span><span class="n">RootFolder</span><span class="p">.</span><span class="n">ServerRelativeUrl</span><span class="w"> </span><span class="p">+</span><span class="w"> </span><span class="s">&quot;/# My Tricky File ühühü.docx&quot;</span><span class="p">;</span><span class="w"></span>
 
-    <span class="n">File</span> <span class="n">fileToGet</span> <span class="p">=</span> <span class="n">currentWeb</span><span class="p">.</span><span class="n">GetFileByServerRelativePath</span><span class="p">(</span><span class="n">ResourcePath</span><span class="p">.</span><span class="n">FromDecodedUrl</span><span class="p">(</span><span class="n">filePath</span><span class="p">));</span>
-    <span class="n">spContext</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">fileToGet</span><span class="p">,</span> <span class="n">f</span> <span class="p">=&gt;</span> <span class="n">f</span><span class="p">.</span><span class="n">Exists</span><span class="p">);</span>
+<span class="w">    </span><span class="n">File</span><span class="w"> </span><span class="n">fileToGet</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">currentWeb</span><span class="p">.</span><span class="n">GetFileByServerRelativePath</span><span class="p">(</span><span class="n">ResourcePath</span><span class="p">.</span><span class="n">FromDecodedUrl</span><span class="p">(</span><span class="n">filePath</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">spContext</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="n">fileToGet</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">Exists</span><span class="p">);</span><span class="w"></span>
 
-    <span class="k">try</span>
-    <span class="p">{</span>
-        <span class="n">spContext</span><span class="p">.</span><span class="n">ExecuteQuery</span><span class="p">();</span>
+<span class="w">    </span><span class="k">try</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">spContext</span><span class="p">.</span><span class="n">ExecuteQuery</span><span class="p">();</span><span class="w"></span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="n">fileToGet</span><span class="p">.</span><span class="n">Exists</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="c1">// Do something</span>
-        <span class="p">}</span>
-        <span class="k">else</span>
-        <span class="p">{</span>
-            <span class="c1">// Do something else</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">fileToGet</span><span class="p">.</span><span class="n">Exists</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// Do something</span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="c1">// Do something else</span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">ex</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <h2 id="bonus-using-the-windows-credential-manager">Bonus : Using the Windows Credential Manager</h2>
@@ -520,9 +520,9 @@ using (ClientContext spContext = new ClientContext(&quot;SharePointSiteUrl&quot;
 <p>Then, when referencing it, you just have to use it like this:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kt">var</span> <span class="n">cred</span> <span class="p">=</span> <span class="n">CredentialManager</span><span class="p">.</span><span class="n">GetCredentials</span><span class="p">(</span><span class="s">&quot;PnPPS:CredentialsName&quot;</span><span class="p">);</span>
-<span class="kt">string</span> <span class="n">user</span> <span class="p">=</span> <span class="n">cred</span><span class="p">.</span><span class="n">UserName</span><span class="p">;</span>
-<span class="n">SecureString</span> <span class="n">pwd</span> <span class="p">=</span> <span class="n">cred</span><span class="p">.</span><span class="n">SecurePassword</span><span class="p">;</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kt">var</span><span class="w"> </span><span class="n">cred</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">CredentialManager</span><span class="p">.</span><span class="n">GetCredentials</span><span class="p">(</span><span class="s">&quot;PnPPS:CredentialsName&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="kt">string</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cred</span><span class="p">.</span><span class="n">UserName</span><span class="p">;</span><span class="w"></span>
+<span class="n">SecureString</span><span class="w"> </span><span class="n">pwd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cred</span><span class="p">.</span><span class="n">SecurePassword</span><span class="p">;</span><span class="w"></span>
 </code></pre></div>
 </td></tr></table>
 <h2 id="useful-links">Useful Links</h2>
@@ -582,10 +582,10 @@ using (ClientContext spContext = new ClientContext(&quot;SharePointSiteUrl&quot;
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.ca141e46.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.361d90f1.min.js"}</script>
     
     
-      <script src="../../assets/javascripts/bundle.6baa0517.min.js"></script>
+      <script src="../../assets/javascripts/bundle.289a2a4b.min.js"></script>
       
     
   </body>

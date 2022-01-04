@@ -15,7 +15,7 @@
     
     
       
-        <title>How to quickly and properly delete a Team (without waiting) - Michaël Maillot</title>
+        <title>Apply a DevOps process to your SPFx project (Part 1) - Michaël Maillot</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#how-to-quickly-and-properly-delete-a-team-without-waiting" class="md-skip">
+        <a href="#apply-a-devops-process-to-your-spfx-project-part-1" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              How to quickly and properly delete a Team (without waiting)
+              Apply a DevOps process to your SPFx project (Part 1)
             
           </span>
         </div>
@@ -247,90 +247,50 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
+  <a href="#goal-of-this-article" class="md-nav__link">
+    Goal of this article
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#delete-group" class="md-nav__link">
-    Delete Group
+  <a href="#the-devops-movment" class="md-nav__link">
+    The DevOps movment
   </a>
   
-    <nav class="md-nav" aria-label="Delete Group">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sharepoint-online-alm" class="md-nav__link">
+    SharePoint Online ALM
+  </a>
+  
+    <nav class="md-nav" aria-label="SharePoint Online ALM">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#delete-group-with-interface" class="md-nav__link">
-    Delete Group with Interface
+  <a href="#tenant-app-catalog" class="md-nav__link">
+    Tenant App Catalog
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#delete-group-with-code" class="md-nav__link">
-    Delete Group with code
+  <a href="#site-collection-app-catalog" class="md-nav__link">
+    Site Collection App Catalog
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority-order" class="md-nav__link">
+    Priority order
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#delete-team-if-necessary" class="md-nav__link">
-    Delete Team (if necessary)
-  </a>
-  
-    <nav class="md-nav" aria-label="Delete Team (if necessary)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#delete-team-with-interface" class="md-nav__link">
-    Delete Team with Interface
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#delete-team-with-code" class="md-nav__link">
-    Delete Team with code
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#delete-site-collection" class="md-nav__link">
-    Delete Site Collection
-  </a>
-  
-    <nav class="md-nav" aria-label="Delete Site Collection">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#delete-site-with-code" class="md-nav__link">
-    Delete site with code
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#thats-it" class="md-nav__link">
-    That's it
-  </a>
   
 </li>
       
@@ -354,133 +314,128 @@
               
                 
 
-<h1 id="how-to-quickly-and-properly-delete-a-team-without-waiting">How to quickly and properly delete a Team (without waiting)</h1>
-<div class="admonition note">
-<p class="admonition-title">Article update</p>
-<p>2020-11-29 : I've updated the article following the update of the CLI for Microsoft 365, adding a new command for permanently delete a site collection.</p>
-</div>
+<h1 id="apply-a-devops-process-to-your-spfx-project-part-1">Apply a DevOps process to your SPFx project (Part 1)</h1>
 <h2 id="use-case">Use Case</h2>
-<p>You work for a company that wants to automatically create a Team with Tabs, Channels and other stuff that will make a new project team ready to rock the stage.</p>
-<p>You are preparing the process and for mastering it, you have create / test / destroy / retry. But when you want to clean up your mess, you have to know that, during 30 days:</p>
-<ul>
-<li>Your Team still exists as a Group (you can find it in the "Deleted Groups" menu on AAD), same for the associated e-mail address</li>
-<li>The Team Site also still exists</li>
-</ul>
-<p>So let's says that you made a mistake during the creation of a Team and want to "start over" (with same name of course), if you don't want to wait for the Office 365 Job to update your environment and re-create the Team with same name:</p>
-<ul>
-<li>
-<p>The SharePoint Site URL takes a number at the end of its address (of course, because the older one's still here)</p>
-</li>
-<li>
-<p>You can't permanently delete the Teams Site, as the SharePoint Admin Center detects that the related Group still exists</p>
-</li>
-</ul>
-<p>Here's a step by step process to delete quickly a Team ! I recommand to follow them in this order to make everything's work.</p>
-<h2 id="prerequisites">Prerequisites</h2>
+<p>You're working on a daily basis with SharePoint Framework solutions in a business context. You want to make improvments on existing components and testing them without impacting users in production environment.</p>
+<h2 id="goal-of-this-article">Goal of this article</h2>
+<p>This article will show how to apply a DevOps process by using tools like Azure DevOps or GitHub Actions, using multi-stage pipelines to deploy on environments such as UAT, in order to validate an improvment or a hotfix before going to production.</p>
+<p>The first part will describe the DevOps philosophy, how can it fit in SharePoint Online context and which project does it work with.</p>
+<h2 id="the-devops-movment">The DevOps movment</h2>
+<p>Back in 2009, it was first described by Patrick Debois as a way of teaming up the developers (build) and the system administrators / operators (run), to unify their work and put some trust on each other.</p>
+<p>One of the bests depictions of the movment is this world famous schema:</p>
+<p><img alt="DevOps Image" src="../../images/articles/20220104/devops-spfx-moebius.png" /></p>
+<p>According to Microsoft:</p>
+<blockquote>
+<p>DevOps is the union of people, process, and technology to continually provide value to customers.</p>
+</blockquote>
+<p>As SharePoint Online developers, we know how confortable it is to have all the <del>power</del> permissions when working on SPFx solutions. But we also know that in a business context, this could not be tolerated by the IT department, as they're the "gatekeepers" of the production environment.</p>
+<h2 id="sharepoint-online-alm">SharePoint Online ALM</h2>
+<p>When working on SharePoint Framework solutions, you're crossing through several steps which describe the application lifecycle:</p>
 <ol>
-<li>An Office 365 (Dev) Tenant or a Partner Demo Tenant</li>
-<li>An Account with the following Office 365 roles<ul>
-<li>SharePoint Admin</li>
-<li>Teams Admin</li>
-</ul>
-</li>
-<li>An Account with the following Azure AD role<ul>
-<li>Groups administrator</li>
-</ul>
-</li>
-<li>Command Interface (one of these)<ul>
-<li>PowerShell (with <a href="https://docs.microsoft.com/en-us/powershell/azure/active-directory/install-adv2?view=azureadps-2.0" target="_blank">AzureAD PowerShell</a>, <a href="https://docs.microsoft.com/en-us/powershell/sharepoint/sharepoint-pnp/sharepoint-pnp-cmdlets?view=sharepoint-ps" target="_blank">PnP PowerShell</a> and <a href="https://docs.microsoft.com/en-us/powershell/teams/?view=teams-ps" target="_blank">Microsoft Teams PowerShell</a>)</li>
-<li><a href="https://pnp.github.io/cli-microsoft365/" target="_blank">CLI for Microsoft 365</a></li>
-</ul>
-</li>
+<li>Testing "locally" (as the code is on your machine even if you're testing on a remote workbench / page)</li>
+<li>Build / shipping the solution as a package</li>
+<li>Adding the solution to an app catalog</li>
+<li>Deploying it</li>
+<li>Installing it on a tenant or a site</li>
+<li>(optional) Upgrading it</li>
+<li>Retracting it</li>
+<li>Uninstalling it</li>
 </ol>
-<h2 id="delete-group">Delete Group</h2>
-<h3 id="delete-group-with-interface">Delete Group with Interface</h3>
-<p>Throught the UI, you have to delete the Group then permanently delete it</p>
-<p><img alt="alt text" src="../../images/articles/20200211/delete-group.png" title="Delete Group" /></p>
-<p><img alt="alt text" src="../../images/articles/20200211/perm-delete-group.png" title="Permanently Delete Group" /></p>
-<h3 id="delete-group-with-code">Delete Group with code</h3>
-<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Azure AD PowerShell</label><div class="tabbed-content">
+<p><img alt="SPO ALM" src="../../images/articles/20220104/devops-spfx-alm.png" /></p>
+<p>When your package is shipped for deployment, SharePoint Online has two ways of storing your apps:</p>
+<ol>
+<li>Tenant app catalog</li>
+<li>Site collection app catalog</li>
+</ol>
+<h3 id="tenant-app-catalog">Tenant App Catalog</h3>
+<p>The first one has to be added if it doesn't exist, because it's not created by default on your Tenant. With SharePoint Administrator permissions:</p>
+<ol>
+<li>Open the tenant admin apps page: <a href="https://contoso-admin.sharepoint.com/_layouts/15/online/TenantAdminApps.aspx">https://contoso-admin.sharepoint.com/_layouts/15/online/TenantAdminApps.aspx</a> (replace <code>contoso</code> by your tenant name)</li>
+<li>Click on "App Catalog", then setup the URL and validate the app catalog creation</li>
+</ol>
+<p>Once the tenant app catalog is created, you have to be site collection administrator to add and deploy packages.</p>
+<p>From there, you can deploy following components, that can be automatically deployed on all the tenant:</p>
+<ul>
+<li>SharePoint Online WebPart</li>
+<li>SharePoint Online Extensions</li>
+<li>SharePoint Online Library Components</li>
+<li>SharePoint Online Adaptive Card Extensions (ACEs)</li>
+<li>Microsoft Teams WebPart</li>
+</ul>
+<h3 id="site-collection-app-catalog">Site Collection App Catalog</h3>
+<p>The second one will really be useful for the next part of the article series, because it can be enabled optionally for each existing site collection.</p>
+<p>Unlike the tenant app catalog, the site collection app catalog can only be created through Microsoft or PnP tools such as <strong>SharePoint Online Management Shell</strong>, <strong>PnP PowerShell</strong> or <strong>CLI for Microsoft 365</strong>:</p>
+<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">SPO Management Shell</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">Connect-AzureAD</span> <span class="n">-TenantId</span> <span class="s2">&quot;TenantId&quot;</span>
-<span class="nb">Remove-AzureADGroup</span> <span class="n">-ObjectId</span> <span class="s2">&quot;GroupId&quot;</span>
-<span class="nb">Remove-AzureADMSDeletedDirectoryObject</span> <span class="n">-Id</span> <span class="s2">&quot;GroupId&quot;</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c"># Login to the site collection where the app catalog will be added</span>
+<span class="nb">Connect-SPOService</span> <span class="n">-Url</span> <span class="n">https</span><span class="p">://</span><span class="n">contoso</span><span class="p">.</span><span class="n">sharepoint</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">sites</span><span class="p">/</span><span class="n">HR</span> <span class="n">-Credential</span> <span class="n">mbowen</span><span class="nv">@contoso</span><span class="p">.</span><span class="n">com</span>
+
+<span class="c"># Enable the site collection app catalog</span>
+<span class="nb">Add-SPOSiteCollectionAppCtalog</span> <span class="n">-Site</span> <span class="n">https</span><span class="p">://</span><span class="n">contoso</span><span class="p">.</span><span class="n">sharepoint</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">sites</span><span class="p">/</span><span class="n">HR</span> <span class="n">-Confirm</span>
 </code></pre></div>
 </td></tr></table>
 </div>
-<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">CLI for Microsoft 365</label><div class="tabbed-content">
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># (As there&#39;s no CLI command to permanently delete a Group,</span>
-<span class="c1"># you&#39;ll have to do it through the UI)</span>
-aad o365group remove --id <span class="s2">&quot;GroupId&quot;</span> --confirm
-</code></pre></div>
-</td></tr></table>
-</div>
-</div>
-<h2 id="delete-team-if-necessary">Delete Team (if necessary)</h2>
-<p>Sometimes, once a Group is permanently deleted, the Team still exists. If it's the case and once again, you don't want for the Job to delete it, you can do it yourself. But don't be surprise if the following commands throw an error : maybe the Job has already worked.</p>
-<h3 id="delete-team-with-interface">Delete Team with Interface</h3>
-<p>Throught the UI (if you have an owner account) or Admin Interface, you can delete the Team</p>
-<p><img alt="alt text" src="../../images/articles/20200211/delete-team-ui.png" title="Delete Team from UI" /></p>
-<p><center><strong>OR</strong></center></p>
-<p><img alt="alt text" src="../../images/articles/20200211/delete-team-admin.png" title="Delete Team from Admin Interface" /></p>
-<h3 id="delete-team-with-code">Delete Team with code</h3>
-<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Microsoft Teams PowerShell</label><div class="tabbed-content">
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nb">Connect-MicrosoftTeams</span> <span class="n">-TenantId</span> <span class="s2">&quot;TenantId&quot;</span>
-<span class="nb">Remove-Team</span> <span class="n">-GroupId</span> <span class="s2">&quot;GroupId&quot;</span>
-</code></pre></div>
-</td></tr></table>
-</div>
-</div>
-<h2 id="delete-site-collection">Delete Site Collection</h2>
-<p>As I told you before (even if you did the previous steps), if you try to delete the Teams Site from the SharePoint Admin Center, you won't be able to remove it from the Site Collection Recycle Bin (because of the O365 Job Tenant update process).</p>
-<h3 id="delete-site-with-code">Delete site with code</h3>
-<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">PnP PowerShell</label><div class="tabbed-content">
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">PnP PowerShell</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span>
-<span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c"># If you are familiar with the Get-PnPStoredCredential cmdlet,</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c"># Login to the site collection where the app catalog will be added</span>
+<span class="c"># If you are familiar with the Get-PnPStoredCredential cmdlet,</span>
 <span class="c"># you can use it here with the &quot;-Credential&quot; Argument</span>
-<span class="nb">Connect-PnPOnline</span> <span class="n">-TenantId</span> <span class="s2">&quot;TenantId&quot;</span>
+<span class="nb">Connect-PnPOnline</span> <span class="n">-Url</span> <span class="n">https</span><span class="p">://</span><span class="n">contoso</span><span class="p">.</span><span class="n">sharepoint</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">sites</span><span class="p">/</span><span class="n">HR</span> <span class="n">-Credentials</span> <span class="n">mbowen</span><span class="nv">@contoso</span><span class="p">.</span><span class="n">com</span>
 
-<span class="c"># Remove the site</span>
-<span class="nb">Remove-PnPTenantSite</span> <span class="n">-Url</span> <span class="s2">&quot;TeamsSiteUrl&quot;</span> <span class="n">-Force</span> <span class="n">-SkipRecycleBin</span>
-
-<span class="c"># Remove the site from the Site Collection Recycle Bin</span>
-<span class="nb">Clear-PnPTenantRecycleBinItem</span> <span class="n">-Url</span> <span class="s2">&quot;TeamsSiteUrl&quot;</span> <span class="n">-Force</span> <span class="n">-Wait</span>
+<span class="c"># Enable the site collection app catalog</span>
+<span class="nb">Add-PnPSiteCollectionAppCatalog</span>
 </code></pre></div>
 </td></tr></table>
 </div>
-<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">CLI for Microsoft 365</label><div class="tabbed-content">
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">CLI for Microsoft 365</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Remove the site</span>
-spo site classic remove -u <span class="s2">&quot;TeamsSiteUrl&quot;</span> --skipRecycleBin --confirm --wait
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># Login using device code</span>
+m365 login
 
-<span class="c1"># Remove the site from the Site Collection Recycle Bin</span>
-spo tenant recyclebinitem remove -u <span class="s2">&quot;TeamsSiteUrl&quot;</span> --confirm --wait
+<span class="c1"># Enable the site collection app catalog</span>
+m365 spo site appcatalog add --url https://contoso.sharepoint.com/sites/HR
 </code></pre></div>
 </td></tr></table>
 </div>
 </div>
-<h2 id="thats-it">That's it</h2>
-<p>Et voilà ! You can start over your process until it's ready to use.</p>
-<p>Of course, you could also make those tasks with the SharePoint Online Management Shell or with the Graph API, but here I've covered the most common ways of working with Teams / Group / SharePoint administration.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>To enable the site collection app catalog, you must be at least SharePoint Administrator, be tenant app catalog site collection administrator and be the targeted site collection administrator</p>
+</div>
+<p>Once enabled, like the tenant app catalog you have to be site collection administrator to add and deploy packages.</p>
+<p>As the tenant app catalog, you can deploy components on the site collection tenant but not all of them:</p>
+<ul>
+<li>SharePoint Online WebPart</li>
+<li>SharePoint Online Extensions</li>
+<li>SharePoint Online Library Components</li>
+<li>SharePoint Online ACEs<ul>
+<li><em>Beware that for this component, you'll only be able to test it on the hosted workbench, not a "Dashboard" page, as this one is only available on the "<a href="https://docs.microsoft.com/en-us/viva/connections/guide-to-setting-up-viva-connections#step-2-designate-a-home-site-in-sharepoint" target="_blank">home site</a>"</em></li>
+</ul>
+</li>
+</ul>
+<p>You can't deploy Microsoft Teams WebParts, as you have to deploy them at the tenant level in order to synchronize the solution package with Teams.</p>
+<h3 id="priority-order">Priority order</h3>
+<p>The most interesting part when deploying SPFx solutions is the <strong>priority order</strong>.</p>
+<p>Let's take a simple example. You're developing a WebPart and ship it as a solution package. You can deploy it on both tenant app catalog and site collection app catalog.</p>
+<p>When a same component is deployed on both catalogs, it's the site collection one which prevails.</p>
+<p><img alt="SPO ALM PRIORITY ORDER" src="../../images/articles/20220104/devops-spfx-alm-priority.png" /></p>
+<p>Keep that is mind because it will be very useful for the second part 😉</p>
 <h2 id="useful-links">Useful Links</h2>
 <ul>
-<li><a href="https://slideplayer.com/slide/13833399/">Microsoft Teams Architecture</a></li>
-<li><a href="https://docs.microsoft.com/en-us/microsoftteams/teams-architecture-solutions-posters">Microsoft Teams Architecture Posters</a></li>
+<li><a href="https://docs.microsoft.com/en-us/sharepoint/dev/apis/alm-api-for-spfx-add-ins?tabs=sprest" target="_blank">Application Lifecycle Management (ALM) APIs</a></li>
 </ul>
+<p>(Thanks to <a href="https://twitter.com/morisseauphi" target="_blank">Philippe M</a> for providing his DevOps schema template)</p>
 
               
             </article>

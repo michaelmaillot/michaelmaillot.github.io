@@ -611,76 +611,76 @@
 <span class="normal">67</span>
 <span class="normal">68</span>
 <span class="normal">69</span>
-<span class="normal">70</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c">/* /!\ update the reference to use Fluent UI or you&#39;ll get an error */</span><span class="w"></span>
-<span class="p">@</span><span class="k">import</span><span class="w"> </span><span class="s1">&#39;~@fluentui/react/dist/sass/References.scss&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="normal">70</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c">/* /!\ update the reference to use Fluent UI or you&#39;ll get an error */</span>
+<span class="p">@</span><span class="k">import</span> <span class="s1">&#39;~@fluentui/react/dist/sass/References.scss&#39;</span><span class="p">;</span>
 
-<span class="o">$</span><span class="nt">bg-color-unreached</span><span class="o">:</span><span class="w"> </span><span class="o">$</span><span class="nt">ms-color-themeLight</span><span class="o">;</span><span class="w"></span>
-<span class="o">$</span><span class="nt">bg-color-reached</span><span class="o">:</span><span class="w"> </span><span class="o">$</span><span class="nt">ms-color-themePrimary</span><span class="o">;</span><span class="w"></span>
-<span class="o">$</span><span class="nt">font-color-reached</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">ffffff</span><span class="o">;</span><span class="w"></span>
+<span class="o">$</span><span class="nt">bg-color-unreached</span><span class="o">:</span> <span class="o">$</span><span class="nt">ms-color-themeLight</span><span class="o">;</span>
+<span class="o">$</span><span class="nt">bg-color-reached</span><span class="o">:</span> <span class="o">$</span><span class="nt">ms-color-themePrimary</span><span class="o">;</span>
+<span class="o">$</span><span class="nt">font-color-reached</span><span class="o">:</span> <span class="p">#</span><span class="nn">ffffff</span><span class="o">;</span>
 
-<span class="p">.</span><span class="nc">stepindicator</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="p">.</span><span class="nc">stepindicator</span> <span class="p">{</span>
 
-<span class="w">  </span><span class="c">/* Style of a step (number and text) */</span><span class="w"></span>
-<span class="w">  </span><span class="err">.breadcrumbitem</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="kt">px</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
+  <span class="c">/* Style of a step (number and text) */</span>
+  <span class="err">.breadcrumbitem</span> <span class="err">{</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">150</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c">/* Style of the text displayed below the step, reached or not */</span><span class="w"></span>
-<span class="w">    </span><span class="err">.status</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">text-align</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span><span class="kt">rem</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">white-space</span><span class="p">:</span><span class="w"> </span><span class="kc">pre-line</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">min-height</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
+    <span class="c">/* Style of the text displayed below the step, reached or not */</span>
+    <span class="err">.status</span> <span class="err">{</span>
+      <span class="k">text-align</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+      <span class="k">font-size</span><span class="p">:</span> <span class="mf">0.7</span><span class="kt">rem</span><span class="p">;</span>
+      <span class="k">white-space</span><span class="p">:</span> <span class="kc">pre-line</span><span class="p">;</span>
+      <span class="k">min-height</span><span class="p">:</span> <span class="mi">40</span><span class="kt">px</span><span class="p">;</span>
 
-<span class="w">      </span><span class="err">&amp;current</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">        </span><span class="err">@extend</span><span class="w"> </span><span class="err">.status</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">margin-left</span><span class="p">:</span><span class="w"> </span><span class="mi">-5</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">bold</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="err">}</span><span class="w"></span>
+      <span class="err">&amp;current</span> <span class="err">{</span>
+        <span class="err">@extend</span> <span class="err">.status</span><span class="p">;</span>
+        <span class="k">margin-left</span><span class="p">:</span> <span class="mi">-5</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="err">}</span>
 
-<span class="w">    </span><span class="c">/*</span>
+    <span class="c">/*</span>
 <span class="c">        Style of the step &#39;icon&#39; (number)</span>
 <span class="c">        Here, it&#39;s displayed as a circle</span>
-<span class="c">    */</span><span class="w"></span>
-<span class="w">    </span><span class="p">.</span><span class="nc">step</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="kt">%</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">text-align</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">left</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="kt">%</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">relative</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">bg-color-unreached</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">z-index</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="c">    */</span>
+    <span class="p">.</span><span class="nc">step</span> <span class="p">{</span>
+      <span class="k">border-radius</span><span class="p">:</span> <span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+      <span class="k">height</span><span class="p">:</span> <span class="mi">26</span><span class="kt">px</span><span class="p">;</span>
+      <span class="k">width</span><span class="p">:</span> <span class="mi">26</span><span class="kt">px</span><span class="p">;</span>
+      <span class="k">line-height</span><span class="p">:</span> <span class="mi">26</span><span class="kt">px</span><span class="p">;</span>
+      <span class="k">font-size</span><span class="p">:</span> <span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+      <span class="k">text-align</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+      <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+      <span class="k">left</span><span class="p">:</span> <span class="mi">40</span><span class="kt">%</span><span class="p">;</span>
+      <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span>
+      <span class="k">background-color</span><span class="p">:</span> <span class="err">$</span><span class="n">bg-color-unreached</span><span class="p">;</span>
+      <span class="k">z-index</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
 
-<span class="w">      </span><span class="err">&amp;visited</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">        </span><span class="err">@extend</span><span class="w"> </span><span class="err">.step</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="k">font</span><span class="o">-</span><span class="kc">color</span><span class="o">-</span><span class="n">reached</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">bg-color-reached</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="err">}</span><span class="w"></span>
-<span class="w">  </span><span class="err">}</span><span class="w"></span>
+      <span class="err">&amp;visited</span> <span class="err">{</span>
+        <span class="err">@extend</span> <span class="err">.step</span><span class="p">;</span>
+        <span class="k">color</span><span class="p">:</span> <span class="err">$</span><span class="k">font</span><span class="o">-</span><span class="kc">color</span><span class="o">-</span><span class="n">reached</span><span class="p">;</span>
+        <span class="k">background-color</span><span class="p">:</span> <span class="err">$</span><span class="n">bg-color-reached</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="err">}</span>
+  <span class="err">}</span>
 
-<span class="w">  </span><span class="c">/* Style of the divider */</span><span class="w"></span>
-<span class="w">  </span><span class="p">.</span><span class="nc">separator</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">inline-block</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">absolute</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">95</span><span class="kt">%</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">top</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="kt">%</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">left</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="kt">%</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">bg-color-unreached</span><span class="p">;</span><span class="w"></span>
+  <span class="c">/* Style of the divider */</span>
+  <span class="p">.</span><span class="nc">separator</span> <span class="p">{</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">inline-block</span><span class="p">;</span>
+    <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+    <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span> <span class="mi">4</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">95</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">top</span><span class="p">:</span> <span class="mi">17</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">left</span><span class="p">:</span> <span class="mi">55</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">background-color</span><span class="p">:</span> <span class="err">$</span><span class="n">bg-color-unreached</span><span class="p">;</span>
 
-<span class="w">    </span><span class="err">&amp;visited</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">      </span><span class="err">@extend</span><span class="w"> </span><span class="err">.separator</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">bg-color-reached</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="err">}</span><span class="w"></span>
-<span class="err">}</span><span class="w"></span>
+    <span class="err">&amp;visited</span> <span class="err">{</span>
+      <span class="err">@extend</span> <span class="err">.separator</span><span class="p">;</span>
+      <span class="k">background-color</span><span class="p">:</span> <span class="err">$</span><span class="n">bg-color-reached</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="err">}</span>
+<span class="err">}</span>
 </code></pre></div>
 </td></tr></table>
 <p>After that, we just have to reference the <code>Breadcrumb</code> component which will use our declared methods and styling</p>
@@ -1087,76 +1087,76 @@
 <span class="normal">67</span>
 <span class="normal">68</span>
 <span class="normal">69</span>
-<span class="normal">70</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c">/* /!\ update the reference to use Fluent UI or you&#39;ll get an error */</span><span class="w"></span>
-<span class="p">@</span><span class="k">import</span><span class="w"> </span><span class="s1">&#39;~@fluentui/react/dist/sass/References.scss&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="normal">70</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c">/* /!\ update the reference to use Fluent UI or you&#39;ll get an error */</span>
+<span class="p">@</span><span class="k">import</span> <span class="s1">&#39;~@fluentui/react/dist/sass/References.scss&#39;</span><span class="p">;</span>
 
-<span class="o">$</span><span class="nt">bg-color-unreached</span><span class="o">:</span><span class="w"> </span><span class="o">$</span><span class="nt">ms-color-themeLight</span><span class="o">;</span><span class="w"></span>
-<span class="o">$</span><span class="nt">bg-color-reached</span><span class="o">:</span><span class="w"> </span><span class="o">$</span><span class="nt">ms-color-themePrimary</span><span class="o">;</span><span class="w"></span>
-<span class="o">$</span><span class="nt">font-color-reached</span><span class="o">:</span><span class="w"> </span><span class="p">#</span><span class="nn">ffffff</span><span class="o">;</span><span class="w"></span>
+<span class="o">$</span><span class="nt">bg-color-unreached</span><span class="o">:</span> <span class="o">$</span><span class="nt">ms-color-themeLight</span><span class="o">;</span>
+<span class="o">$</span><span class="nt">bg-color-reached</span><span class="o">:</span> <span class="o">$</span><span class="nt">ms-color-themePrimary</span><span class="o">;</span>
+<span class="o">$</span><span class="nt">font-color-reached</span><span class="o">:</span> <span class="p">#</span><span class="nn">ffffff</span><span class="o">;</span>
 
-<span class="p">.</span><span class="nc">stepindicator</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="p">.</span><span class="nc">stepindicator</span> <span class="p">{</span>
 
-<span class="w">  </span><span class="c">/* Style of a step (number and text) */</span><span class="w"></span>
-<span class="w">  </span><span class="err">.breadcrumbitem</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">150</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="kt">px</span><span class="w"> </span><span class="mi">10</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
+  <span class="c">/* Style of a step (number and text) */</span>
+  <span class="err">.breadcrumbitem</span> <span class="err">{</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">150</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
 
-<span class="w">    </span><span class="c">/* Style of the text displayed below the step, reached or not */</span><span class="w"></span>
-<span class="w">    </span><span class="err">.status</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">text-align</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span><span class="kt">rem</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">white-space</span><span class="p">:</span><span class="w"> </span><span class="kc">pre-line</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">min-height</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
+    <span class="c">/* Style of the text displayed below the step, reached or not */</span>
+    <span class="err">.status</span> <span class="err">{</span>
+      <span class="k">text-align</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+      <span class="k">font-size</span><span class="p">:</span> <span class="mf">0.7</span><span class="kt">rem</span><span class="p">;</span>
+      <span class="k">white-space</span><span class="p">:</span> <span class="kc">pre-line</span><span class="p">;</span>
+      <span class="k">min-height</span><span class="p">:</span> <span class="mi">40</span><span class="kt">px</span><span class="p">;</span>
 
-<span class="w">      </span><span class="err">&amp;current</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">        </span><span class="err">@extend</span><span class="w"> </span><span class="err">.status</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">margin-left</span><span class="p">:</span><span class="w"> </span><span class="mi">-5</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">bold</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="err">}</span><span class="w"></span>
+      <span class="err">&amp;current</span> <span class="err">{</span>
+        <span class="err">@extend</span> <span class="err">.status</span><span class="p">;</span>
+        <span class="k">margin-left</span><span class="p">:</span> <span class="mi">-5</span><span class="kt">px</span><span class="p">;</span>
+        <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="err">}</span>
 
-<span class="w">    </span><span class="c">/*</span>
+    <span class="c">/*</span>
 <span class="c">        Style of the step &#39;icon&#39; (number)</span>
 <span class="c">        Here, it&#39;s displayed as a circle</span>
-<span class="c">    */</span><span class="w"></span>
-<span class="w">    </span><span class="p">.</span><span class="nc">step</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="kt">%</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mi">26</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">text-align</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">left</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="kt">%</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">relative</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">bg-color-unreached</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">z-index</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="c">    */</span>
+    <span class="p">.</span><span class="nc">step</span> <span class="p">{</span>
+      <span class="k">border-radius</span><span class="p">:</span> <span class="mi">50</span><span class="kt">%</span><span class="p">;</span>
+      <span class="k">height</span><span class="p">:</span> <span class="mi">26</span><span class="kt">px</span><span class="p">;</span>
+      <span class="k">width</span><span class="p">:</span> <span class="mi">26</span><span class="kt">px</span><span class="p">;</span>
+      <span class="k">line-height</span><span class="p">:</span> <span class="mi">26</span><span class="kt">px</span><span class="p">;</span>
+      <span class="k">font-size</span><span class="p">:</span> <span class="mi">1</span><span class="kt">rem</span><span class="p">;</span>
+      <span class="k">text-align</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+      <span class="k">padding</span><span class="p">:</span> <span class="mi">0</span><span class="kt">px</span><span class="p">;</span>
+      <span class="k">left</span><span class="p">:</span> <span class="mi">40</span><span class="kt">%</span><span class="p">;</span>
+      <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span>
+      <span class="k">background-color</span><span class="p">:</span> <span class="err">$</span><span class="n">bg-color-unreached</span><span class="p">;</span>
+      <span class="k">z-index</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
 
-<span class="w">      </span><span class="err">&amp;visited</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">        </span><span class="err">@extend</span><span class="w"> </span><span class="err">.step</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="k">font</span><span class="o">-</span><span class="kc">color</span><span class="o">-</span><span class="n">reached</span><span class="p">;</span><span class="w"></span>
-<span class="w">        </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">bg-color-reached</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="err">}</span><span class="w"></span>
-<span class="w">  </span><span class="err">}</span><span class="w"></span>
+      <span class="err">&amp;visited</span> <span class="err">{</span>
+        <span class="err">@extend</span> <span class="err">.step</span><span class="p">;</span>
+        <span class="k">color</span><span class="p">:</span> <span class="err">$</span><span class="k">font</span><span class="o">-</span><span class="kc">color</span><span class="o">-</span><span class="n">reached</span><span class="p">;</span>
+        <span class="k">background-color</span><span class="p">:</span> <span class="err">$</span><span class="n">bg-color-reached</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="err">}</span>
+  <span class="err">}</span>
 
-<span class="w">  </span><span class="c">/* Style of the divider */</span><span class="w"></span>
-<span class="w">  </span><span class="p">.</span><span class="nc">separator</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">inline-block</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">absolute</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">95</span><span class="kt">%</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">top</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="kt">%</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">left</span><span class="p">:</span><span class="w"> </span><span class="mi">55</span><span class="kt">%</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">bg-color-unreached</span><span class="p">;</span><span class="w"></span>
+  <span class="c">/* Style of the divider */</span>
+  <span class="p">.</span><span class="nc">separator</span> <span class="p">{</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">inline-block</span><span class="p">;</span>
+    <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
+    <span class="k">content</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+    <span class="k">height</span><span class="p">:</span> <span class="mi">4</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">width</span><span class="p">:</span> <span class="mi">95</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">top</span><span class="p">:</span> <span class="mi">17</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">left</span><span class="p">:</span> <span class="mi">55</span><span class="kt">%</span><span class="p">;</span>
+    <span class="k">background-color</span><span class="p">:</span> <span class="err">$</span><span class="n">bg-color-unreached</span><span class="p">;</span>
 
-<span class="w">    </span><span class="err">&amp;visited</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">      </span><span class="err">@extend</span><span class="w"> </span><span class="err">.separator</span><span class="p">;</span><span class="w"></span>
-<span class="w">      </span><span class="k">background-color</span><span class="p">:</span><span class="w"> </span><span class="err">$</span><span class="n">bg-color-reached</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="err">}</span><span class="w"></span>
-<span class="err">}</span><span class="w"></span>
+    <span class="err">&amp;visited</span> <span class="err">{</span>
+      <span class="err">@extend</span> <span class="err">.separator</span><span class="p">;</span>
+      <span class="k">background-color</span><span class="p">:</span> <span class="err">$</span><span class="n">bg-color-reached</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="err">}</span>
+<span class="err">}</span>
 </code></pre></div>
 </td></tr></table>
 <p>And the result:</p>

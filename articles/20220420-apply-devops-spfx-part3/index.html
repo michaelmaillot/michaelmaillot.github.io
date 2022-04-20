@@ -1,0 +1,1796 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Blog articles about Microsoft 365 / Azure / General Dev">
+      
+      
+      
+      
+      <link rel="icon" href="../../images/puzzle.ico">
+      <meta name="generator" content="mkdocs-1.2.4, mkdocs-material-7.2.6">
+    
+    
+      
+        <title>Apply a DevOps process to your SPFx project (Part 3) - Michaël Maillot</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700%7C&display=fallback">
+        <style>:root{--md-text-font-family:"Poppins";--md-code-font-family:""}</style>
+      
+    
+    
+    
+    
+      
+
+  
+
+
+  
+
+  
+
+
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-9BSLGY6C2M"),document.addEventListener("DOMContentLoaded",function(){"undefined"!=typeof location$&&location$.subscribe(function(t){gtag("config","G-9BSLGY6C2M",{page_path:t.pathname})})})</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9BSLGY6C2M"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="light-blue">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#apply-a-devops-process-to-your-spfx-project-part-3" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Michaël Maillot" class="md-header__button md-logo" aria-label="Michaël Maillot" data-md-component="logo">
+      
+  <img src="../../images/puzzle.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Michaël Maillot
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Apply a DevOps process to your SPFx project (Part 3)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Michaël Maillot" class="md-nav__button md-logo" aria-label="Michaël Maillot" data-md-component="logo">
+      
+  <img src="../../images/puzzle.png" alt="logo">
+
+    </a>
+    Michaël Maillot
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#goal-of-this-article-reminder" class="md-nav__link">
+    Goal of this article (reminder)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scenarios-context" class="md-nav__link">
+    Scenarios context
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ci-cd-pipelines-digging" class="md-nav__link">
+    CI / CD pipelines digging
+  </a>
+  
+    <nav class="md-nav" aria-label="CI / CD pipelines digging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#templates-structure" class="md-nav__link">
+    Templates structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security" class="md-nav__link">
+    Security
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authentication-with-azure-ad" class="md-nav__link">
+    Authentication with Azure AD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continuous-integration" class="md-nav__link">
+    Continuous Integration
+  </a>
+  
+    <nav class="md-nav" aria-label="Continuous Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ci-triggers-inputs" class="md-nav__link">
+    CI Triggers &amp; Inputs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ci-jobs" class="md-nav__link">
+    CI Jobs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ci-steps" class="md-nav__link">
+    CI Steps
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continuous-delivery" class="md-nav__link">
+    Continuous Delivery
+  </a>
+  
+    <nav class="md-nav" aria-label="Continuous Delivery">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cd-triggers-inputs" class="md-nav__link">
+    CD Triggers &amp; Inputs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cd-jobs" class="md-nav__link">
+    CD Jobs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cd-steps" class="md-nav__link">
+    CD Steps
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trigger-pipeline" class="md-nav__link">
+    Trigger pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pipeline-files" class="md-nav__link">
+    Pipeline files
+  </a>
+  
+    <nav class="md-nav" aria-label="Pipeline files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cli-for-microsoft-365" class="md-nav__link">
+    CLI for Microsoft 365
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pnp-powershell" class="md-nav__link">
+    PnP PowerShell
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution-configuration" class="md-nav__link">
+    Solution configuration
+  </a>
+  
+    <nav class="md-nav" aria-label="Solution configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#azdo-configuration" class="md-nav__link">
+    AzDO configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-actions-configuration" class="md-nav__link">
+    GitHub Actions configuration
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-source-code" class="md-nav__link">
+    Other source code
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#navigation" class="md-nav__link">
+    Navigation
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="apply-a-devops-process-to-your-spfx-project-part-3">Apply a DevOps process to your SPFx project (Part 3)</h1>
+<h2 id="goal-of-this-article-reminder">Goal of this article (reminder)</h2>
+<p>This article series will show how to apply a DevOps process by using tools like Azure DevOps or GitHub Actions, using multi-stage / environment pipelines to deploy on environments such as UAT, in order to validate an improvment or a hotfix before going to production.</p>
+<p>The third part will show how to implement technical solutions by using CI / CD pipeline templates.</p>
+<h2 id="scenarios-context">Scenarios context</h2>
+<p>When working on enterprise solutions, we are always facing the question of "testing" before pushing on production environment, to ensure that new features or fixes are working as expected.</p>
+<p>Thanks to the site collection app catalog, we have this opportunity (for the use cases exposed in the <a href="../20220104-apply-devops-spfx-part1/" target="_blank">first part</a>)!</p>
+<p>We saw <a href="../20220221-apply-devops-spfx-part2/" target="_blank">previously</a> two major scenarios that can be applied in a company as a DevOps process. This part will talk about applying those scenarios with two well-known CI / CD solutions: <a href="https://github.com/features/actions" target="_blank">GitHub Actions</a> &amp; <a href="https://azure.microsoft.com/fr-fr/services/devops/" target="_blank">Azure DevOps (AzDO)</a>.</p>
+<p>In this article, we'll focus on the scenario where a testing site already exists.</p>
+<h2 id="ci-cd-pipelines-digging">CI / CD pipelines digging</h2>
+<p>For both solutions, we will use "pipeline" (Azure DevOps) / "workflow" (GitHub Actions) templates. This will provide us guidance on how to reuse and adapt them to our business context.</p>
+<p>Also, we have to "setup" (that's a quick word) the host that will run our pipeline. Think of this host as a "disposable" / ephemeral machine that is configured only to run specific tasks, then disapear. A host is required for a pipeline / workflow, so we will have at least two hosts needed: one for the CI, one for the CD and each of them will be independant.</p>
+<p>It's important to keep that in mind for the rest of this article 😉.</p>
+<p>Our SPFx solution will have a "main" pipeline, which will call our templates.</p>
+<h3 id="templates-structure">Templates structure</h3>
+<p>Below we'll find a schema for each platform, to understand how the templates are organized.</p>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">AzDO</label><div class="tabbed-content">
+<p><img alt="DevOps SPFx templates AzDO" src="../../images/articles/20220325/devops-spfx-templates-azdo.png" /></p>
+<ol>
+<li>A generic pipeline (<code>azure-pipelines.yml</code>) will be triggered as the initiator</li>
+<li>
+<p>It will call a global CI / CD template (<code>build-deploy-spfx-cli-m365.yml</code>), that will call subsequently</p>
+<ul>
+<li>CI pipeline (<code>build-spfx.yml</code>)</li>
+<li>CD pipeline, using <a href="https://pnp.github.io/cli-microsoft365/">CLI for Microsoft 365</a> (<code>deploy-spfx-cli-m365.yml</code>) (or <a href="https://pnp.github.io/powershell/">PnP PowerShell</a>)</li>
+</ul>
+</li>
+</ol>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Action</label><div class="tabbed-content">
+<p><img alt="DevOps SPFx templates GitHub Actions" src="../../images/articles/20220325/devops-spfx-templates-action.png" /></p>
+<ol>
+<li>
+<p>A generic pipeline (<code>main.yml</code>) will be trigger as the initiator that will call subsequently</p>
+<ul>
+<li>CI pipeline (<code>build-spfx.yml</code>)</li>
+<li>CD pipeline, using <a href="https://pnp.github.io/cli-microsoft365/">CLI for Microsoft 365</a> (<code>deploy-spfx-cli-m365.yml</code>) (or <a href="https://pnp.github.io/powershell/">PnP PowerShell</a>)</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+<h3 id="security">Security</h3>
+<p>If order to deploy securely our SPFx solution, we have to register credentials (certificate authentication) per environment (remember that we want to deploy first on UAT, then on PRD). Here are the main approaches for the two platforms.</p>
+<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">AzDO</label><div class="tabbed-content">
+<p><img alt="DevOps SPFx templates AzDO" src="../../images/articles/20220325/devops-spfx-variables-azdo.png" /></p>
+<ol>
+<li>Using secret variables, linked to environments through pipeline template (with permissions), to keep sensitive information safe</li>
+<li>Using secure file storage to hold certificate file, linked to environments through pipeline template (with permissions), used for authentication</li>
+</ol>
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Action</label><div class="tabbed-content">
+<p><img alt="DevOps SPFx templates GitHub Actions" src="../../images/articles/20220325/devops-spfx-variables-action.png" /></p>
+<ol>
+<li>Using secret variables, linked to environments, to keep sensitive information</li>
+</ol>
+</div>
+</div>
+<p>As we can see, there's no secure file storage available in GitHub Actions, but we'll see a little bit later that we can afford that 😁</p>
+<p>(in the next part and for the AzDO only, we will skip the in-between template <code>build-deploy-spfx-cli-m365.yml</code>, in order to focus on the CI / CD)</p>
+<h3 id="authentication-with-azure-ad">Authentication with Azure AD</h3>
+<p>Whether we choose to use GitHub Actions, AzDO as the CI / CD platform, and PnP PowerShell or CLI for Microsoft 365 as the ALM tool, we'll have to authenticate to SharePolint Online to deploy our solution. As this can't be done with our own account in a DevOps philosophy, it's better to do so with a dedicated authentication, meaning application context, which is provided by Azure AD Applications.</p>
+<p>So to be sure to authenticate correctly and to give the rights keys (as an Ops remember 👀), the AAD application will have to be configured with the following info:</p>
+<ul>
+<li>Certificates &amp; secrets</li>
+<li>Add a certificate file (.pem, crt or .cer), for which we'll have the thumbprint info and encoded file or .pfx file (depending on the CI / CD platform)</li>
+<li>API permission</li>
+<li>Add SharePoint application permission "Sites.FullControl.All"</li>
+</ul>
+<h3 id="continuous-integration">Continuous Integration</h3>
+<p>In this section, we will cover following steps:</p>
+<ul>
+<li>Configuring the trigger (what will be done to run the pipeline)</li>
+<li>Specifying input parameters</li>
+<li>Determine the host OS</li>
+<li>Checking out our last repo sources</li>
+<li>Setting NodeJS version (as a prerequisite to build our SPFx package)</li>
+<li>Installing required NPM packages (as mentioned in the <code>package.json</code> file)</li>
+<li>Bundling the solution</li>
+<li>(optionally) testing the solution</li>
+<li>Packaging the solution</li>
+<li>Uploading it as an artefact, to make it available for the CD part</li>
+</ul>
+<h4 id="ci-triggers-inputs">CI Triggers &amp; Inputs</h4>
+<p>First thing is to specify what will make the pipeline run.</p>
+<div class="tabbed-set" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">AzDO</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># No triggers here, which makes the pipeline not callable except from another pipeline</span>
+<span class="nt">parameters</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">include_tests</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+    <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><label for="__tabbed_3_2">Action</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build</span>
+
+<span class="nt">on</span><span class="p">:</span>
+  <span class="nt">workflow_call</span><span class="p">:</span> <span class="c1"># only callable from another workflow</span>
+    <span class="nt">inputs</span><span class="p">:</span>
+      <span class="nt">include_tests</span><span class="p">:</span>
+        <span class="nt">description</span><span class="p">:</span> <span class="s">&#39;Indicates</span><span class="nv"> </span><span class="s">whether</span><span class="nv"> </span><span class="s">build</span><span class="nv"> </span><span class="s">job</span><span class="nv"> </span><span class="s">has</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">run</span><span class="nv"> </span><span class="s">tests</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">not&#39;</span>
+        <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+        <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<h4 id="ci-jobs">CI Jobs</h4>
+<p>Then specify the job details, the core of the pipeline which has an ephemeral state. First, the host OS:</p>
+<div class="tabbed-set" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">AzDO</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">job</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build</span>
+    <span class="nt">pool</span><span class="p">:</span>
+      <span class="nt">vmImage</span><span class="p">:</span> <span class="s">&#39;ubuntu-latest&#39;</span>
+      <span class="nt">demands</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">npm</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">node.js</span>
+      <span class="nt">variables</span><span class="p">:</span>
+        <span class="nt">npm_config_cache</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">$(Pipeline.Workspace)/.npm</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><label for="__tabbed_4_2">Action</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">build</span><span class="p">:</span> <span class="c1"># job name here, can be anything else</span>
+    <span class="nt">runs-on</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<h4 id="ci-steps">CI Steps</h4>
+<p>Now the details steps that will call all the tasks to complete the CI part.</p>
+<p>Starting with the repo checkout, the node configuration and npm packages installation.</p>
+<div class="tabbed-set" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">AzDO</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">job</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build</span>
+      <span class="l l-Scalar l-Scalar-Plain"># ...</span>
+      <span class="l l-Scalar l-Scalar-Plain">steps</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">checkout</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">self</span>
+
+        <span class="p p-Indicator">-</span> <span class="nt">task</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">NodeTool@0</span>
+          <span class="nt">displayName</span><span class="p">:</span> <span class="s">&#39;Use</span><span class="nv"> </span><span class="s">Node</span><span class="nv"> </span><span class="s">14.x&#39;</span>
+          <span class="nt">inputs</span><span class="p">:</span>
+          <span class="nt">versionSpec</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">14.x</span>
+          <span class="nt">checkLatest</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+
+        <span class="p p-Indicator">-</span> <span class="nt">script</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">npm ci</span>
+          <span class="nt">displayName</span><span class="p">:</span> <span class="s">&#39;npm</span><span class="nv"> </span><span class="s">ci&#39;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><label for="__tabbed_5_2">Action</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">build</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="nt">steps</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Checkout</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/checkout@v2</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Use Node 14.x</span>
+        <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/setup-node@v2</span>
+        <span class="nt">with</span><span class="p">:</span>
+        <span class="nt">node-version</span><span class="p">:</span> <span class="s">&#39;14&#39;</span>
+        <span class="nt">cache</span><span class="p">:</span> <span class="s">&#39;npm&#39;</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">npm ci</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">npm ci</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Then bundling the sources and testing it when input <code>include_tests</code> is set to <em>true</em>.</p>
+<div class="tabbed-set" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">AzDO</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">job</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build</span>
+    <span class="c1"># ...</span>
+    <span class="nt">steps</span><span class="p">:</span>
+      <span class="c1"># ...</span>
+      <span class="p p-Indicator">-</span> <span class="nt">task</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Gulp@0</span>
+        <span class="nt">displayName</span><span class="p">:</span> <span class="s">&#39;Bundle</span><span class="nv"> </span><span class="s">project&#39;</span>
+        <span class="nt">inputs</span><span class="p">:</span>
+        <span class="nt">targets</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">bundle</span>
+        <span class="nt">arguments</span><span class="p">:</span> <span class="s">&#39;--ship&#39;</span>
+
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">${{ if eq(parameters.include_tests, true) }}</span><span class="p p-Indicator">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">script</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">npm test</span>
+          <span class="nt">displayName</span><span class="p">:</span> <span class="s">&#39;npm</span><span class="nv"> </span><span class="s">test&#39;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><label for="__tabbed_6_2">Action</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">build</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="nt">steps</span><span class="p">:</span>
+      <span class="c1"># ...</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Bundle project</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gulp bundle --ship</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">npm test</span>
+        <span class="nt">if</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ inputs.include_tests == true }}</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">npm test</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Last part is to package the solution, then make it available for the CD part.</p>
+<div class="tabbed-set" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">AzDO</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">job</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build</span>
+    <span class="c1"># ...</span>
+    <span class="nt">steps</span><span class="p">:</span>
+      <span class="c1"># ...</span>
+      <span class="p p-Indicator">-</span> <span class="nt">task</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Gulp@0</span>
+        <span class="nt">displayName</span><span class="p">:</span> <span class="s">&#39;Package</span><span class="nv"> </span><span class="s">Solution&#39;</span>
+        <span class="nt">inputs</span><span class="p">:</span>
+          <span class="nt">targets</span><span class="p">:</span> <span class="s">&#39;package-solution&#39;</span>
+          <span class="nt">arguments</span><span class="p">:</span> <span class="s">&#39;--ship&#39;</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">task</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">CopyFiles@2</span>
+        <span class="nt">displayName</span><span class="p">:</span> <span class="s">&#39;Copy</span><span class="nv"> </span><span class="s">Files</span><span class="nv"> </span><span class="s">to:</span><span class="nv"> </span><span class="s">$(Build.ArtifactStagingDirectory)&#39;</span>
+        <span class="nt">inputs</span><span class="p">:</span>
+          <span class="nt">Contents</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+            <span class="no">sharepoint/**/*.sppkg</span>
+        <span class="nt">TargetFolder</span><span class="p">:</span> <span class="s">&#39;$(Build.ArtifactStagingDirectory)&#39;</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">task</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PublishBuildArtifacts@1</span>
+        <span class="nt">displayName</span><span class="p">:</span> <span class="s">&#39;Publish</span><span class="nv"> </span><span class="s">Artifact:</span><span class="nv"> </span><span class="s">drop&#39;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><label for="__tabbed_7_2">Action</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">build</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="nt">steps</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Package solution</span>
+      <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">gulp package-solution --ship</span>
+
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Upload artifact for deployment job</span>
+      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v2</span>
+      <span class="nt">with</span><span class="p">:</span>
+        <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sharepoint/solution/*.sppkg</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<h3 id="continuous-delivery">Continuous Delivery</h3>
+<p>Now that we've completed ou CI / build pipeline, let's rollout the deployment process!</p>
+<p>To make things "readable" in this post, we'll take the <a href="../20220221-apply-devops-spfx-part2/#existing-testing-site" target="_blank">existing testing site</a> scenario as an example.</p>
+<p>Below the steps of the CD part:</p>
+<ul>
+<li>Configuring the trigger (what will be done to run the pipeline)</li>
+<li>Specifying input parameters</li>
+<li>Determine the host OS</li>
+<li>Getting the SPFx package uploaded in the CI pipeline as an artefact</li>
+<li>Setting NodeJS version (as a prerequisite to build our SPFx package)</li>
+<li>Installing the CLI for Microsoft 365</li>
+<li>Authenticating to SharePoint Online using the CLI for Microsoft 365</li>
+<li>For the UAT environment<ul>
+<li>Deploying the SPFx solution to the site dedicated to tests</li>
+</ul>
+</li>
+<li>For the PRD environment<ul>
+<li>Deploying the SPFx solution to the targeted and specified app catalog</li>
+</ul>
+</li>
+</ul>
+<p>Keep in mind that this pipeline will be used twice: UAT &amp; PRD environments.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This use case states that the SPFx app is already installed on both testing and production environments</p>
+</div>
+<h4 id="cd-triggers-inputs">CD Triggers &amp; Inputs</h4>
+<p>First thing is to specify what will make the pipeline run.</p>
+<div class="tabbed-set" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">AzDO</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># No triggers here, which makes the pipeline not callable except from another pipeline</span>
+<span class="nt">parameters</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">target_environment</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">variable_group_name</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><label for="__tabbed_8_2">Action</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">deploy with cli m365</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="nt">workflow_call</span><span class="p">:</span>
+  <span class="nt">inputs</span><span class="p">:</span>
+    <span class="nt">environment_name</span><span class="p">:</span>
+      <span class="nt">description</span><span class="p">:</span> <span class="s">&#39;Target</span><span class="nv"> </span><span class="s">environment</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">deploy</span><span class="nv"> </span><span class="s">to&#39;</span>
+      <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="nt">site_url_prd</span><span class="p">:</span>
+      <span class="nt">description</span><span class="p">:</span> <span class="s">&#39;SharePoint</span><span class="nv"> </span><span class="s">PRD</span><span class="nv"> </span><span class="s">site</span><span class="nv"> </span><span class="s">URL&#39;</span>
+      <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="nt">site_url_uat</span><span class="p">:</span>
+      <span class="nt">description</span><span class="p">:</span> <span class="s">&#39;SharePoint</span><span class="nv"> </span><span class="s">UAT</span><span class="nv"> </span><span class="s">site</span><span class="nv"> </span><span class="s">URL&#39;</span>
+      <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="nt">app_catalog_site_url</span><span class="p">:</span>
+      <span class="nt">description</span><span class="p">:</span> <span class="s">&#39;SharePoint</span><span class="nv"> </span><span class="s">app</span><span class="nv"> </span><span class="s">catalog</span><span class="nv"> </span><span class="s">site</span><span class="nv"> </span><span class="s">URL</span><span class="nv"> </span><span class="s">(tenant</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">site</span><span class="nv"> </span><span class="s">collection)&#39;</span>
+      <span class="nt">default</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+      <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+    <span class="nt">app_catalog_scope</span><span class="p">:</span>
+      <span class="nt">description</span><span class="p">:</span> <span class="s">&#39;Indicates</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">PRD</span><span class="nv"> </span><span class="s">app</span><span class="nv"> </span><span class="s">catalog</span><span class="nv"> </span><span class="s">scope</span><span class="nv"> </span><span class="s">(tenant</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">site</span><span class="nv"> </span><span class="s">collection)&#39;</span>
+      <span class="nt">default</span><span class="p">:</span> <span class="s">&quot;&quot;</span>
+      <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="nt">secrets</span><span class="p">:</span>
+    <span class="nt">AAD_APP_ID</span><span class="p">:</span>
+      <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">AAD_APP_PASSWORD</span><span class="p">:</span>
+      <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">AAD_APP_ENCODED_CERTIFICATE</span><span class="p">:</span>
+      <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">AAD_APP_THUMBPRINT</span><span class="p">:</span>
+      <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">AAD_TENANT_ID</span><span class="p">:</span>
+      <span class="nt">required</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="c1"># Like this, we are getting environment secrets as inputs</span>
+    <span class="c1"># Otherwise we&#39;ll get the repository secrets</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<h4 id="cd-jobs">CD Jobs</h4>
+<p>Then specify the job details, the core of the pipeline which has an ephemeral state. First, the host OS:</p>
+<div class="tabbed-set" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><label for="__tabbed_9_1">AzDO</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">deployment</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">deploy</span>
+    <span class="nt">displayName</span><span class="p">:</span> <span class="s">&#39;Upload</span><span class="nv"> </span><span class="s">&amp;</span><span class="nv"> </span><span class="s">deploy</span><span class="nv"> </span><span class="s">*.sppkg</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">SharePoint</span><span class="nv"> </span><span class="s">app</span><span class="nv"> </span><span class="s">catalog&#39;</span>
+    <span class="nt">pool</span><span class="p">:</span>
+      <span class="nt">vmImage</span><span class="p">:</span> <span class="s">&#39;ubuntu-latest&#39;</span>
+    <span class="nt">environment</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ parameters.target_environment }}</span>
+    <span class="nt">variables</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">group</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ parameters.variable_group_name }}</span>
+      <span class="c1"># This is specific to AzDO: it allows to use variables / secrets stored in a &quot;library&quot;</span>
+      <span class="c1"># It&#39;s very useful with multi-stage pipelines</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><label for="__tabbed_9_2">Action</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">deploy</span><span class="p">:</span>
+    <span class="nt">runs-on</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+    <span class="nt">environment</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ inputs.environment_name }}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<h4 id="cd-steps">CD Steps</h4>
+<p>Now the details steps that will call all the tasks to complete the CD part.</p>
+<p>Starting with getting the SPFx package, configuring node and installing the deployment tool (CLI for Microsoft 365 or PnP PowerShell).</p>
+<div class="tabbed-set" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><label for="__tabbed_10_1">AzDO</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">deployment</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="nt">strategy</span><span class="p">:</span>
+      <span class="nt">runOnce</span><span class="p">:</span>
+        <span class="nt">deploy</span><span class="p">:</span>
+          <span class="nt">steps</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="nt">download</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">current</span>
+              <span class="nt">artifact</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">drop</span>
+              <span class="nt">patterns</span><span class="p">:</span> <span class="s">&#39;**/*.sppkg&#39;</span>
+            <span class="p p-Indicator">-</span> <span class="nt">pwsh</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sudo npm install -g @pnp/cli-microsoft365</span>
+              <span class="nt">displayName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install CLI for Microsoft365</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><label for="__tabbed_10_2">Action</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">deploy</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="nt">steps</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Download artifact from build job</span>
+      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/download-artifact@v2</span>
+
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Use Node 16.x</span>
+      <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">actions/setup-node@v3</span>
+      <span class="nt">with</span><span class="p">:</span>
+        <span class="nt">node-version</span><span class="p">:</span> <span class="s">&#39;16&#39;</span>
+
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Install CLI for Microsoft 365</span>
+      <span class="nt">run</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">npm install -g @pnp/cli-microsoft365</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Then authenticating to SharePoint Online, configure error handling and download the built SPFx package</p>
+<div class="tabbed-set" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><label for="__tabbed_11_1">AzDO</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">deployment</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="nt">strategy</span><span class="p">:</span>
+      <span class="nt">runOnce</span><span class="p">:</span>
+        <span class="nt">deploy</span><span class="p">:</span>
+          <span class="nt">steps</span><span class="p">:</span>
+            <span class="c1"># ...</span>
+            <span class="p p-Indicator">-</span> <span class="nt">task</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DownloadSecureFile@1</span>
+              <span class="nt">inputs</span><span class="p">:</span>
+                <span class="nt">secureFile</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PnP.SharePoint.AppOnly.pfx</span>
+              <span class="nt">displayName</span><span class="p">:</span> <span class="s">&#39;Download</span><span class="nv"> </span><span class="s">authentication</span><span class="nv"> </span><span class="s">certificate&#39;</span>
+              <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">AppCertificate</span>
+              <span class="c1"># Thanks to the AzDO pipeline files management, we can store secure files</span>
+              <span class="c1"># Such as a certificate file</span>
+            <span class="p p-Indicator">-</span> <span class="nt">pwsh</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+                <span class="no">m365 login --authType certificate --certificateFile $(AppCertificate.secureFilePath) -p &quot;$(aad_app_password)&quot; --appId $(aad_app_id) --tenant $(aad_tenant_id)</span>
+              <span class="nt">displayName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Login to Microsoft 365</span>
+            <span class="p p-Indicator">-</span> <span class="nt">pwsh</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+                <span class="no">m365 cli config set --key output --value json</span>
+                <span class="no">m365 cli config set --key errorOutput --value stdout</span>
+              <span class="nt">displayName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Configuring CLI for Microsoft 365 output error handling</span>
+            <span class="p p-Indicator">-</span> <span class="nt">pwsh</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+                <span class="no">$package = Get-ChildItem -Path $(Pipeline.Workspace)/drop -Recurse -Filter &#39;*.sppkg&#39; | Select Name | Select-Object -First 1</span>
+                <span class="no">Write-Host &quot;##vso[task.setvariable variable=SpPkgFileName;isOutput=true]$($package.Name)&quot;</span>
+              <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GetSharePointPackage</span>
+              <span class="nt">displayName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Get generated *.sppkg filename</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><label for="__tabbed_11_2">Action</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">deploy</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="nt">steps</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Login to Microsoft 365</span>
+      <span class="nt">shell</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pwsh</span>
+      <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+        <span class="no">m365 login --authType certificate --certificateBase64Encoded ${{ secrets.AAD_APP_ENCODED_CERTIFICATE }} --thumbprint ${{ secrets.AAD_APP_THUMBPRINT }} -p ${{ secrets.AAD_APP_PASSWORD }} --appId ${{ secrets.AAD_APP_ID }} --tenant ${{ secrets.AAD_TENANT_ID }}</span>
+      <span class="c1"># Through GitHub environment secrets, we can store many info</span>
+      <span class="c1"># Including a Base64 encoded certificate, useful for authentication  </span>
+
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Configuring CLI for Microsoft 365 output error handling</span>
+      <span class="nt">shell</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pwsh</span>
+      <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+        <span class="no">m365 cli config set --key output --value json</span>
+        <span class="no">m365 cli config set --key errorOutput --value stdout</span>
+
+    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Get generated *.sppkg filename</span>
+      <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">package</span>
+      <span class="nt">shell</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pwsh</span>
+      <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+          <span class="no">$package = Get-ChildItem -Path artifact -Recurse -Filter &#39;*.sppkg&#39; | Select Name | Select-Object -First 1</span>
+          <span class="no">echo &quot;::set-output name=name::$($package.Name)&quot;</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Next step is to add &amp; deploy the SPFx package to the testing site, then in Production</p>
+<div class="tabbed-set" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><label for="__tabbed_12_1">AzDO</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">deployment</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="nt">strategy</span><span class="p">:</span>
+      <span class="nt">runOnce</span><span class="p">:</span>
+        <span class="nt">deploy</span><span class="p">:</span>
+          <span class="c1"># ...</span>
+          <span class="nt">steps</span><span class="p">:</span>
+            <span class="c1"># ...</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">${{ if ne(parameters.target_environment, &#39;PRD&#39;) }}</span><span class="p p-Indicator">:</span>
+              <span class="p p-Indicator">-</span> <span class="nt">pwsh</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+                  <span class="no">$uri = [System.Uri]&quot;$(site_url_uat)&quot;</span>
+                  <span class="no">m365 spo set --url $($uri.Scheme + &quot;://&quot; + $uri.Authority)</span>
+                <span class="nt">displayName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Set site collection context (${{ parameters.target_environment }})</span>
+              <span class="p p-Indicator">-</span> <span class="nt">pwsh</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+                  <span class="no">m365 spo app add --filePath &quot;$(Pipeline.Workspace)/drop/sharepoint/solution/$(GetSharePointPackage.SpPkgFileName)&quot; --appCatalogUrl $(site_url_uat) --scope sitecollection --overwrite</span>
+                <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">SPOPackage</span>
+                <span class="nt">displayName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Upload SharePoint package</span>
+              <span class="p p-Indicator">-</span> <span class="nt">pwsh</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+                  <span class="no">m365 spo app deploy --name $(GetSharePointPackage.SpPkgFileName) --appCatalogUrl $(site_url_uat) --scope sitecollection</span>
+                <span class="nt">displayName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deploy SharePoint package</span>
+
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">${{ if eq(parameters.target_environment, &#39;PRD&#39;) }}</span><span class="p p-Indicator">:</span>
+              <span class="p p-Indicator">-</span> <span class="nt">pwsh</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+                  <span class="no">$uri = [System.Uri]&quot;$(site_url_prd)&quot;</span>
+                  <span class="no">m365 spo set --url $($uri.Scheme + &quot;://&quot; + $uri.Authority)</span>
+                <span class="nt">displayName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Set site collection context (${{ parameters.target_environment }})</span>
+              <span class="p p-Indicator">-</span> <span class="nt">pwsh</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">m365 spo app add --filePath &quot;$(Pipeline.Workspace)/drop/sharepoint/solution/$(GetSharePointPackage.SpPkgFileName)&quot; --appCatalogUrl $(app_catalog_site_url) --scope $(app_catalog_scope) --overwrite</span>
+                <span class="nt">displayName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Upload SharePoint package to $(app_catalog_scope) App Catalog</span>
+              <span class="p p-Indicator">-</span> <span class="nt">pwsh</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">m365 spo app deploy --name $(GetSharePointPackage.SpPkgFileName) --appCatalogUrl $(app_catalog_site_url) --scope $(app_catalog_scope)</span>
+                <span class="nt">displayName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deploy SharePoint package</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><label for="__tabbed_12_2">Action</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">deploy</span><span class="p">:</span>
+    <span class="c1"># ...</span>
+    <span class="nt">steps</span><span class="p">:</span>
+      <span class="c1"># ...</span>
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Get target site URL (${{ inputs.environment_name }})</span>
+        <span class="nt">id</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">site</span>
+        <span class="nt">shell</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pwsh</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+            <span class="no">$uri = [System.Uri]&quot;${{ inputs.site_url_uat }}&quot;</span>
+
+            <span class="no">if (&#39;${{ inputs.environment_name }}&#39; -eq &#39;PRD&#39;) {</span>
+              <span class="no">$uri = [System.Uri]&quot;${{ inputs.site_url_prd }}&quot;</span>
+            <span class="no">}</span>
+
+            <span class="no">echo &quot;::set-output name=url::$uri&quot;</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Set site collection context (${{ inputs.environment_name }})</span>
+        <span class="nt">shell</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pwsh</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+          <span class="no">$uri = &quot;${{ steps.site.outputs.url }}&quot;</span>
+          <span class="no">m365 spo set --url $uri</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Upload SharePoint package to ${{ inputs.app_catalog_scope }} App Catalog (${{ inputs.environment_name }})</span>
+        <span class="nt">shell</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pwsh</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+            <span class="no">$appCatalogScope = &quot;sitecollection&quot;</span>
+            <span class="no">$appCatalogUrl = &quot;${{ inputs.site_url_uat }}&quot;</span>
+
+            <span class="no">if (&#39;${{ inputs.environment_name }}&#39; -eq &#39;PRD&#39;) {</span>
+              <span class="no">$appCatalogScope = &quot;${{ inputs.app_catalog_scope }}&quot;</span>
+              <span class="no">$appCatalogUrl = &quot;${{ inputs.site_url_prd }}&quot;</span>
+            <span class="no">}</span>
+
+            <span class="no">m365 spo app add --filePath &quot;artifact/${{ steps.package.outputs.name }}&quot; --appCatalogUrl $appCatalogUrl --scope $appCatalogScope --overwrite</span>
+
+      <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deploy SharePoint package (${{ inputs.environment_name }})</span>
+        <span class="nt">shell</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pwsh</span>
+        <span class="nt">run</span><span class="p">:</span> <span class="p p-Indicator">|</span>
+            <span class="no">$appCatalogScope = &quot;sitecollection&quot;</span>
+            <span class="no">$appCatalogUrl = &quot;${{ inputs.site_url_uat }}&quot;</span>
+
+            <span class="no">if (&#39;${{ inputs.environment_name }}&#39; -eq &#39;PRD&#39;) {</span>
+              <span class="no">$appCatalogScope = &quot;${{ inputs.app_catalog_scope }}&quot;</span>
+              <span class="no">$appCatalogUrl = &quot;${{ inputs.app_catalog_site_url }}&quot;</span>
+            <span class="no">}</span>
+
+            <span class="no">m365 spo app deploy --name ${{ steps.package.outputs.name }} --appCatalogUrl $appCatalogUrl --scope $appCatalogScope</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Notice that in the <code>PRD</code> environment, we're not targeting the tenant app catalog, as it also can be a site collection app catalog.</p>
+<h3 id="trigger-pipeline">Trigger pipeline</h3>
+<p>The last "step" is to configure the pipeline that will trigger our whole CI / CD process.</p>
+<p>For Azure DevOps, we have the opportunity to reference a global CI / CD pipeline (<code>build-deploy-spfx-cli-m365.yml</code>), for which we'll provide important steps, such as environment variable groups.</p>
+<div class="tabbed-set" data-tabs="13:3"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><label for="__tabbed_13_1">AzDO (azure-pipelines.yml)</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">main</span>
+
+<span class="nt">trigger</span><span class="p">:</span>
+  <span class="nt">branches</span><span class="p">:</span>
+    <span class="nt">include</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">main</span>
+
+<span class="nt">stages</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">pipelines/stages/build-deploy-spfx-cli-m365.yml</span>
+    <span class="nt">parameters</span><span class="p">:</span>
+      <span class="nt">include_tests</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+      <span class="nt">variable_group_uat</span><span class="p">:</span> <span class="s">&#39;contoso-UAT&#39;</span>
+      <span class="nt">variable_group_prd</span><span class="p">:</span> <span class="s">&#39;contoso-PRD&#39;</span>
+      <span class="nt">deploy_uat</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+      <span class="nt">deploy_prd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><label for="__tabbed_13_2">AzDO (build-deploy-spfx-cli-m365.yml)</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">parameters</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">include_tests</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+    <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">variable_group_uat</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">variable_group_prd</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">deploy_uat</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+    <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">deploy_prd</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">boolean</span>
+    <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="nt">stages</span><span class="p">:</span>
+  <span class="p p-Indicator">-</span> <span class="nt">stage</span><span class="p">:</span> <span class="s">&#39;build&#39;</span>
+    <span class="nt">jobs</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="nt">template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">../jobs/build-spfx.yml</span>
+        <span class="nt">parameters</span><span class="p">:</span>
+          <span class="nt">include_tests</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">${{ if eq(parameters.deploy_uat, true) }}</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">stage</span><span class="p">:</span> <span class="s">&#39;deploy_uat&#39;</span>
+      <span class="nt">displayName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deploy on UAT</span>
+      <span class="nt">dependsOn</span><span class="p">:</span> <span class="p p-Indicator">[</span> <span class="nv">build</span> <span class="p p-Indicator">]</span>
+      <span class="nt">jobs</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">../jobs/deploy-spfx-cli-m365.yml</span>
+          <span class="nt">parameters</span><span class="p">:</span>
+            <span class="nt">target_environment</span><span class="p">:</span> <span class="s">&#39;UAT&#39;</span>
+            <span class="nt">variable_group_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ parameters.variable_group_uat }}</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">${{ if eq(parameters.deploy_prd, true) }}</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="nt">stage</span><span class="p">:</span> <span class="s">&#39;deploy_prd&#39;</span>
+      <span class="nt">displayName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Deploy on PRD</span>
+      <span class="nt">dependsOn</span><span class="p">:</span> <span class="p p-Indicator">[</span> <span class="nv">deploy_uat</span> <span class="p p-Indicator">]</span>
+      <span class="nt">jobs</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="nt">template</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">../jobs/deploy-spfx-cli-m365.yml</span>
+          <span class="nt">parameters</span><span class="p">:</span>
+            <span class="nt">target_environment</span><span class="p">:</span> <span class="s">&#39;PRD&#39;</span>
+            <span class="nt">variable_group_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ parameters.variable_group_prd }}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_13_3" name="__tabbed_13" type="radio" /><label for="__tabbed_13_3">Action (main.yml)</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">main</span>
+
+<span class="nt">on</span><span class="p">:</span>
+  <span class="nt">push</span><span class="p">:</span>
+    <span class="nt">branches</span><span class="p">:</span> 
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">main</span>
+  <span class="nt">workflow_dispatch</span><span class="p">:</span> <span class="c1"># Can be triggered manually</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+  <span class="nt">build</span><span class="p">:</span>
+    <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">meganb/contoso/.github/workflows/build-spfx.yml@main</span>
+  <span class="nt">deploy_uat</span><span class="p">:</span>
+    <span class="nt">needs</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build</span>
+    <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">meganb/contoso/.github/workflows/deploy-spfx-cli-m365.yml@main</span>
+    <span class="nt">with</span><span class="p">:</span>
+      <span class="nt">environment_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">UAT</span>
+      <span class="nt">site_url_uat</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://contoso.sharepoint.com/sites/hr-uat</span>
+    <span class="nt">secrets</span><span class="p">:</span>
+      <span class="nt">AAD_APP_ID</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.AAD_APP_ID }}</span>
+      <span class="nt">AAD_APP_PASSWORD</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.AAD_APP_PASSWORD }}</span>
+      <span class="nt">AAD_APP_ENCODED_CERTIFICATE</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.AAD_APP_ENCODED_CERTIFICATE }}</span>
+      <span class="nt">AAD_APP_THUMBPRINT</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.AAD_APP_THUMBPRINT }}</span>
+      <span class="nt">AAD_TENANT_ID</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.AAD_TENANT_ID }}</span>
+  <span class="nt">deploy_prd</span><span class="p">:</span>
+    <span class="nt">needs</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">deploy_uat</span>
+    <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">meganb/contoso/.github/workflows/deploy-spfx-cli-m365.yml@main</span>
+    <span class="nt">with</span><span class="p">:</span>
+      <span class="nt">environment_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">PRD</span>
+      <span class="nt">site_url_prd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://contoso.sharepoint.com/sites/hr</span>
+      <span class="nt">app_catalog_scope</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">tenant</span>
+      <span class="nt">app_catalog_site_url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">https://contoso.sharepoint.com/sites/app</span>
+    <span class="nt">secrets</span><span class="p">:</span>
+      <span class="nt">AAD_APP_ID</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.AAD_APP_ID }}</span>
+      <span class="nt">AAD_APP_PASSWORD</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.AAD_APP_PASSWORD }}</span>
+      <span class="nt">AAD_APP_ENCODED_CERTIFICATE</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.AAD_APP_ENCODED_CERTIFICATE }}</span>
+      <span class="nt">AAD_APP_THUMBPRINT</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.AAD_APP_THUMBPRINT }}</span>
+      <span class="nt">AAD_TENANT_ID</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${{ secrets.AAD_TENANT_ID }}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<h3 id="pipeline-files">Pipeline files</h3>
+<p>Below you'll find the complete pipeline files with an abstract, which will be enough as a starter kit to setup everything on your side. </p>
+<h4 id="cli-for-microsoft-365">CLI for Microsoft 365</h4>
+<ul>
+<li><a href="https://gist.github.com/michaelmaillot/08c82c94a61a820b631794ead87a36a7" target="_blank">AzDO</a></li>
+<li><a href="https://gist.github.com/michaelmaillot/634036bae9e636cef432f18e4657732a" target="_blank">Action</a></li>
+</ul>
+<h4 id="pnp-powershell">PnP PowerShell</h4>
+<ul>
+<li><a href="https://gist.github.com/michaelmaillot/12e44f58ffb22cef9c887616952db510" target="_blank">AzDO</a></li>
+<li><a href="https://gist.github.com/michaelmaillot/efd98d0dd446d69addb990bddb76a287" target="_blank">Action</a></li>
+</ul>
+<h3 id="solution-configuration">Solution configuration</h3>
+<p>Below we'll have all the minimum configuration to make our pipeline working on both AzDO and GitHub Actions.</p>
+<h4 id="azdo-configuration">AzDO configuration</h4>
+<p>In this context, we'll use three important features:</p>
+<ul>
+<li>Environments</li>
+<li>Approvers</li>
+<li>Variable groups</li>
+</ul>
+<p>During the pipeline run, both CI and CD parts are considered as "Stages". As the UAT and PRD deployments will have to access to environments, secure files and variable groups, we will have to give permission for those stages once. </p>
+<p>For each of those, we will have to permit the pipeline to access to them only on the first run. This will be seen on the pipeline run page, as we'll see that the UAT / PR deployments will be pending for approving permissions. More info <a href="https://docs.microsoft.com/en-us/azure/devops/pipelines/policies/permissions?view=azure-devops">here</a>.</p>
+<p>The environments will be necessary for approving a pipeline before being run. We'll have to add two environments:</p>
+<ul>
+<li>UAT (testing)</li>
+<li>PRD (production)</li>
+</ul>
+<p>Environments can be configured here: <a href="" target="_blank">https://dev.azure.com/[ORGANIZATION]/[PROJECT]/_environment</a>.</p>
+<p>For each environment, we can add an approver by clicking on the three dots located in the upper right of it, then "Approvals and checks" and select "Approvals".</p>
+<p>Last part to configure are the variable groups, which will be called by our deployment pipeline. As this one will be called twice (one for testing, the other for production), the variable groups will be associated with the environments created before. Here again, two variable groups will be created:</p>
+<ul>
+<li>contoso-UAT (testing)</li>
+<li>contoso-PRD (production)</li>
+</ul>
+<p>Variable groups can be configured here: <a href="" target="_blank">https://dev.azure.com/[ORGANIZATION]/[PROJECT]/_library?itemType=VariableGroups</a>.</p>
+<p>Below the variables used in the pipelines, depending on the context:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>UAT</th>
+<th>PRD</th>
+<th>Secret value?</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>aad_app_id</code></td>
+<td>YES</td>
+<td>YES</td>
+<td>NO</td>
+<td>The Azure AD application ID with which the authentication to SharePoint will be done</td>
+</tr>
+<tr>
+<td><code>aad_app_password</code></td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+<td>The certificate password necessary for the authentication</td>
+</tr>
+<tr>
+<td><code>aad_tenant_id</code></td>
+<td>YES</td>
+<td>YES</td>
+<td>NO</td>
+<td>ID or domain (for example "contoso.onmicrosoft.com") of the tenant from which accounts should be able to authenticate</td>
+</tr>
+<tr>
+<td><code>app_catalog_scope</code></td>
+<td>NO</td>
+<td>YES</td>
+<td>NO</td>
+<td>Production app catalog scope (can be "tenant" or "site collection")</td>
+</tr>
+<tr>
+<td><code>site_url_uat</code></td>
+<td>YES</td>
+<td>NO</td>
+<td>NO</td>
+<td>SharePoint UAT site URL where the SPFx package will be deployed</td>
+</tr>
+<tr>
+<td><code>app_catalog_site_url</code></td>
+<td>NO</td>
+<td>YES</td>
+<td>NO</td>
+<td>Production app catalog site URL (can be a tenant or a site collection one)</td>
+</tr>
+<tr>
+<td><code>site_url_prd</code></td>
+<td>NO</td>
+<td>YES</td>
+<td>NO</td>
+<td>SharePoint PRD site URL where the SPFx package will be deployed</td>
+</tr>
+</tbody>
+</table>
+<p>Especially for AzDO, we will use the Secure files feature to store a PFX file in order to login to SharePoint in Application context. In this example, we'll use one PFX file for both testing and production environments: <code>PnP.SharePoint.AppOnly.pfx</code>.</p>
+<p>Secure files can be configured here: <a href="" target="_blank">https://dev.azure.com/[ORGANIZATION]/[PROJECT]/_library?itemType=SecureFiles</a>.</p>
+<h4 id="github-actions-configuration">GitHub Actions configuration</h4>
+<p>The environments will be necessary for approving a pipeline before being run. You'll have to add two environments:</p>
+<ul>
+<li>UAT (testing)</li>
+<li>PRD (production)</li>
+</ul>
+<p>Environments can be configured here: <a href="">https://github.com/[ORGANIZATION]/[PROJECT]/settings/environments</a>.</p>
+<p><strong>Beware that in order to use multiple environments, your repo has to be public or your subscription has to be a Pro one.</strong></p>
+<p>For each environment, you can add an approver by enabling the checkbox marked "Required reviewers", then adding at least one reviewer account then click on "Save protection rules".</p>
+<p>Environment secrets can be configured here: <a href="">https://github.com/[ORGANIZATION]/[PROJECT]/settings/environments/[ENVIRONMENT_ID]/edit</a>.</p>
+<p>Below the secrets used in the workflows:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AAD_APP_ID</code></td>
+<td>The Azure AD application ID with which the authentication to SharePoint will be done</td>
+</tr>
+<tr>
+<td><code>AAD_APP_PASSWORD</code></td>
+<td>The certificate password necessary for the authentication</td>
+</tr>
+<tr>
+<td><code>AAD_APP_ENCODED_CERTIFICATE</code></td>
+<td>Base64 encoded certificate</td>
+</tr>
+<tr>
+<td><code>AAD_APP_THUMBPRINT</code></td>
+<td>Certificate thumbprint</td>
+</tr>
+<tr>
+<td><code>AAD_TENANT_ID</code></td>
+<td>ID or domain (for example "contoso.onmicrosoft.com") of the tenant from which accounts should be able to authenticate</td>
+</tr>
+</tbody>
+</table>
+<p>Below the parameters used in the <code>deploy-spfx-cli-m365.yml</code> workflow, depending on the environment: </p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>UAT</th>
+<th>PRD</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>environment_name</code></td>
+<td>YES</td>
+<td>YES</td>
+<td>The deployment environment (can be 'UAT' or 'PRD')</td>
+</tr>
+<tr>
+<td><code>site_url_uat</code></td>
+<td>YES</td>
+<td>NO</td>
+<td>SharePoint UAT site URL where the SPFx package will be deployed</td>
+</tr>
+<tr>
+<td><code>site_url_prd</code></td>
+<td>NO</td>
+<td>YES</td>
+<td>SharePoint PRD site URL where the SPFx package will be deployed</td>
+</tr>
+<tr>
+<td><code>app_catalog_scope</code></td>
+<td>NO</td>
+<td>YES</td>
+<td>Production app catalog scope (can be "tenant" or "site collection")</td>
+</tr>
+<tr>
+<td><code>app_catalog_site_url</code></td>
+<td>NO</td>
+<td>YES</td>
+<td>Production app catalog site URL (can be a tenant or a site collection one)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="other-source-code">Other source code</h3>
+<p>Ephemeral testing site (which will run with PnP PowerShell only, as it will use the Provisioning Engine to create a copy of existing production site):</p>
+<ul>
+<li><a href="https://gist.github.com/michaelmaillot/ceeca60b9c3f604b431afff7190036e7" target="_blank">AzDO</a></li>
+<li><a href="https://gist.github.com/michaelmaillot/cc7ca7c710b5fdb984070dfe3a970606" target="_blank">Action</a></li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Doing so, we'll secure the credentials for each environment and give the entire control to the Ops.</p>
+<p>The last part will point out advantages / drawbacks on the two solutions regarding this implementation.</p>
+<h2 id="navigation">Navigation</h2>
+<p><a href="../20220104-apply-devops-spfx-part1/">Apply a DevOps process to your SPFx project (Part 1)</a></p>
+<p><a href="../20220221-apply-devops-spfx-part2/">Apply a DevOps process to your SPFx project (Part 2)</a></p>
+<p>Apply a DevOps process to your SPFx project (Part 3)</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/michaelmaillot" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="http://github.com/michaelmaillot" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
+      
+    
+  </body>
+</html>

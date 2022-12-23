@@ -1,0 +1,1215 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Blog articles about Microsoft 365 / Azure / General Dev">
+      
+      
+      
+      
+      <link rel="icon" href="../../images/puzzle.ico">
+      <meta name="generator" content="mkdocs-1.2.4, mkdocs-material-7.2.6">
+    
+    
+      
+        <title>[SPFx] Form Customizer Boilerplate - Michaël Maillot</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700%7C&display=fallback">
+        <style>:root{--md-text-font-family:"Poppins";--md-code-font-family:""}</style>
+      
+    
+    
+    
+    
+      
+
+  
+
+
+  
+
+  
+
+
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-9BSLGY6C2M"),document.addEventListener("DOMContentLoaded",function(){"undefined"!=typeof location$&&location$.subscribe(function(t){gtag("config","G-9BSLGY6C2M",{page_path:t.pathname})})})</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9BSLGY6C2M"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="light-blue">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#spfx-form-customizer-boilerplate" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Michaël Maillot" class="md-header__button md-logo" aria-label="Michaël Maillot" data-md-component="logo">
+      
+  <img src="../../images/puzzle.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Michaël Maillot
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              [SPFx] Form Customizer Boilerplate
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Michaël Maillot" class="md-nav__button md-logo" aria-label="Michaël Maillot" data-md-component="logo">
+      
+  <img src="../../images/puzzle.png" alt="logo">
+
+    </a>
+    Michaël Maillot
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deep-dive-in-code" class="md-nav__link">
+    Deep dive in code
+  </a>
+  
+    <nav class="md-nav" aria-label="Deep dive in code">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#form-customizer-declaration" class="md-nav__link">
+    Form customizer declaration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#component" class="md-nav__link">
+    Component
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-react-control-to-rule-them-all" class="md-nav__link">
+    A React control to rule them all
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deployment" class="md-nav__link">
+    Deployment
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="spfx-form-customizer-boilerplate">[SPFx] Form Customizer Boilerplate</h1>
+<p>Since the v1.15 of SharePoint Framework, we can (finally) customize list forms! Until now, the only customizable options were through PowerApps or limited to switch fields or display / hide them.</p>
+<p>But actually, the customization leads to a gap with the native display, as clicking on "New" / "Edit" / "Display" redirects you to a dedicated SPFx hosting page. Even if there're plans to make custom forms available through the well-known side panel, I though it could be interesting to give a starting point solution, that would less impact users experience 🙂</p>
+<p>It's also interesting to remind the existance of the ETag, which prevents concurrency updates on existing list items.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ol>
+<li>An Office 365 (Dev) Tenant or a Partner Demo Tenant</li>
+<li>SPFx 1.15 package (at least) installed on the local machine</li>
+</ol>
+<p>The whole project snippet is available <a href="https://github.com/michaelmaillot/spfx-form-boilerplate" target="_blank">here</a>.</p>
+<p>For this example, we also use the following libraries:</p>
+<ul>
+<li><a href="https://github.com/s-KaiNet/spfx-fast-serve" target="_blank">spfx-fast-serve</a></li>
+<li><a href="https://pnp.github.io/pnpjs/" target="_blank">PnPJs</a></li>
+<li><a href="https://pnp.github.io/sp-dev-fx-controls-react/" target="_blank">PnP SPFx Controls</a></li>
+</ul>
+<p>For the package deployment &amp; Content Type component association, we use the <a href="https://pnp.github.io/powershell" target="_blank">PnP PowerShell</a> module.</p>
+<h2 id="deep-dive-in-code">Deep dive in code</h2>
+<h3 id="form-customizer-declaration">Form customizer declaration</h3>
+<p>First, let's have a look at the init method:</p>
+<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">FormBoilerplateFormCustomizer.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">// ... (imports)</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">FormBoilerplateFormCustomizer</span> <span class="k">extends</span> <span class="nx">BaseFormCustomizer</span><span class="o">&lt;</span><span class="nx">IFormBoilerplateFormCustomizerProperties</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">public</span> <span class="k">async</span> <span class="nx">onInit</span><span class="p">()</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+    <span class="c1">// Init SPFx context for using PnPJs</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_sp</span> <span class="o">=</span> <span class="nx">getSP</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">);</span> <span class="c1">// &lt;== Declared in pnpConfig.ts</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_pnpListItem</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_sp</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">lists</span><span class="p">.</span><span class="nx">getById</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">list</span><span class="p">.</span><span class="nx">guid</span><span class="p">.</span><span class="nx">toString</span><span class="p">()).</span><span class="nx">items</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">displayMode</span> <span class="o">!==</span> <span class="nx">FormDisplayMode</span><span class="p">.</span><span class="nx">New</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">_listItem</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">_loadItem</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">_listItem</span> <span class="o">=</span> <span class="p">{}</span> <span class="kr">as</span> <span class="nx">ISPEmployeeItem</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">pnpConfig.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="p">{</span>
+  <span class="nx">FormCustomizerContext</span>
+  <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@microsoft/sp-listview-extensibility&#39;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">spfi</span><span class="p">,</span> <span class="nx">SPFI</span><span class="p">,</span> <span class="nx">SPFx</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;@pnp/sp&quot;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">LogLevel</span><span class="p">,</span> <span class="nx">PnPLogging</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;@pnp/logging&quot;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s2">&quot;@pnp/sp/webs&quot;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s2">&quot;@pnp/sp/lists&quot;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s2">&quot;@pnp/sp/items&quot;</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">_sp</span>: <span class="kt">SPFI</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">getSP</span> <span class="o">=</span> <span class="p">(</span><span class="nx">context?</span>: <span class="kt">FormCustomizerContext</span><span class="p">)</span><span class="o">:</span> <span class="nx">SPFI</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">_sp</span> <span class="o">===</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="nx">context</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">_sp</span> <span class="o">=</span> <span class="nx">spfi</span><span class="p">().</span><span class="nx">using</span><span class="p">(</span><span class="nx">SPFx</span><span class="p">(</span><span class="nx">context</span><span class="p">)).</span><span class="nx">using</span><span class="p">(</span><span class="nx">PnPLogging</span><span class="p">(</span><span class="nx">LogLevel</span><span class="p">.</span><span class="nx">Warning</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">_sp</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">ISPEmployeeItem.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">export</span> <span class="kd">interface</span> <span class="nx">ISPEmployeeItem</span> <span class="p">{</span>
+  <span class="nx">Title</span>: <span class="kt">string</span><span class="p">;</span>
+  <span class="nx">Description</span>: <span class="kt">string</span><span class="p">;</span>
+  <span class="nx">Complete</span>: <span class="kt">boolean</span><span class="p">;</span>
+  <span class="nx">Completeby</span>: <span class="kt">string</span><span class="p">;</span>
+  <span class="nx">Completedon</span>: <span class="kt">Date</span><span class="p">;</span>
+  <span class="nx">Mentor</span><span class="o">:</span> <span class="p">{</span> <span class="nx">Id</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">EMail</span>: <span class="kt">string</span> <span class="p">};</span>
+  <span class="nx">Relevantlink</span><span class="o">:</span> <span class="p">{</span> <span class="nx">Url</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">Description</span>: <span class="kt">string</span> <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p><code>this.context</code>, as we know it, contains know properties (because it's inheriting from <a href="https://learn.microsoft.com/fr-fr/javascript/api/sp-component-base/basecomponentcontext?view=sp-typescript-latest" target="_blank"><code>BaseComponentContext</code></a>) such as <code>instanceId</code>, <code>pageContext</code>,... But here as a <code>FormCustomizerContext</code>, we can get info related to the list context:</p>
+<ul>
+<li><code>list</code></li>
+<li><code>contentType</code></li>
+<li><code>folderInfo</code></li>
+<li><code>itemId</code></li>
+<li><code>item</code> (new to SPFx 1.16)</li>
+<li><code>domElement</code></li>
+</ul>
+<p>We also have list form context info, such as <code>displayMode</code> that let us know if we're in New, Display or Edit state (but this info is also in the URL as query parameter 😬).</p>
+<p>So here, we are loading the list item if we're displaying an existing one, through the <code>_loadItem</code> method:</p>
+<div class="tabbed-set" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">FormBoilerplateFormCustomizer.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">FormBoilerplateFormCustomizer</span> <span class="k">extends</span> <span class="nx">BaseFormCustomizer</span><span class="o">&lt;</span><span class="nx">IFormBoilerplateFormCustomizerProperties</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+  <span class="k">private</span> <span class="nx">_loadItem</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">ISPEmployeeItem</span><span class="o">&gt;</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">item</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">_pnpListItem</span>
+      <span class="p">.</span><span class="nx">getById</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">itemId</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;Title, Description, Complete, Completeby, Completedon, Relevantlink, Mentor/Id, Mentor/EMail&quot;</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">expand</span><span class="p">(</span><span class="s2">&quot;Mentor&quot;</span><span class="p">)();</span>
+
+    <span class="c1">// Saving ETag for the update</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_eTag</span> <span class="o">=</span> <span class="nx">item</span><span class="p">[</span><span class="s2">&quot;odata.etag&quot;</span><span class="p">];</span>
+
+    <span class="c1">// Removing unecessary data before passing list item to the component</span>
+    <span class="ow">delete</span> <span class="nx">item</span><span class="p">[</span><span class="s2">&quot;odata.type&quot;</span><span class="p">];</span>
+    <span class="ow">delete</span> <span class="nx">item</span><span class="p">[</span><span class="s2">&quot;odata.etag&quot;</span><span class="p">];</span>
+    <span class="ow">delete</span> <span class="nx">item</span><span class="p">[</span><span class="s2">&quot;odata.editLink&quot;</span><span class="p">];</span>
+    <span class="ow">delete</span> <span class="nx">item</span><span class="p">[</span><span class="s2">&quot;odata.metadata&quot;</span><span class="p">];</span>
+    <span class="ow">delete</span> <span class="nx">item</span><span class="p">[</span><span class="s2">&quot;odata.id&quot;</span><span class="p">];</span>
+    <span class="ow">delete</span> <span class="nx">item</span><span class="p">[</span><span class="s2">&quot;Mentor@odata.navigationLinkUrl&quot;</span><span class="p">];</span>
+
+    <span class="k">return</span> <span class="nx">item</span> <span class="kr">as</span> <span class="nx">ISPEmployeeItem</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Once our data loaded, we just have to push it to our Form customizer component!</p>
+<div class="tabbed-set" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><label for="__tabbed_3_1">FormBoilerplateFormCustomizer.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">FormBoilerplateFormCustomizer</span> <span class="k">extends</span> <span class="nx">BaseFormCustomizer</span><span class="o">&lt;</span><span class="nx">IFormBoilerplateFormCustomizerProperties</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+  <span class="k">public</span> <span class="nx">render</span><span class="p">()</span><span class="o">:</span> <span class="ow">void</span> <span class="p">{</span>
+    <span class="c1">// Use this method to perform your custom rendering.</span>
+
+    <span class="kd">const</span> <span class="nx">formBoilerplate</span>: <span class="kt">React.ReactElement</span><span class="o">&lt;</span><span class="p">{}</span><span class="o">&gt;</span> <span class="o">=</span>
+      <span class="nx">React</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">FormBoilerplate</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">context</span>: <span class="kt">this.context</span><span class="p">,</span>
+        <span class="nx">displayMode</span>: <span class="kt">this.displayMode</span><span class="p">,</span>
+        <span class="nx">theme</span>: <span class="kt">getDefaultTheme</span><span class="p">(),</span>
+        <span class="nx">item</span>: <span class="kt">this._listItem</span><span class="p">,</span>
+        <span class="nx">onSave</span>: <span class="kt">this._onSave</span><span class="p">,</span>
+        <span class="nx">onClose</span>: <span class="kt">this._onClose</span>
+      <span class="p">}</span> <span class="kr">as</span> <span class="nx">IFormBoilerplateProps</span><span class="p">);</span>
+
+    <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">formBoilerplate</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">domElement</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<h3 id="component">Component</h3>
+<p>Now let's have a look at the component!</p>
+<div class="tabbed-set" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><label for="__tabbed_4_1">FormBoilerplate.tsx</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">// Imports...</span>
+
+<span class="kd">interface</span> <span class="nx">IFormBoilerplateState</span> <span class="p">{</span>
+  <span class="nx">formListItem</span>: <span class="kt">ISPEmployeeItem</span><span class="p">;</span>
+  <span class="nx">error</span>: <span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">LOG_SOURCE</span>: <span class="kt">string</span> <span class="o">=</span> <span class="s1">&#39;FormBoilerplate&#39;</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">FormBoilerplate</span> <span class="k">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="nx">IFormBoilerplateProps</span><span class="p">,</span> <span class="nx">IFormBoilerplateState</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+  <span class="kr">constructor</span><span class="p">(</span><span class="nx">props</span>: <span class="kt">IFormBoilerplateProps</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+
+    <span class="c1">// Here, we receive list item data (if existing)</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">formListItem</span>: <span class="kt">this.props.item</span><span class="p">,</span>
+      <span class="nx">error</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="c1">// ...</span>
+  <span class="k">public</span> <span class="nx">render</span><span class="p">()</span><span class="o">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">ReactElement</span><span class="o">&lt;</span><span class="p">{}</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// ... (component content details declared here)</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">form</span> <span class="nx">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_onSubmitSaveItem</span><span class="p">}</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">formBoilerplate</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">CommandBar</span> <span class="nx">items</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_getCommandBarItems</span><span class="p">()}</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Separator</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">commandBarSeparators</span><span class="p">}</span> <span class="o">/&gt;</span>
+        <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">error</span> <span class="o">&amp;&amp;</span>
+          <span class="o">&lt;</span><span class="nx">MessageBar</span> <span class="nx">messageBarType</span><span class="o">=</span><span class="p">{</span><span class="nx">MessageBarType</span><span class="p">.</span><span class="nx">error</span><span class="p">}</span> <span class="nx">onDismiss</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="nx">error</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">})}}</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">error</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/MessageBar&gt;</span>
+        <span class="p">}</span>
+        <span class="o">&lt;</span><span class="nx">Breadcrumb</span>
+          <span class="nx">items</span><span class="o">=</span><span class="p">{</span><span class="nx">breadcrumb</span><span class="p">}</span>
+          <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">breadcrumbItem</span><span class="p">}</span>
+        <span class="o">/&gt;</span>
+        <span class="p">{</span><span class="nx">formContent</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="err">/form&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>In the <code>return</code> statement of the <code>render</code> method we got interesting stuff:</p>
+<ul>
+<li>the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Form" target="_blank"><code>form</code></a> tag is used to control the required fields with native HTML5 behavior</li>
+<li>the <code>CommandBar</code>, the <code>Separator</code> and the <code>Breadcrumb</code> controls placed here are for keeping consistency to the UX, as we're moving to the <code>SPListForm.aspx</code> SPFx hosting page</li>
+</ul>
+<p>Let's keep scrolling down!</p>
+<div class="tabbed-set" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><label for="__tabbed_5_1">FormBoilerplate.tsx</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">// Imports...</span>
+
+<span class="k">export</span> <span class="kd">interface</span> <span class="nx">IFormBoilerplateProps</span> <span class="p">{</span>
+  <span class="nx">context</span>: <span class="kt">FormCustomizerContext</span><span class="p">;</span>
+  <span class="nx">displayMode</span>: <span class="kt">FormDisplayMode</span><span class="p">;</span>
+  <span class="nx">theme</span>: <span class="kt">ITheme</span><span class="p">;</span>
+  <span class="nx">item</span>: <span class="kt">ISPEmployeeItem</span><span class="p">;</span>
+  <span class="nx">onSave</span><span class="o">:</span> <span class="p">(</span><span class="nx">updatedItem</span>: <span class="kt">ISPEmployeeItem</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="ow">void</span><span class="p">;</span>
+  <span class="nx">onClose</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="ow">void</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span> <span class="nx">IFormBoilerplateState</span> <span class="p">{</span>
+  <span class="nx">formListItem</span>: <span class="kt">ISPEmployeeItem</span><span class="p">;</span>
+  <span class="nx">error</span>: <span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">LOG_SOURCE</span>: <span class="kt">string</span> <span class="o">=</span> <span class="s1">&#39;FormBoilerplate&#39;</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">FormBoilerplate</span> <span class="k">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="nx">IFormBoilerplateProps</span><span class="p">,</span> <span class="nx">IFormBoilerplateState</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+  <span class="kr">constructor</span><span class="p">(</span><span class="nx">props</span>: <span class="kt">IFormBoilerplateProps</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+  <span class="p">}</span>
+
+  <span class="c1">// ...</span>
+  <span class="k">public</span> <span class="nx">render</span><span class="p">()</span><span class="o">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">ReactElement</span><span class="o">&lt;</span><span class="p">{}</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+  <span class="p">}</span>
+
+  <span class="c1">// ...</span>
+
+  <span class="k">private</span> <span class="nx">_editItem</span><span class="p">()</span><span class="o">:</span> <span class="kt">boolean</span> <span class="o">|</span> <span class="ow">void</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">searchParams</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">URLSearchParams</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">searchParams</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="s2">&quot;PageType&quot;</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">searchParams</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">&quot;PageType&quot;</span><span class="p">,</span> <span class="nx">FormDisplayMode</span><span class="p">.</span><span class="nx">Edit</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+      <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">+</span> <span class="s2">&quot;//&quot;</span> <span class="o">+</span> <span class="nx">location</span><span class="p">.</span><span class="nx">host</span> <span class="o">+</span> <span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span> <span class="o">+</span> <span class="s2">&quot;?&quot;</span> <span class="o">+</span> <span class="nx">searchParams</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="c1">// ...</span>
+
+  <span class="k">private</span> <span class="nx">_renderSaveButton</span> <span class="o">=</span> <span class="p">(</span><span class="nx">item</span>: <span class="kt">ICommandBarItemProps</span><span class="p">)</span><span class="o">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">ReactNode</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">PrimaryButton</span>
+        <span class="kr">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span>
+        <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">styles</span><span class="p">.</span><span class="nx">commandBarItems</span><span class="p">}</span>
+        <span class="nx">styles</span><span class="o">=</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">buttonStyles</span><span class="p">}</span>
+        <span class="nx">text</span><span class="o">=</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">text</span><span class="p">}</span>
+        <span class="nx">iconProps</span><span class="o">=</span><span class="p">{</span><span class="nx">item</span><span class="p">.</span><span class="nx">iconProps</span><span class="p">}</span> <span class="o">/&gt;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">private</span> <span class="nx">_saveItem</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">event</span>: <span class="kt">React.FormEvent</span><span class="o">&lt;</span><span class="nx">HTMLFormElement</span><span class="o">&gt;</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="nx">error</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">});</span>
+
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">onSave</span><span class="p">({</span>
+        <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">formListItem</span>
+      <span class="p">});</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">let</span> <span class="nx">updateError</span>: <span class="kt">string</span><span class="p">;</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="o">?</span><span class="p">.</span><span class="nx">isHttpRequestError</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">httpErr</span>: <span class="kt">HttpRequestError</span> <span class="o">=</span> <span class="nx">err</span> <span class="kr">as</span> <span class="nx">HttpRequestError</span><span class="p">;</span>
+
+        <span class="c1">// Handling the concurrency issue as working with ETag</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">httpErr</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mf">412</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">updateError</span> <span class="o">=</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">ErrorEtagMessage</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">updateError</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="nx">httpErr</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">())[</span><span class="s2">&quot;odata.error&quot;</span><span class="p">].</span><span class="nx">message</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">updateError</span> <span class="o">=</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="nx">err</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="nx">Logger</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">updateError</span><span class="p">);</span>
+
+      <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+        <span class="nx">error</span>: <span class="kt">updateError</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>A few other things to point out:</p>
+<ul>
+<li>As the <code>SPListForm.aspx</code> hosting page needs context parameters (such as the <em>PageType</em> or the <em>ID</em>) to know what to display, the <code>_onClickEditItem</code> event redirects from the <em>Display</em> mode to the <em>Edit</em> mode</li>
+<li>the <code>_renderSaveButton</code> method renders a <code>PrimaryButton</code> with the <code>type</code> attribute <em>submit</em>, which is crucial when working in a <code>form</code> context (and not declared as such by default in the Fluent UI component)</li>
+<li>the <code>_onSubmitSaveItem</code> event triggered by the <em>submit</em> button mentioned before contains the <code>event.preventDefault()</code> statement, in order to not redirect the user (because it has to be handled by an inherited event declared in the <code>FormBoilerplateFormCustomizer</code>, we'll see about that later)</li>
+<li>this method sends the updated form data to the host, which will perform the update operation and redirect the user to the list view or catching the error to display to him</li>
+</ul>
+<p>Below the form customizer "as is" when initiated by Yeoman:</p>
+<p><img alt="alt text" src="https://learn.microsoft.com/en-us/sharepoint/dev/images/ext-forcustomizer-default-output.png" title="Standard Form customizer" /></p>
+<p>As we can see, the default display is really...empty! You can also see that the SharePoint App Bar isn't displayed here.</p>
+<p>So the idea was to keep the same UI as the one we have in the list form:</p>
+<p><img alt="alt text" src="../../images/tips/20221223/spfx-form-boilerplate-list.png" title="List UI" /></p>
+<p>Based on this, here's my proposal of Form customizer header:</p>
+<p><img alt="alt text" src="../../images/tips/20221223/spfx-form-boilerplate-consistent.png" title="Boilerplate Form customizer" /></p>
+<p>Now, back to the <code>FormBoilerplateFormCustomizer</code> host:</p>
+<div class="tabbed-set" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><label for="__tabbed_6_1">FormBoilerplateFormCustomizer.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">FormBoilerplateFormCustomizer</span> <span class="k">extends</span> <span class="nx">BaseFormCustomizer</span><span class="o">&lt;</span><span class="nx">IFormBoilerplateFormCustomizerProperties</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">private</span> <span class="nx">_sp</span>: <span class="kt">SPFI</span><span class="p">;</span>
+  <span class="k">private</span> <span class="nx">_pnpListItem</span>: <span class="kt">IItems</span><span class="p">;</span>
+  <span class="k">private</span> <span class="nx">_eTag?</span>: <span class="kt">string</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span><span class="p">;</span>
+
+  <span class="k">public</span> <span class="k">async</span> <span class="nx">onInit</span><span class="p">()</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_sp</span> <span class="o">=</span> <span class="nx">getSP</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_pnpListItem</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_sp</span><span class="p">.</span><span class="nx">web</span><span class="p">.</span><span class="nx">lists</span><span class="p">.</span><span class="nx">getById</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">list</span><span class="p">.</span><span class="nx">guid</span><span class="p">.</span><span class="nx">toString</span><span class="p">()).</span><span class="nx">items</span><span class="p">;</span>
+
+    <span class="c1">// ...</span>
+
+    <span class="k">return</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="c1">// ...</span>
+
+  <span class="k">private</span> <span class="nx">_onSave</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">updatedItem</span>: <span class="kt">ISPEmployeeItem</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">res</span>: <span class="kt">IItemAddResult</span> <span class="o">|</span> <span class="nx">IItemUpdateResult</span><span class="p">;</span>
+
+    <span class="kd">const</span> <span class="nx">item</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s2">&quot;MentorId&quot;</span><span class="o">:</span> <span class="nx">updatedItem</span><span class="p">.</span><span class="nx">Mentor</span><span class="o">?</span><span class="p">.</span><span class="nx">Id</span> <span class="o">||</span> <span class="kc">null</span><span class="p">,</span>
+      <span class="p">...</span><span class="nx">updatedItem</span>
+    <span class="p">};</span>
+
+    <span class="c1">// Remove the Mentor Field as loaded to avoid an &quot;EntitySet error&quot;</span>
+    <span class="ow">delete</span> <span class="nx">item</span><span class="p">.</span><span class="nx">Mentor</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">itemId</span> <span class="o">&gt;</span> <span class="mf">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">_pnpListItem</span><span class="p">.</span><span class="nx">getById</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">itemId</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">_eTag</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="k">this</span><span class="p">.</span><span class="nx">_pnpListItem</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">DEBUG</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">_onSaveNative</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// Save new ETag perform multiple savings in debug mode</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">_eTag</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">etag</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">private</span> <span class="nx">_onSaveNative</span> <span class="o">=</span> <span class="p">()</span><span class="o">:</span> <span class="ow">void</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// You MUST call this.formSaved() after you save the form.</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">formSaved</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>Here, we got the following:</p>
+<ul>
+<li>Cleaning the Person field info as SharePoint REST API expects a specific format when adding / updating it</li>
+<li>Depending if it's a new or existing item, we add the known ETag to the request</li>
+<li>When working locally on the component, using the <code>DEBUG</code> property is usefull, because when triggering the <code>this.formSaved()</code>, the <code>SPListForm.aspx</code> hosting page redirects to the site home page instead of the target list, which could be frustrating</li>
+</ul>
+<h2 id="a-react-control-to-rule-them-all">A React control to rule them all</h2>
+<p>Since PnP SPFx Controls version 3.10, there's a new control called <a href="https://pnp.github.io/sp-dev-fx-controls-react/controls/DynamicForm/" target="_blank">DynamicForm</a>, which could perfectly fit to SPFx latest feature. Let's give a try!</p>
+<div class="tabbed-set" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><label for="__tabbed_7_1">FormBoilerplateFormCustomizer.ts</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">FormBoilerplateFormCustomizer</span> <span class="k">extends</span> <span class="nx">BaseFormCustomizer</span><span class="o">&lt;</span><span class="nx">IFormBoilerplateFormCustomizerProperties</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+  <span class="k">public</span> <span class="nx">render</span><span class="p">()</span><span class="o">:</span> <span class="ow">void</span> <span class="p">{</span>
+    <span class="c1">// Use this method to perform your custom rendering.</span>
+
+    <span class="kd">const</span> <span class="nx">formBoilerplate</span>: <span class="kt">React.ReactElement</span><span class="o">&lt;</span><span class="p">{}</span><span class="o">&gt;</span> <span class="o">=</span>
+      <span class="nx">React</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">DynamicFormBoilerplate</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">context</span>: <span class="kt">this.context</span><span class="p">,</span>
+        <span class="nx">displayMode</span>: <span class="kt">this.displayMode</span><span class="p">,</span>
+        <span class="nx">theme</span>: <span class="kt">getDefaultTheme</span><span class="p">(),</span>
+        <span class="nx">item</span>: <span class="kt">this._listItem</span><span class="p">,</span>
+        <span class="nx">onSave</span>: <span class="kt">this._onSave</span><span class="p">,</span>
+        <span class="nx">onClose</span>: <span class="kt">this._onClose</span>
+      <span class="p">}</span> <span class="kr">as</span> <span class="nx">IFormBoilerplateProps</span><span class="p">);</span>
+
+    <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">formBoilerplate</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">domElement</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><label for="__tabbed_7_2">DynamicFormBoilerplate.tsx</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1">// ... (imports)</span>
+<span class="kd">interface</span> <span class="nx">IDynamicFormBoilerplateState</span> <span class="p">{</span>
+  <span class="nx">error</span>: <span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">DynamicFormBoilerplate</span> <span class="k">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="o">&lt;</span><span class="nx">IFormBoilerplateProps</span><span class="p">,</span> <span class="nx">IDynamicFormBoilerplateState</span><span class="o">&gt;</span> <span class="p">{</span>
+
+  <span class="kr">constructor</span><span class="p">(</span><span class="nx">props</span>: <span class="kt">IFormBoilerplateProps</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">error</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+
+  <span class="k">public</span> <span class="nx">render</span><span class="p">()</span><span class="o">:</span> <span class="nx">React</span><span class="p">.</span><span class="nx">ReactElement</span><span class="o">&lt;</span><span class="nx">IFormBoilerplateProps</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">error</span> <span class="o">&amp;&amp;</span>
+          <span class="o">&lt;</span><span class="nx">MessageBar</span> <span class="nx">messageBarType</span><span class="o">=</span><span class="p">{</span><span class="nx">MessageBarType</span><span class="p">.</span><span class="nx">error</span><span class="p">}</span> <span class="nx">onDismiss</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="nx">error</span><span class="o">:</span> <span class="s2">&quot;&quot;</span> <span class="p">})</span> <span class="p">}}</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">error</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/MessageBar&gt;</span>
+        <span class="p">}</span>
+        <span class="o">&lt;</span><span class="nx">DynamicForm</span>
+          <span class="cm">/* eslint-disable-next-line @typescript-eslint/no-explicit-any */</span>
+          <span class="nx">context</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">context</span> <span class="kr">as</span> <span class="nx">any</span><span class="p">}</span>
+          <span class="nx">listId</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">list</span><span class="p">.</span><span class="nx">guid</span><span class="p">.</span><span class="nx">toString</span><span class="p">()}</span>
+          <span class="nx">listItemId</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">itemId</span><span class="p">}</span>
+          <span class="nx">onSubmitted</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">onSave</span><span class="p">}</span>
+          <span class="nx">onCancelled</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">onClose</span><span class="p">}</span>
+          <span class="nx">onSubmitError</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">_handleSPError</span><span class="p">}</span>
+          <span class="nx">disabled</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">displayMode</span> <span class="o">===</span> <span class="nx">FormDisplayMode</span><span class="p">.</span><span class="nx">Display</span><span class="p">}</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="err">/div&gt;</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// eslint-disable-next-line @typescript-eslint/no-explicit-any</span>
+  <span class="k">private</span> <span class="nx">_handleSPError</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">listItemData</span>: <span class="kt">any</span><span class="p">,</span> <span class="nx">error</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">updateError</span>: <span class="kt">string</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="o">?</span><span class="p">.</span><span class="nx">isHttpRequestError</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">httpErr</span>: <span class="kt">HttpRequestError</span> <span class="o">=</span> <span class="nx">error</span> <span class="kr">as</span> <span class="nx">HttpRequestError</span><span class="p">;</span>
+
+      <span class="nx">updateError</span> <span class="o">=</span> <span class="p">(</span><span class="k">await</span> <span class="nx">httpErr</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">())[</span><span class="s2">&quot;odata.error&quot;</span><span class="p">].</span><span class="nx">message</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">updateError</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span> <span class="o">||</span> <span class="nx">error</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">Logger</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">updateError</span><span class="p">);</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
+      <span class="nx">error</span>: <span class="kt">updateError</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
+<p>As we can see, it's shorter than the first approach! With a "few" lines we have a ready-to-use Form customizer!</p>
+<p>But we notice that:</p>
+<ul>
+<li>there's neither <code>CommandBar</code>, <code>Separator</code> or <code>Breadcrumb</code> components, since the <em>Save</em> and <em>Cancel</em> buttons are part of the <code>DynamicForm</code> component, we can't hide them or overriding them</li>
+<li>we can't handle the ETag here, as the component doesn't have a prop which allows us to specify it</li>
+<li>the <em>saving</em> and <em>cancelling</em> events are handled by the component (through the <code>onSubmitted</code> and the <code>onCancelled</code> event props)</li>
+</ul>
+<p>Th advantage of this component is that it handles the list context, so that the fields are displayed accordingly to its host (with associated configuration for each of them). But we're limited into the UI (even if there's a render overriding method called <code>fieldOverrides</code>), especially if we want to keep existing parts like the <code>CommandBar</code>.</p>
+<h2 id="deployment">Deployment</h2>
+<p>In order to deploy our Form customizer properly, below the script used to deploy the solution to the tenant app catalog and associate the component to the list content Type.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The list used here is the <strong>Employee onboarding</strong> template provided by Microsoft when creating a list:
+<img alt="alt text" src="../../images/tips/20221223/spfx-form-boilerplate-list-template.png" title="List template" /></p>
+</div>
+<div class="tabbed-set" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><label for="__tabbed_8_1">LinkFormCustomizerToContentType.ps1</label><div class="tabbed-content"></div>
+</div>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>  <span class="c"># Connecting to Tenant App Catalog (but could be also a Site Collection App Catalog)</span>
+  <span class="nb">Connect-PnPOnline</span> <span class="n">-Url</span> <span class="n">https</span><span class="p">://</span><span class="n">contoso</span><span class="p">.</span><span class="n">sharepoint</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">sites</span><span class="p">/</span><span class="n">appcatalog</span> <span class="n">-Interactive</span>
+
+  <span class="c"># Deploy the SPFx package to the Tenant App Catalog</span>
+  <span class="nb">Add-PnPApp</span> <span class="n">-Path</span> <span class="s2">&quot;[PATH_TO_YOUR_SPFX_PACKAGE]&quot;</span> <span class="n">-Scope</span> <span class="n">Tenant</span> <span class="n">-Publish</span> <span class="n">-Overwrite</span>
+
+  <span class="nb">Disconnect-PnPOnline</span>
+
+  <span class="c"># Connecting to the target site where the component will be added</span>
+  <span class="nb">Connect-PnPOnline</span> <span class="n">-Url</span> <span class="n">https</span><span class="p">://</span><span class="n">contoso</span><span class="p">.</span><span class="n">sharepoint</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">sites</span><span class="p">/</span><span class="n">hr</span> <span class="n">-Interactive</span>
+
+  <span class="c"># Adding the solution to the site</span>
+  <span class="nb">Get-PnPApp</span> <span class="n">-Identity</span> <span class="n">0f850be3</span><span class="p">-</span><span class="n">9749</span><span class="p">-</span><span class="n">4726</span><span class="p">-</span><span class="n">9a75</span><span class="p">-</span><span class="n">06a89e6f231d</span> <span class="p">|</span> <span class="nb">Install-PnPApp</span>
+
+  <span class="c"># Form customizer component id</span>
+  <span class="nv">$customFormComponentId</span> <span class="p">=</span> <span class="s2">&quot;8b38fd0b-2722-4001-acc0-5fddb5bc4c50&quot;</span>
+
+  <span class="c"># Getting the list default Content Type (but could also be a Hub or a Document Set one)</span>
+  <span class="nv">$listCT</span> <span class="p">=</span> <span class="nb">Get-PnPContentType</span> <span class="n">-Identity</span> <span class="s2">&quot;Item&quot;</span> <span class="n">-List</span> <span class="s2">&quot;/lists/EmployeeOnboarding&quot;</span>
+
+  <span class="c"># Linking the component to the different form contexts</span>
+  <span class="nv">$listCT</span><span class="p">.</span><span class="n">EditFormClientSideComponentId</span> <span class="p">=</span> <span class="nv">$customFormComponentId</span>
+  <span class="nv">$listCT</span><span class="p">.</span><span class="n">NewFormClientSideComponentId</span> <span class="p">=</span> <span class="nv">$customFormComponentId</span>
+  <span class="nv">$listCT</span><span class="p">.</span><span class="n">DisplayFormClientSideComponentId</span> <span class="p">=</span> <span class="nv">$customFormComponentId</span>
+  <span class="nv">$listCT</span><span class="p">.</span><span class="n">Update</span><span class="p">(</span><span class="n">0</span><span class="p">)</span>
+
+  <span class="nb">Invoke-PnPQuery</span>
+</code></pre></div>
+</td></tr></table>
+<p>And that's it! From this boilerplate, you should be able to start playing with the Form Customizer!</p>
+<p>Happy coding! 😄</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://twitter.com/michaelmaillot" target="_blank" rel="noopener" title="twitter.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="http://github.com/michaelmaillot" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
+      
+    
+  </body>
+</html>

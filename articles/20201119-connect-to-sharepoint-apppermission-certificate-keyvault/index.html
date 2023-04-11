@@ -571,8 +571,8 @@
 </ul>
 </li>
 <li>Command Interface (one of these)<ul>
-<li>PowerShell (with <a href="https://docs.microsoft.com/fr-fr/powershell/azure/install-az-ps?view=azps-4.8.0" target="_blank">Az PowerShell</a> and <a href="https://docs.microsoft.com/en-us/powershell/azure/active-directory/install-adv2?view=azureadps-2.0" target="_blank">AzureAD PowerShell</a>)</li>
-<li>Azure CLI (<a href="https://docs.microsoft.com/fr-fr/cli/azure/install-azure-cli-windows?tabs=azure-cli" target="_blank">on your machine</a> or through <a href="https://docs.microsoft.com/fr-fr/azure/cloud-shell/quickstart" target="_blank">Azure Cloud Shell</a>)</li>
+<li>PowerShell (with <a href="https://learn.microsoft.com/powershell/azure/install-az-ps?view=azps-4.8.0&amp;WT.mc_id=M365-MVP-5005200" target="_blank">Az PowerShell</a> and <a href="https://learn.microsoft.com/powershell/azure/active-directory/install-adv2?view=azureadps-2.0&amp;WT.mc_id=M365-MVP-5005200" target="_blank">AzureAD PowerShell</a>)</li>
+<li>Azure CLI (<a href="https://learn.microsoft.com/cli/azure/install-azure-cli-windows?tabs=azure-cli&amp;WT.mc_id=M365-MVP-5005200" target="_blank">on your machine</a> or through <a href="https://learn.microsoft.com/azure/cloud-shell/quickstart?WT.mc_id=M365-MVP-5005200" target="_blank">Azure Cloud Shell</a>)</li>
 </ul>
 </li>
 <li>Visual Studio (2017 or later)</li>
@@ -580,7 +580,7 @@
 <h2 id="why-authenticating-by-certificate-and-not-by-client-id-secret">Why authenticating by certificate and not by Client ID / Secret</h2>
 <p>In AAD Application permission context, for unknown reason, you can't work with SharePoint REST API using Client ID / Secret connection. It only works with a connection using Client ID / Certificate.</p>
 <p>I've posted a solution as an answer on <a href="https://stackoverflow.com/questions/54771270/msal-ad-token-not-valid-with-sharepoint-online-csom/60090373" target="_blank">Stack Overflow</a> a couple months ago.</p>
-<p>But in some cases, you have no choice but to work with a Client ID / Secret (like for example writing in the User Profile Service). In that case, use the legacy <a href="https://docs.microsoft.com/en-us/sharepoint/dev/solution-guidance/security-apponly" target="_blank">App-Only principal</a> context</p>
+<p>But in some cases, you have no choice but to work with a Client ID / Secret (like for example writing in the User Profile Service). In that case, use the legacy <a href="https://learn.microsoft.com/sharepoint/dev/solution-guidance/security-apponly?WT.mc_id=M365-MVP-5005200" target="_blank">App-Only principal</a> context</p>
 <h2 id="why-using-two-azure-powershell-modules">Why using two Azure PowerShell Modules</h2>
 <p>Even if Microsoft provides a module that covers most Azure resources and the most popular is <em>Az PowerShell</em>, this one does not cover all features regarding AAD.</p>
 <p>For instance, let's compare one command and the options provided.</p>
@@ -1148,7 +1148,7 @@ az ad sp credential reset --name <span class="s2">&quot;AAD_APP_OBJECT_ID&quot;<
 </div>
 </div>
 <h2 id="grant-web-application-to-get-key-vault-secret">Grant Web Application to get Key Vault Secret</h2>
-<p>When using <a href="https://www.nuget.org/packages/Microsoft.Azure.KeyVault/" target="_blank">Microsoft.Azure.KeyVault</a> library, we used to grant certificate (GET) access policy to certificate. But as this library is replaced by the Azure.Security .NET Libraries, we have to use the Keyvault.Secrets service because until now, there's no method provided to get a Key Vault Certificate with the certificate (GET) access policy. Furthermore, the Certificate in Key Vault is more a <a href="https://docs.microsoft.com/en-us/azure/key-vault/certificates/about-certificates" target="_blank">concept</a> than just a type of Secret.</p>
+<p>When using <a href="https://www.nuget.org/packages/Microsoft.Azure.KeyVault/" target="_blank">Microsoft.Azure.KeyVault</a> library, we used to grant certificate (GET) access policy to certificate. But as this library is replaced by the Azure.Security .NET Libraries, we have to use the Keyvault.Secrets service because until now, there's no method provided to get a Key Vault Certificate with the certificate (GET) access policy. Furthermore, the Certificate in Key Vault is more a <a href="https://learn.microsoft.com/azure/key-vault/certificates/about-certificates?WT.mc_id=M365-MVP-5005200" target="_blank">concept</a> than just a type of Secret.</p>
 <p>That's why we're going to setup a secret (GET) access policy.</p>
 <h3 id="grant-access-through-interface">Grant access through interface</h3>
 <p><img alt="alt text" src="../../images/articles/20201119/keyvault-set-policy.png" title="Set KeyVault Policy" /></p>
@@ -1181,7 +1181,7 @@ az keyvault set-policy --name <span class="s2">&quot;kvwecommon&quot;</span> --o
 </div>
 </div>
 <h2 id="init-aspnet-web-application-project">Init ASP.NET Web Application Project</h2>
-<p>To init your project (.NET Framework 4.8 C#), you can follow <a href="https://docs.microsoft.com/en-us/azure/app-service/quickstart-dotnet-framework" target="_blank">this quickstart</a> (and if you want to try with an API deployed in an Azure API, just select "Web API" instead of "MVC").</p>
+<p>To init your project (.NET Framework 4.8 C#), you can follow <a href="https://learn.microsoft.com/azure/app-service/quickstart-dotnet-framework?WT.mc_id=M365-MVP-5005200" target="_blank">this quickstart</a> (and if you want to try with an API deployed in an Azure API, just select "Web API" instead of "MVC").</p>
 <h2 id="get-nuget-packages-azure-sharepoint">Get Nuget Packages (Azure, SharePoint)</h2>
 <p>Below the Nuget packages required to test the architecture:</p>
 <ul>
@@ -1192,7 +1192,7 @@ az keyvault set-policy --name <span class="s2">&quot;kvwecommon&quot;</span> --o
 </ul>
 <h2 id="setup-connection-to-azure">Setup connection to Azure</h2>
 <p>To setup a connection to Azure through the Identity SDK, you can use the <code>DefaultAzureCredential()</code> class which will follow a specific mechanism based on the execution environment, which make this part easy to manage. To sum up, you'll be able to authenticate both in Visual Studio (as a user) and in Azure (as a managed identity / service principal) with the same method.</p>
-<p>More info <a href="https://docs.microsoft.com/en-us/dotnet/api/overview/azure/identity-readme" target="_blank">here</a> (this article also explains how to configure connection to Azure from Visual Studio).</p>
+<p>More info <a href="https://learn.microsoft.com/dotnet/api/overview/azure/identity-readme?WT.mc_id=M365-MVP-5005200" target="_blank">here</a> (this article also explains how to configure connection to Azure from Visual Studio).</p>
 <p>Below the snippet you can use to connect to the Key Vault, in order to get the certificate.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -1321,7 +1321,7 @@ az keyvault set-policy --name <span class="s2">&quot;kvwecommon&quot;</span> --o
 <li><a href="http://blog.octavie.nl/index.php/2017/09/13/creating-azure-ad-app-registration-with-powershell-part-1" target="_blank">Create Azure AD App Registration with PowerShell-Part 1</a></li>
 <li><a href="http://blog.octavie.nl/index.php/2017/09/19/create-azure-ad-app-registration-with-powershell-part-2" target="_blank">Create Azure AD App Registration with PowerShell-Part 2</a></li>
 <li><a href="https://nedinthecloud.com/2019/07/16/demystifying-azure-ad-service-principals/" target="_blank">Demystifying Azure AD Service Principals</a></li>
-<li><a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals#relationship-between-application-objects-and-service-principals" target="_blank">Relationship between application objects and service principals</a></li>
+<li><a href="https://learn.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals#relationship-between-application-objects-and-service-principals?WT.mc_id=M365-MVP-5005200" target="_blank">Relationship between application objects and service principals</a></li>
 </ul>
                 
               
@@ -1366,8 +1366,17 @@ az keyvault set-policy --name <span class="s2">&quot;kvwecommon&quot;</span> --o
         
         
       
-      <a href="http://github.com/michaelmaillot" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+      <a href="https://github.com/michaelmaillot" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://mvp.microsoft.com/en-us/PublicProfile/5005200" target="_blank" rel="noopener" title="mvp.microsoft.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M0 32h214.6v214.6H0V32zm233.4 0H448v214.6H233.4V32zM0 265.4h214.6V480H0V265.4zm233.4 0H448V480H233.4V265.4z"/></svg>
       </a>
     
   </div>

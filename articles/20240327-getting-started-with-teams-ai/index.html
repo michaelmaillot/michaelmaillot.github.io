@@ -1,0 +1,2007 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Blog articles about Microsoft 365 / Azure / General Dev">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../images/puzzle.ico">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.15">
+    
+    
+      
+        <title>Getting started with Teams AI library - Michaël Maillot</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Poppins";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-9BSLGY6C2M"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-9BSLGY6C2M",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-9BSLGY6C2M",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#getting-started-with-teams-ai-library" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Michaël Maillot" class="md-header__button md-logo" aria-label="Michaël Maillot" data-md-component="logo">
+      
+  <img src="../../images/puzzle.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Michaël Maillot
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Getting started with Teams AI library
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Michaël Maillot" class="md-nav__button md-logo" aria-label="Michaël Maillot" data-md-component="logo">
+      
+  <img src="../../images/puzzle.png" alt="logo">
+
+    </a>
+    Michaël Maillot
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#librarys-key-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Library's key concepts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prompt-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prompt manager
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Storage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#planner" class="md-nav__link">
+    <span class="md-ellipsis">
+      Planner
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#augmentations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Augmentations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Augmentations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sequence-augmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sequence augmentation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monologue-augmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monologue augmentation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use case
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solutions-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution's description
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solution's description">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ai-system-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI system interaction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Actions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Actions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sequence" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sequence
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monologue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monologue
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#moderation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Moderation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watchout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Watchout
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Watchout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Documentation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#await" class="md-nav__link">
+    <span class="md-ellipsis">
+      Await
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aistopcommandname" class="md-nav__link">
+    <span class="md-ellipsis">
+      AI.StopCommandName
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action-misspelling-and-users-intent-misunderstanding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Action misspelling and user's intent misunderstanding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-openai-api-preview-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      Azure OpenAI API preview version
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#personal-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      Personal feedback
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#thats-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      That's it
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#useful-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      Useful Links
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="getting-started-with-teams-ai-library">Getting started with Teams AI library</h1>
+<p>With the rise of LLMs such as GPT and Llama, Microsoft not only provides ready-to-use chatbot such as Copilots but also extensibility features.</p>
+<p><img alt="Copilot adoption and extensibility" src="../../images/articles/20240327/teams-ai-copilot-experiences.png" /></p>
+<p>Among them, one got my attention from the first announcement as a preview: <strong>Teams AI library</strong>. First announced during Build 2023 as a public preview, the library got significant changes until its official release (GA) on December 12, 2023 (even if announced first during Ignite 2023 but still in preview though). However, you can start developing with it using Teams Toolkit which has a dedicated template!</p>
+<p>In this article, I'll explain key features of this library, how to get started with a ready-to-use chatbot sample which will include Azure resources usage.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Disclaimer</strong>
+This article will focus on Teams AI library (TypeScript) with a chatbot example, not message extension. It will also leverage Azure OpenAI &amp; Azure AI Content Content Safety. Consequently, it won't use the Azure OpenAI's new assistant features.</p>
+</div>
+<h2 id="librarys-key-concepts">Library's key concepts</h2>
+<p><img alt="Teams AI general presentation" src="../../images/articles/20240327/teams-ai-general-presentation.png" /></p>
+<p>The library is based on Bot Framework SDK which has already event handlers &amp; methods to interact with Teams chat context (app installation, message reactions, adaptive cards...) but has also AI dedicated features which relies on LLM to complete end user's intents. It also contains features related to moderation, prompt functions injection and intents-to-actions mapping.</p>
+<p>Along with these features, Teams AI library includes <strong>Retrieval Augmented Generation</strong> (RAG) which facilitates existing custom data sources search when a user requests particular info. For now this is only available when adding data sources such as Vector one.</p>
+<h2 id="prompt-manager">Prompt manager</h2>
+<p>The prompt manager will gather information related to prompt configuration, prompt itself and optionally, actions that can be called by the prompt when using augmentations. A Teams AI prompt has to be structured like this:</p>
+<ul>
+<li><strong>prompts</strong> folder</li>
+<li>prompt name (<code>chat</code> for example)<ul>
+<li><code>config.json</code>: prompt configuration (input tokens, temperature, <a href="https://community.openai.com/t/difference-between-frequency-and-presence-penalties/2777/3" target="_blank">penalties</a>,...)</li>
+<li><code>skprompt.txt</code>: flat file that gives a context to the model and for which you can provide functions and context variables</li>
+<li><code>actions.json</code> (optional): a list of methods with a description and optionally input parameters that can be requested by the SDK to the user</li>
+</ul>
+</li>
+</ul>
+<p>Most of the prompt manager features are based on <a href="https://learn.microsoft.com/semantic-kernel/overview?WT.mc_id=M365-MVP-5005200" target="_blank">Semantic Kernel</a> ones.</p>
+<h2 id="storage">Storage</h2>
+<p>Storage feature is for keeping state information (temp values, input / output actions) but also user session / history, which can be useful for complex scenario where you want the model to remember previous messages exchanged with the user. The Storage features comes from Bot Framework SDK.</p>
+<h2 id="planner">Planner</h2>
+<p>The Planner is the most essential configuration part of the app. This will perform key actions like validation and feedback loop to bring the expected answer to user's request. It contains:</p>
+<ul>
+<li>Model instance used (OpenAI or Azure OpenAI key, deployment to use, endpoint, request configuration,...)</li>
+<li>Prompt manager (history token, input tokens, which prompts to use,...)</li>
+<li>Tokenizer (if specific, otherwise a default one will be used)</li>
+<li>Number of repair attempts to perform during intent-to-action validation process</li>
+</ul>
+<p>The Planner will orchestrate the LLM's response validation accordingly to the selected augmentation if such.</p>
+<h2 id="augmentations">Augmentations</h2>
+<p>Augmentations are some kind of enhancements. They leverage the LLM to "reason" or plan user's intents, preventing wrong answers by checking if intent will match with a declared action and if necessary, will ask the AI system to adjust its response, before bringing an answer to the user.</p>
+<p>Whether you choose to use <code>monologue</code> or <code>sequence</code>, both will rely on a <strong>plan</strong>. We'll see later in this article that the process is interesting and that the choice of the augmentation impacts your bot's behavior.</p>
+<p>There are two augmentations available, depending on the scenario you imagine for your bot.</p>
+<h3 id="sequence-augmentation">Sequence augmentation</h3>
+<p>Sequence augmentation works with a DO / SAY system, which will be turned into a plan that can be helpful in a multi-step process like for example, scheduling a meeting which will start by finding a common slot with a coworker from a start date, then initializing a meeting request.</p>
+<p>When initializing the AI system, Teams AI is completing the initial prompt with the following info (it's trimmed and shrunk in the debug to avoid over-consumption of tokens):</p>
+<blockquote>
+<p>[INITIAL PROMPT]</p>
+<p>Use the actions above to create a plan in the following JSON format:</p>
+</blockquote>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;plan&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;commands&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;DO&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;name&gt;&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;&lt;name&gt;&quot;</span><span class="p">:</span><span class="err">&lt;value&gt;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;SAY&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;response&gt;&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Like this, it will be able to transform <strong>actions</strong> into a DO-SAY plan.</p>
+<p>Below is an example of how Teams AI behaves when a user is requesting to get its info, as stated in the augmentation title, "sequentially" by first performing the action, then returning a response to the user:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;plan&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;commands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DO&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;getUserInfo&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SAY&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Your user information is as follows: [insert user info here].&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>The cool thing about this one is that you can provide conversation values that will be available in the prompt, which then will be used by the AI system.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When using sequence augmentation, if you want the model to automatically return info, you have to update the prompt with conversation state properties. We'll see about that later on.</p>
+</div>
+<h3 id="monologue-augmentation">Monologue augmentation</h3>
+<p>With this augmentation, when interacting with the bot, there's a self-reasoning mechanism that will help the LLM to find out user's intent and try to match it to an action. If required info is missing, it will guess that it has to ask it to the user or rely on the prompt if necessary.</p>
+<p>Like for the <code>sequence</code> augmentation, Teams AI will complete the initial prompt like this:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w"> </span><span class="na">SAY</span><span class="o">:</span>
+<span class="w">    </span><span class="na">description</span><span class="o">:</span><span class="w"> </span><span class="s">use to ask the user a question or say something</span>
+<span class="w">    </span><span class="na">parameters</span><span class="o">:</span>
+<span class="w">        </span><span class="na">text</span><span class="o">:</span>
+<span class="w">            </span><span class="na">type</span><span class="o">:</span><span class="w"> </span><span class="s">string</span>
+<span class="w">            </span><span class="na">description</span><span class="o">:</span><span class="w"> </span><span class="s">text to say or question to ask</span>
+<span class="w">                </span><span class="na">Return a JSON object with your thoughts and the next action to perform.</span>
+<span class="w">                </span><span class="na">Only respond with the JSON format below and base your plan on the actions above.</span>
+<span class="w">                </span><span class="na">If you&#39;re not sure what to do, you can always say something by returning a SAY action.</span>
+<span class="w">                </span><span class="na">If you&#39;re told your JSON response has errors, do your best to fix them.</span>
+<span class="w">            </span><span class="na">Response Format</span><span class="o">:</span>
+<span class="w">                </span><span class="na">{</span>
+<span class="w">                    </span><span class="na">&quot;thoughts&quot;</span><span class="o">:</span>
+<span class="w">                        </span><span class="na">{</span>
+<span class="w">                            </span><span class="na">&quot;thought&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;your current thought&gt;&quot;,</span>
+<span class="w">                            </span><span class="na">&quot;reasoning&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;self reflect on why you made this decision&gt;&quot;,</span>
+<span class="w">                            </span><span class="na">&quot;plan&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;- short bulleted\\n- list that conveys\\n- long-term plan&quot;,</span>
+<span class="w">                        </span><span class="na">},</span>
+<span class="w">                    </span><span class="na">&quot;action&quot;</span><span class="o">:</span>
+<span class="w">                        </span><span class="na">{</span>
+<span class="w">                            </span><span class="na">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;&lt;action name&gt;&quot;,</span>
+<span class="w">                            </span><span class="na">&quot;parameters&quot;</span><span class="o">:</span><span class="w"> </span><span class="s">{ &quot;&lt;name&gt;&quot;: &quot;&lt;value&gt;&quot; },</span>
+<span class="w">                        </span><span class="na">},</span>
+<span class="w">                </span><span class="na">}</span>
+</code></pre></div></td></tr></table></div>
+<p>As you can see, it's kind of different than the previous. You can see that there's a notion of thoughts which lead the AI system to have a self-reasoning process.</p>
+<p>This is an example of how Teams AI translates user's request.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;thoughts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;thought&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sure, let me retrieve your user information.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;reasoning&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The getUserInfo action was requested, which requires retrieving the current user&#39;s information.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;plan&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;- Retrieve the current user&#39;s information\n- Provide the information to the user.&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;getUserInfo&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>We'll see in the sample's description that the mechanism is interesting to observe but also more limited than the <code>sequence</code> one according to me.</p>
+<h2 id="use-case">Use case</h2>
+<p>You want to provide a custom intelligent chatbot to your end users, that both leverage the power of the LLM and respects the company's privacy.</p>
+<p>But moreover, you want to provide advanced capabilities based on company's ecosystem using Microsoft Graph with current user's context.</p>
+<p>You want users to get the information they're looking for, with simple requests and if necessary, the chatbot will ask for missing information to complete the initial request.</p>
+<h2 id="architecture">Architecture</h2>
+<ul>
+<li>Azure OpenAI service (<code>Microsoft.CognitiveServices/accounts</code>)<ul>
+<li>LLM Deployment</li>
+</ul>
+</li>
+<li>Azure AI Content Safety (for moderation)</li>
+<li>Web App (to host the deployed bot)</li>
+<li>2 Entra ID Apps<ul>
+<li>1 for the bot</li>
+<li>1 for managing Graph API permissions through OBO flow</li>
+</ul>
+</li>
+</ul>
+<h2 id="solutions-description">Solution's description</h2>
+<p>If you want to download the sample solution, here it is (read the README first 😉): <a href="https://github.com/michaelmaillot/teams-ai-bot-graph">Teams AI Chat Bot Graph sample</a></p>
+<p>Based on a sample project generated by Teams Toolkit, the solution contains everything to run "locally" (there're still Entra IDs generated on the fly + a dev tunnel visible from <a href="https://dev.botframework.com/bots">BotFramework site</a> + Azure AI resources).</p>
+<p>It also provides everything to deploy the bot on Azure. The only resources not provided by default are the Azure OpenAI service and the Azure AI Content Safety, which have to be provided in the <em>env</em> files (both git tracked and untracked / private ones, in the <em>local</em> and <em>dev</em> environments).</p>
+<p>Even if this article is focused on <em>local</em> env, the featured sample is ready-to-use for <em>dev</em> one if you add and fill <em>.env.dev.user</em> file. More info regarding Teams Toolkit environment configuration can be found <a href="https://learn.microsoft.com/microsoftteams/platform/toolkit/teamsfx-preview-and-customize-app-manifest?WT.mc_id=M365-MVP-5005200" target="_blank">here</a>.</p>
+<p>This sample handles following features:</p>
+<ul>
+<li>Silent SSO with Graph API</li>
+<li>Azure OpenAI connection</li>
+<li>Azure AI moderation</li>
+</ul>
+<p>When pressing F5, the <em>local</em> .env is triggered with the following actions in this order through Team Toolkit:</p>
+<ol>
+<li>Running the <code>teamsapp.local.yml</code> file</li>
+<li>Provisioning<ol>
+<li><code>teamsApp/create</code>: Creating the Teams App for deployment (see <a href="https://dev.teams.microsoft.com/apps">Teams Developer Portal</a>)</li>
+<li><code>botAadApp/create</code>: Creating the Entra ID app that will handle the bot<ol>
+<li>Writing the generated info in the <em>.env.local</em> &amp; <em>.env.local.user</em> files</li>
+</ol>
+</li>
+<li><code>botFramework/create</code>: Registering the bot on the <a href="https://dev.botframework.com/">Bot Framework developer portal</a><ol>
+<li>Including the bot Entra ID, messaging endpoint, Teams channel</li>
+</ol>
+</li>
+<li><code>aadApp/create</code>: Creating the Entra ID app that will handle the OBO flow with Graph API<ol>
+<li>Writing the generated info in the <em>.env.local</em> &amp; <em>.env.local.user</em> files</li>
+</ol>
+</li>
+<li><code>aadApp/update</code>: Updating the previous created Entra ID app with more info based on a template manifest<ol>
+<li>Including Graph API permissions, <em>access_as_user</em> API authorization endpoint,...</li>
+</ol>
+</li>
+<li><code>teamsApp/validateManifest</code>: Validating Teams manifest file<ol>
+<li>Generating a <code>manifest.local.json</code> from <code>manifest.json</code> template file</li>
+</ol>
+</li>
+<li><code>teamsApp/zipAppPackage</code>: Packaging the Teams App with manifest and icons</li>
+<li><code>teamsApp/validateAppPackage</code>: Validating Teams App package</li>
+<li><code>teamsApp/update</code>: Adding or updating Teams App on the <a href="https://dev.teams.microsoft.com/apps">Teams Developer Portal</a></li>
+</ol>
+</li>
+<li>Deploying<ol>
+<li><code>cli/runNpmCommand</code>: Installing dependencies to run the solution locally</li>
+<li><code>file/createOrUpdateEnvironmentFile</code>: Setting context environment values<ol>
+<li>These values will be used in the <code>config.ts</code> file during runtime</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="authentication">Authentication</h3>
+<p>First, the authentication. By default, there's nothing configured except the default Entra ID app linked to the Azure Bot resource, in order to be available in Teams.</p>
+<p>But thanks to Teams AI, you can specify dedicated authentication, including API scopes (here Microsoft Graph). See snippet below:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">appBuilderService.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// ...</span>
+<span class="kr">constructor</span><span class="p">(</span><span class="nx">storage</span><span class="o">:</span><span class="w"> </span><span class="kt">Storage</span><span class="p">,</span><span class="w"> </span><span class="nx">planner</span><span class="o">:</span><span class="w"> </span><span class="kt">Planner</span><span class="p">,</span><span class="w"> </span><span class="nx">moderator</span><span class="o">:</span><span class="w"> </span><span class="kt">Moderator</span><span class="p">,</span><span class="w"> </span><span class="nx">adapter</span><span class="o">:</span><span class="w"> </span><span class="kt">TeamsAdapter</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="nx">permissions</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">_app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ApplicationBuilder</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">withStorage</span><span class="p">(</span><span class="nx">storage</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">withAIOptions</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">planner</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">moderator</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">withAuthentication</span><span class="p">(</span><span class="nx">adapter</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">settings</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">graph</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">scopes</span><span class="o">:</span><span class="w"> </span><span class="kt">permissions</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">msalConfig</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">auth</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">clientId</span><span class="o">:</span><span class="w"> </span><span class="kt">config.appId</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">clientSecret</span><span class="o">:</span><span class="w"> </span><span class="kt">config.appPassword</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">authority</span><span class="o">:</span><span class="w"> </span><span class="kt">config.authority</span><span class="p">,</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nx">signInLink</span><span class="o">:</span><span class="w"> </span><span class="sb">`https://</span><span class="si">${</span><span class="nx">config</span><span class="p">.</span><span class="nx">botDomain</span><span class="si">}</span><span class="sb">/auth-start.html`</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">endOnInvalidMessage</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">build</span><span class="p">();</span>
+<span class="c1">// ...</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>In this case, the solution will use the OBO flow in order to give user permissions to query Graph API on his behalf. The only required thing here is that he will have to approve requested permissions once, through a dedicated page (here <code>auth-start.html</code> which is located in the <strong>public</strong> folder of the project). It will be displayed like this during first user interaction:</p>
+<p><img alt="Teams AI consent pop above conversation box" src="../../images/articles/20240327/teams-ai-consent-pop.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Message is: "<em>We need to request additional permissions. You should only need to do this once for [Entra ID App name]</em>". Of course, if this has been already allowed for the whole organization, this message won't be displayed.</p>
+</div>
+<p>Then user will be redirected to a dedicated page (the one mentioned above in the <code>SignInLink</code> param). When testing locally, this window will appear:</p>
+<p><img alt="Teams AI consent developer tunnel page validation" src="../../images/articles/20240327/teams-ai-consent-tunnel-page.png" /></p>
+<p>Finally, the user will see the common permission approval page:</p>
+<p><img alt="Teams AI consent approval permission page" src="../../images/articles/20240327/teams-ai-consent-permissions.png" /></p>
+<p>If the user clicks on the "App Info" link, it will display the Entra ID app name and the redirect URI (here <code>auth-end.html</code> located in the <strong>public</strong> folder of the project), which is configured in the Entra ID app in the "Authentication" part, as a <strong>Web</strong> platform. This is included in the project sample in the bicep files.</p>
+<h3 id="ai-system-interaction">AI system interaction</h3>
+<p>Once authenticated, we need to "init" the interaction with the AI system through Teams AI and most importantly, setting up the Microsoft Graph context.</p>
+<p>This can be done in a event handler, after signing in called <code>onSignInSuccess</code>. The problem is, if we use this handler, it will "bypass" the LLM init which means that the user will have to send another message after authentication. The solution here is to setup the AI system in the event handler:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">bot-sequence.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">graphClient</span><span class="o">:</span><span class="w"> </span><span class="kt">GraphClientService</span><span class="p">;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">authentication</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;graph&#39;</span><span class="p">).</span><span class="nx">onUserSignInSuccess</span><span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">context</span><span class="o">:</span><span class="w"> </span><span class="kt">TurnContext</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="o">:</span><span class="w"> </span><span class="kt">ApplicationTurnState</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">    </span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">graphClient</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">graphClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">GraphClientService</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">temp</span><span class="p">.</span><span class="nx">authTokens</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span><span class="o">!</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// This will indicate the user that the plan is being processed during init</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">sendActivities</span><span class="p">([</span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;typing&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span><span class="w"> </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;delay&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">2000</span><span class="w"> </span><span class="p">}</span>
+<span class="w">    </span><span class="p">])</span>
+
+<span class="w">    </span><span class="c1">// Here we&#39;ll init the LLM at first user&#39;s interaction</span>
+<span class="w">    </span><span class="c1">// Otherwise the user will have to send another message</span>
+<span class="w">    </span><span class="c1">// This is because of the silent SSO event performed here with onUserSignInSuccess</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">ai</span><span class="p">.</span><span class="nx">doAction</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;greetings&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// If token has expired, update the Graph client</span>
+<span class="w">    </span><span class="nx">graphClient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">GraphClientService</span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">temp</span><span class="p">.</span><span class="nx">authTokens</span><span class="p">[</span><span class="s1">&#39;graph&#39;</span><span class="p">]</span><span class="o">!</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>Once the graph token is obtained and used to instantiate the Graph client, the event handler will init the LLM through the action <em>greetings</em> which will welcome the user for the first time.</p>
+<h3 id="actions">Actions</h3>
+<p>Like mentioned earlier regarding the <strong>prompts</strong> folder, Teams AI gives the opportunity to declare functions as actions with a simple description and if necessary, parameters than can be required or not.</p>
+<p>As discussed earlier, the use case here is to facilitate user interaction with his organization context through Microsoft Graph. Below the content of <code>actions.json</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">actions.json</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;greetings&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Welcomes User on the first interaction with the bot&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;getUserInfo&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Get User information&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;getUserColleagues&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Get User&#39;s colleagues&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;getUserUnreadEmails&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Get User unread emails&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;findMeetingTimes&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Returns available meeting slots for a given colleague&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;colleague&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The colleague to find meeting times with&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The duration of the meeting in minutes&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;startTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The start time of the meeting in ISO 8601 format&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;endTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The end time of the meeting in ISO 8601 format&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">&quot;colleague&quot;</span><span class="w"> </span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>We'll focus on the <code>sequence</code> augmentation first, then on the <code>monologue</code> one.</p>
+<h4 id="sequence">Sequence</h4>
+<p>We can find the <em>greetings</em> action mentioned before, but also other ones. Now let's go back to the code where the <em>greetings</em> action is declared:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">bot-sequence.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nx">app</span><span class="p">.</span><span class="nx">ai</span><span class="p">.</span><span class="nx">action</span><span class="p">(</span><span class="s2">&quot;greetings&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">context</span><span class="o">:</span><span class="w"> </span><span class="kt">TurnContext</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="o">:</span><span class="w"> </span><span class="kt">ApplicationTurnState</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">plan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">ai</span><span class="p">.</span><span class="nx">planner</span><span class="p">.</span><span class="nx">beginTask</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">ai</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// The command [1] matches with the first SAY command in the generated DO / SAY plan</span>
+<span class="w">  </span><span class="c1">// It means that the actions.json must be registered</span>
+<span class="w">  </span><span class="c1">// Otherwise, it will use the auto-generated SAY command ([0])</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">welcomeCommand</span><span class="o">:</span><span class="w"> </span><span class="kt">PredictedSayCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">plan</span><span class="p">.</span><span class="nx">commands</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">plan</span><span class="p">.</span><span class="nx">commands</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">plan</span><span class="p">.</span><span class="nx">commands</span><span class="p">[</span><span class="mf">0</span><span class="p">])</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">PredictedSayCommand</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">sendActivity</span><span class="p">(</span><span class="nx">welcomeCommand</span><span class="p">.</span><span class="nx">response</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">AI</span><span class="p">.</span><span class="nx">StopCommandName</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>When referring to a declared action, the command <code>app.ai.action</code> will be used. That's where the "magic" works. The AI system, when initialized, will complete the developer's prompt with a "plan", containing the actions declared in the JSON file, that will help it to match user's potential request with commands hard-coded in the app.</p>
+<p>Of course, we could just post a predefined message, but I found it more interesting to let the AI system generate the response for me (and after all, isn't one of the library's purposes?).</p>
+<p>For this, we can count on the <em>Planner</em> context, for which we have two methods called <code>beginTask</code> &amp; <code>continueTask</code>. Under the hood they will generate a new plan and will let us access the AI system's response based on both user's current request and the matched action.</p>
+<p>For the <em>greetings</em> action, as it's the first one triggered manually after the authentication process, we have two possibilities following the <code>beginTask</code> method:</p>
+<ul>
+<li>The AI system was able to generate the plan, it will contain all the actions and the first one is the <em>greetings</em> one (because declared as such in the <code>actions.json</code> file)</li>
+<li>The plan was not able to generate the plan yet, then it will return a basic sentence</li>
+</ul>
+<p>Because we can't be sure that the plan will be generated first, the <em>greetings</em> action will handle both scenarios.</p>
+<p>You would ask: <em>Why don't you handle the response yourself?</em>. Let's see what the AI system responds on the first interaction in the scenario where it was able to generate the plan:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;plan&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;commands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DO&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;greetings&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SAY&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hello! How can I assist you today?&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DO&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;getUserInfo&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SAY&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Your name is [User&#39;s name], and your email address is [User&#39;s email address].&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DO&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;getUserColleagues&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SAY&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Your colleagues are [list of User&#39;s colleagues].&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DO&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;getUserUnreadEmails&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SAY&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;You have [number of unread emails] unread emails.&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DO&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;findMeetingTimes&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;colleague&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;colleague name&gt;&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;startTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-03-15T17:59:28.767Z&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;endTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-03-16T17:59:28.767Z&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SAY&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Here are the available meeting slots with [colleague name]: [list of available meeting slots].&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>As you can see, in the generation, all <strong>DO</strong> commands have respective <strong>SAY</strong> ones, which contain predefined answers with a "slot" for the expected data.</p>
+<p>So what if we could go further and let the AI system answering to the user's request if it's "aware" of the data?</p>
+<p>Let's take another registered action, like <code>getUserInfo</code>.</p>
+<p>Let's say that we want to give additional info about the user when requested and we want the AI system to know this info. Teams AI provides the ability to extend the <code>conversation</code> context object by adding new properties:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">bot-sequence.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ConversationState</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">DefaultConversationState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">graphToken</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">UserInfo</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">mail</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="p">};</span>
+<span class="w">  </span><span class="nx">meetingSuggestions</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="kt">Date</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">end</span><span class="o">:</span><span class="w"> </span><span class="kt">Date</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}[];</span>
+<span class="w">  </span><span class="nx">colleagues</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[];</span>
+<span class="w">  </span><span class="nx">nbUnreadEmails</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>Here, we're defining the <code>UserInfo</code> property with user's additional info. From my perspective, I see two advantages when using this:</p>
+<ul>
+<li>We can store in the app's storage memory that kind of info we can refer to anytime and in our case, when actions are requested, to avoid token consumption</li>
+<li>The prompt can be updated with those properties so that the AI system can also refer to it when generating answers</li>
+</ul>
+<p>Regarding the prompt, below the info regarding user's properties:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">skprompt.txt</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>[PROMPT_TEXT]
+...
+User info is the following: {{$conversation.UserInfo}}
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>With Teams AI, we can inject additional data to the prompt dynamically!</p>
+<p>If we focus on the action <code>getUserInfo</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">bot-sequence.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nx">app</span><span class="p">.</span><span class="nx">ai</span><span class="p">.</span><span class="nx">action</span><span class="p">(</span><span class="s2">&quot;getUserInfo&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">context</span><span class="o">:</span><span class="w"> </span><span class="kt">TurnContext</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="o">:</span><span class="w"> </span><span class="kt">ApplicationTurnState</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="p">.</span><span class="nx">conversation</span><span class="p">.</span><span class="nx">UserInfo</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">me</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">graphClient</span><span class="p">.</span><span class="nx">getMe</span><span class="p">();</span>
+
+<span class="w">    </span><span class="nx">state</span><span class="p">.</span><span class="nx">conversation</span><span class="p">.</span><span class="nx">UserInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">mail</span><span class="o">:</span><span class="w"> </span><span class="kt">me.mail</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">me.displayName</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">sendActivityFromPlanner</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">AI</span><span class="p">.</span><span class="nx">StopCommandName</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// If the action is triggered once again</span>
+<span class="w">  </span><span class="c1">// We willingly return nothing from the action</span>
+<span class="w">  </span><span class="c1">// So that the AI system will handle the answer based on the updated prompt</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>As we're triggering it the first time, we have to query the Graph API to get expected info. Then we update both the <code>conversation</code> context object and consequently the prompt with obtained info. Finally, we're asking the AI system to start a new plan with updated data through the <code>sendActivityFromPlanner</code>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">bot-sequence.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">sendActivityFromPlanner</span><span class="p">(</span><span class="nx">context</span><span class="o">:</span><span class="w"> </span><span class="kt">TurnContext</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="o">:</span><span class="w"> </span><span class="kt">ApplicationTurnState</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="ow">void</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">plan</span><span class="o">:</span><span class="w"> </span><span class="kt">Plan</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">nbRetries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">maxRetries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span>
+
+<span class="w">  </span><span class="k">do</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Start a new completion task from the planner</span>
+<span class="w">    </span><span class="c1">// (beginTask method triggers in fact continueTask under the hood)</span>
+<span class="w">    </span><span class="nx">plan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">ai</span><span class="p">.</span><span class="nx">planner</span><span class="p">.</span><span class="nx">continueTask</span><span class="p">(</span><span class="nx">context</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="p">,</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">ai</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// if the answer is generated from a DO / SAY plan match, process it</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">plan</span><span class="p">.</span><span class="nx">commands</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">plan</span><span class="p">.</span><span class="nx">commands</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="o">?</span><span class="p">.</span><span class="kr">type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;SAY&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">await</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">sendActivity</span><span class="p">((</span><span class="nx">plan</span><span class="p">.</span><span class="nx">commands</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">PredictedSayCommand</span><span class="p">).</span><span class="nx">response</span><span class="p">);</span>
+<span class="w">      </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">nbRetries</span><span class="o">++</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">nbRetries</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">maxRetries</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">nbRetries</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">maxRetries</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">sendActivity</span><span class="p">((</span><span class="nx">plan</span><span class="p">.</span><span class="nx">commands</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">PredictedSayCommand</span><span class="p">).</span><span class="nx">response</span><span class="p">);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>This method, called by most of the actions in our sample, will let the AI system generate a new plan that will eventually return the expected <strong>SAY</strong> command with updated data. If not, the method will let the AI system update its plan 2 more times and in the worst case, will return the last generated message even if not the expected one.</p>
+<p>So when we're querying the bot to get our user info:</p>
+<p><img alt="Teams AI chat with request to get user info" src="../../images/articles/20240327/teams-ai-getuserinfo-chat.png" /></p>
+<p>The AI system will behave like this (from the <strong>TERMINAL</strong> tab in VS Code during local execution):</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// CHAT PROMPT</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;what are my user info?&quot;</span>
+<span class="p">}</span>
+
+<span class="c1">// CHAT RESPONSE (message =&gt; content, first task plan execution in the `sendActivityFromPlanner` method)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;plan&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;commands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DO&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;getUserInfo&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SAY&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Your user information is: name, email, phone number, job title, department, and manager.&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1">// CHAT RESPONSE (message =&gt; content, second task plan execution in the `sendActivityFromPlanner` method)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;plan&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;commands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DO&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;getUserInfo&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SAY&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Your user information is: name: Michael MAILLOT, email: michael.maillot@contoso.onmicrosoft.com.&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>This has been done like this because I realized that the AI system was unstable and not always able to return the expected answer.</p>
+<p>The cool thing is that we can easily detect this through the returned plan. But beware that this approach, even if nice because you don't have to worry about how to generate the answer, it will consume more tokens because of the feedback loop process involved. Of course, responses are limited and if you want to return fancy responses, it's up to you 😉.</p>
+<p>The <strong>SAY</strong> command has also limitations when returning complex objects. In our use case, if we want to find common meeting slots with a colleague, we're referring to Graph's <a href="https://learn.microsoft.com/graph/api/user-findmeetingtimes?view=graph-rest-1.0&amp;tabs=http&amp;WT.mc_id=M365-MVP-5005200" target="_blank"><code>findMeetingTimes</code></a> method, returning following interface:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">MeetingTimeSuggestion</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// An array that shows the availability status of each attendee for this meeting suggestion.</span>
+<span class="w">    </span><span class="nx">attendeeAvailability?</span><span class="o">:</span><span class="w"> </span><span class="kt">NullableOption</span><span class="o">&lt;</span><span class="nx">AttendeeAvailability</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// A percentage that represents the likelhood of all the attendees attending.</span>
+<span class="w">    </span><span class="nx">confidence?</span><span class="o">:</span><span class="w"> </span><span class="kt">NullableOption</span><span class="o">&lt;</span><span class="kt">number</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// An array that specifies the name and geographic location of each meeting location for this meeting suggestion.</span>
+<span class="w">    </span><span class="nx">locations?</span><span class="o">:</span><span class="w"> </span><span class="kt">NullableOption</span><span class="o">&lt;</span><span class="nx">Location</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// A time period suggested for the meeting.</span>
+<span class="w">    </span><span class="nx">meetingTimeSlot?</span><span class="o">:</span><span class="w"> </span><span class="kt">NullableOption</span><span class="o">&lt;</span><span class="nx">TimeSlot</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Order of meeting time suggestions sorted by their computed confidence value from high to low, then by chronology if</span>
+<span class="cm">     * there are suggestions with the same confidence.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">order?</span><span class="o">:</span><span class="w"> </span><span class="kt">NullableOption</span><span class="o">&lt;</span><span class="kt">number</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Availability of the meeting organizer for this meeting suggestion. The possible values are: free, tentative, busy, oof,</span>
+<span class="cm">     * workingElsewhere, unknown.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">organizerAvailability?</span><span class="o">:</span><span class="w"> </span><span class="kt">NullableOption</span><span class="o">&lt;</span><span class="nx">FreeBusyStatus</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// Reason for suggesting the meeting time.</span>
+<span class="w">    </span><span class="nx">suggestionReason?</span><span class="o">:</span><span class="w"> </span><span class="kt">NullableOption</span><span class="o">&lt;</span><span class="kt">string</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Even if the <strong>SAY</strong> command generated by the AI system plans to include meeting time slots:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;plan&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;commands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DO&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;findMeetingTimes&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;colleague&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;colleague name&gt;&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;startTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-03-15T17:59:28.767Z&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;endTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-03-16T17:59:28.767Z&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SAY&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Here are the available meeting slots with [colleague name]: [list of available meeting slots].&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>And even if the prompt contains the meeting info in its state:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">skprompt.txt</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>[PROMPT_TEXT]
+...
+Available meeting slots: {{$conversation.meetingSuggestions}}
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>It won't be able to list the meeting slots with appropriate info based on its scope of understanding. If we have a look at the chat prompt in the terminal during debug, here's the output:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Find meeting slots with Alex W today&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assistant&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{&quot;</span><span class="kc">t</span><span class="err">ype</span><span class="s2">&quot;:&quot;</span><span class="err">pla</span><span class="kc">n</span><span class="s2">&quot;,&quot;</span><span class="err">comma</span><span class="kc">n</span><span class="err">ds</span><span class="s2">&quot;:[{&quot;</span><span class="kc">t</span><span class="err">ype</span><span class="s2">&quot;:&quot;</span><span class="err">DO</span><span class="s2">&quot;,&quot;</span><span class="err">ac</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="s2">&quot;:&quot;</span><span class="kc">f</span><span class="err">i</span><span class="kc">n</span><span class="err">dMee</span><span class="kc">t</span><span class="err">i</span><span class="kc">n</span><span class="err">gTimes</span><span class="s2">&quot;,&quot;</span><span class="err">parame</span><span class="kc">ters</span><span class="s2">&quot;:{&quot;</span><span class="err">colleague</span><span class="s2">&quot;:&quot;</span><span class="err">Alex</span><span class="w"> </span><span class="err">W</span><span class="s2">&quot;,&quot;</span><span class="err">dura</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="s2">&quot;:60,&quot;</span><span class="err">s</span><span class="kc">tart</span><span class="err">Time</span><span class="s2">&quot;:&quot;</span><span class="mi">2024-03-19</span><span class="err">T</span><span class="mi">08</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="mf">44.024</span><span class="err">Z</span><span class="s2">&quot;,&quot;</span><span class="err">e</span><span class="kc">n</span><span class="err">dTime</span><span class="s2">&quot;:&quot;</span><span class="mi">2024-03-20</span><span class="err">T</span><span class="mi">08</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="mf">44.024</span><span class="err">Z</span><span class="s2">&quot;}},{&quot;</span><span class="kc">t</span><span class="err">ype</span><span class="s2">&quot;:&quot;</span><span class="err">SAY</span><span class="s2">&quot;,&quot;</span><span class="err">respo</span><span class="kc">nse</span><span class="s2">&quot;:&quot;</span><span class="err">Sure</span><span class="p">,</span><span class="w"> </span><span class="err">le</span><span class="kc">t</span><span class="w"> </span><span class="err">me</span><span class="w"> </span><span class="err">check</span><span class="w"> </span><span class="kc">f</span><span class="err">or</span><span class="w"> </span><span class="err">available</span><span class="w"> </span><span class="err">mee</span><span class="kc">t</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="w"> </span><span class="err">slo</span><span class="kc">ts</span><span class="w"> </span><span class="err">wi</span><span class="kc">t</span><span class="err">h</span><span class="w"> </span><span class="err">Alex</span><span class="w"> </span><span class="err">W</span><span class="w"> </span><span class="kc">t</span><span class="err">oday.</span><span class="s2">&quot;}]}&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Decoded, here's the JSON inside <code>content</code>:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;plan&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;commands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DO&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;findMeetingTimes&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;colleague&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alex W&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;startTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-03-19T08:20:44.024Z&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;endTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-03-20T08:20:44.024Z&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SAY&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sure, let me check for available meeting slots with Alex W today.&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>It looks like it can't use Dates objects to create a response. But maybe I'm missing something?</p>
+<h4 id="monologue">Monologue</h4>
+<p>The <code>monologue</code> augmentation is also nice but more limited compared to what we saw with <code>sequence</code> one. Like explained earlier, during user's interaction with the AI system, it will have a chain-to-reason flow where the AI system will try to understand user's intent with self-reasoning.</p>
+<p>Even if more limited because there's no DO-SAY plan, it's really interesting to see the "thinking" process made by the AI system.</p>
+<p>Below the example when user requests meeting slots with a colleague, which supposes to trigger the <code>findMeetingTimes</code> action that requires at least the <code>colleague</code> parameter.</p>
+<p>User request:</p>
+<blockquote>
+<p>Find meeting slots with a colleague</p>
+</blockquote>
+<p>AI system reasoning:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;thoughts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;thought&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The User called the &#39;findMeetingTimes&#39; action, but did not provide any arguments. I will ask them to provide the necessary information.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;reasoning&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;I cannot find meeting slots without knowing who the User wants to meet with and when they are available. Asking the User to provide the necessary information is the best course of action.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;plan&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;- Ask the User to provide the name of the colleague they want to meet with.\\n- If the User provides a duration, ask them to provide it.\\n- If the User provides a start time, ask them to provide it.\\n- If the User provides an end time, ask them to provide it.&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SAY&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sure, I can help you find meeting slots with a colleague. Can you please tell me the name of the colleague you want to meet with?&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Once requested colleague provided (here "Megan B"), here's the chat response:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;thoughts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;thought&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The User wants to find meeting slots with Megan B. I will check if the User provided any additional information and use default values if necessary.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;reasoning&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Now that I know who the User wants to meet with, I need to check if they provided any additional information. If they did not, I will use default values for the start and end times and duration.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;plan&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;- Check if the User provided a duration.\\n- If not, use the default duration of 60 minutes.\\n- Check if the User provided a start time.\\n- If not, use the current time as the start time.\\n- Calculate the end time by adding the duration to the start time.\\n- Use the Microsoft Graph API to find available meeting slots between the start and end times for Megan B.\\n- Return the available meeting slots to the User.&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;findMeetingTimes&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;colleague&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Megan B&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;duration&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;startTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-03-19T13:52:15.205Z&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;endTime&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-03-20T13:52:15.205Z&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>And here's the provided answer generated through code:</p>
+<p><img alt="Teams AI meeting slots found" src="../../images/articles/20240327/teams-ai-meeting-slots.png" /></p>
+<p>Remember that in the prompt, we provided additional info as default values to help the AI system, such as duration, current &amp; start time,...</p>
+<p>What I find very nice is how it processes internally to get the appropriate answer from user's request.</p>
+<h3 id="moderation">Moderation</h3>
+<p>Of course by default, the Azure AI built-in content filtering system included in the Azure OpenAI deployment will work and will trigger the following message:</p>
+<blockquote>
+<p>The bot encountered unhandled error: The response was filtered due to the prompt triggering Azure OpenAI's content management policy. Please modify your prompt and retry. To learn more about our content filtering policies please read our documentation: https://go.microsoft.com/fwlink/?linkid=2198766</p>
+</blockquote>
+<p>But what we want here is to handle the moderation through the app, in order to trigger specific action or send a custom message to the user.</p>
+<p>Another cool built-in features in Teams AI is content filtering system. We can reference Azure AI Content Safety resources to better handle both input and output. Detailed documentation about content filtering can be found <a href="https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter?WT.mc_id=M365-MVP-5005200" target="_blank">here</a>.</p>
+<p>In the app initialization, you can define an <code>AzureContentSafetyModerator</code> object:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">appContext.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">moderator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">AzureContentSafetyModerator</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">apiKey</span><span class="o">:</span><span class="w"> </span><span class="kt">config.azContentSafetyKey</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">endpoint</span><span class="o">:</span><span class="w"> </span><span class="kt">config.azContentSafetyEndpoint</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">model</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;gpt-3.5-turbo&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">moderate</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;both&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">categories</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Hate&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">severity</span><span class="o">:</span><span class="w"> </span><span class="kt">ModerationSeverity.High</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;SelfHarm&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">severity</span><span class="o">:</span><span class="w"> </span><span class="kt">ModerationSeverity.High</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Sexual&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">severity</span><span class="o">:</span><span class="w"> </span><span class="kt">ModerationSeverity.High</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Violence&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">severity</span><span class="o">:</span><span class="w"> </span><span class="kt">ModerationSeverity.High</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">});</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code>azContentSafetyKey</code> and <code>azContentSafetyEndpoint</code> config properties are not generated by Teams Toolkit during the compilation process: they have to be filled manually in the user <em>.env.local</em> file (as secrets), through their respectful properties <code>SECRET_AZURE_CONTENT_SAFETY_KEY</code> and <code>SECRET_AZURE_CONTENT_SAFETY_ENDPOINT</code>.</p>
+</div>
+<p>There are categories for which we can set a sensitivity level. We can also indicate if we want to filter <em>input</em>, <em>output</em> or both of them.</p>
+<p>Once declared, the <code>moderator</code> constant can be included in the <code>app</code> declaration (in the <code>bot-sequence.ts</code> or <code>bot-monologue.ts</code> files):</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// ...</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">ApplicationTurnState</span><span class="p">,</span><span class="w"> </span><span class="nx">moderator</span><span class="p">,</span><span class="w"> </span><span class="nx">planner</span><span class="p">,</span><span class="w"> </span><span class="nx">scopes</span><span class="p">,</span><span class="w"> </span><span class="nx">storage</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;../appContext&quot;</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">context</span><span class="o">:</span><span class="w"> </span><span class="kt">TurnContext</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">app</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="nx">context</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">app</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">appBuilderService</span><span class="o">&lt;</span><span class="nx">ApplicationTurnState</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">storage</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">planner</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">moderator</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">adapter</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">config</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">scopes</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">app</span><span class="p">;</span>
+
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">app</span><span class="p">;</span>
+<span class="c1">//...</span>
+</code></pre></div></td></tr></table></div>
+<p>Of course, we want to "catch" the flagged input or output. For this, we'll use dedicated actions described here:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">appBuilderService.ts</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">//...</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">appBuilderService</span><span class="o">&lt;</span><span class="nx">T</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">TurnState</span><span class="o">&lt;</span><span class="nx">DefaultConversationState</span><span class="p">,</span><span class="w"> </span><span class="nx">DefaultUserState</span><span class="p">,</span><span class="w"> </span><span class="nx">DefaultTempState</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">private</span><span class="w"> </span><span class="nx">_app</span><span class="o">:</span><span class="w"> </span><span class="kt">Application</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="w">  </span><span class="kr">constructor</span><span class="p">(</span><span class="nx">storage</span><span class="o">:</span><span class="w"> </span><span class="kt">Storage</span><span class="p">,</span><span class="w"> </span><span class="nx">planner</span><span class="o">:</span><span class="w"> </span><span class="kt">Planner</span><span class="p">,</span><span class="w"> </span><span class="nx">moderator</span><span class="o">:</span><span class="w"> </span><span class="kt">Moderator</span><span class="p">,</span><span class="w"> </span><span class="nx">adapter</span><span class="o">:</span><span class="w"> </span><span class="kt">TeamsAdapter</span><span class="p">,</span><span class="w"> </span><span class="nx">config</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">,</span><span class="w"> </span><span class="nx">permissions</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//...</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">_app</span><span class="p">.</span><span class="nx">ai</span><span class="p">.</span><span class="nx">action</span><span class="p">(</span><span class="nx">AI</span><span class="p">.</span><span class="nx">FlaggedInputActionName</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">context</span><span class="p">,</span><span class="w"> </span><span class="nx">_state</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">await</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">sendActivity</span><span class="p">(</span><span class="sb">`I&#39;m sorry your message was flagged: </span><span class="si">${</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">AI</span><span class="p">.</span><span class="nx">StopCommandName</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="nx">_app</span><span class="p">.</span><span class="nx">ai</span><span class="p">.</span><span class="nx">action</span><span class="p">(</span><span class="nx">AI</span><span class="p">.</span><span class="nx">FlaggedOutputActionName</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">context</span><span class="p">,</span><span class="w"> </span><span class="nx">_state</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">await</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">sendActivity</span><span class="p">(</span><span class="sb">`I&#39;m not allowed to talk about such things.`</span><span class="p">);</span>
+<span class="w">      </span><span class="k">await</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">sendActivity</span><span class="p">(</span><span class="sb">`I&#39;m sorry the output message was flagged: </span><span class="si">${</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">AI</span><span class="p">.</span><span class="nx">StopCommandName</span><span class="p">;</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="c1">//...</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>Now let's give a try! For the input side, we'll simply enter something a bit aggressive to trigger the moderation:</p>
+<p><img alt="Teams AI flagged input" src="../../images/articles/20240327/teams-ai-flagged-input.png" /></p>
+<p>The response of the Azure AI Content Safety is the following:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;flagged&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;hate&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;hate/threatening&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;self-harm&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sexual&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sexual/minors&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;violence&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;violence/graphic&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;category_scores&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;hate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3333333333333333</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;hate/threatening&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3333333333333333</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;self-harm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sexual&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sexual/minors&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;violence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;violence/graphic&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>As we can see, the categories <code>hate</code> and <code>date/threatening</code> were triggered by the message and there's a score (from 0 to 1) that gives a hint how important the flag was detected.</p>
+<p>But what about output then? As we know, when using Azure OpenAI services, there's the principle of <a href="https://learn.microsoft.com/azure/ai-services/openai/overview#responsible-ai?WT.mc_id=M365-MVP-5005200" target="_blank">Responsible AI</a> which protects LLMs from being aggressive or harmful towards humans. So for example, if we ask the model to insult us, it won't. So how can we try the output flag moderation?</p>
+<p>Let's ask it to summarize the content of an online news article:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">warning</label><label for="__tabbed_12_2">output flag</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <strong>output flag</strong> tab contains example of harmful content that may be disturbing to some readers.</p>
+</div>
+</div>
+<div class="tabbed-block">
+<p><img alt="Teams AI flagged output" src="../../images/articles/20240327/teams-ai-flagged-output.png" /></p>
+</div>
+</div>
+</div>
+<p>The response of the Azure AI Content Safety is the following:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;flagged&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;hate&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;hate/threatening&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;self-harm&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sexual&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sexual/minors&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;violence&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;violence/graphic&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;category_scores&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;hate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;hate/threatening&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;self-harm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sexual&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;sexual/minors&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;violence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3333333333333333</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;violence/graphic&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3333333333333333</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Now in the output context, it's the categories <code>violence</code> and <code>violence/graphic</code> that were triggered when asked the model to summarize article's content and again, there's a score (from 0 to 1) that gives a hint how important the flag was detected.</p>
+<h2 id="watchout">Watchout</h2>
+<p>Below a few things to point out as a memo.</p>
+<h3 id="documentation">Documentation</h3>
+<p>As the documentation provided on Microsoft Learn is lightweight at the time I wrote this article, there are more info directly in the source code, like <a href="https://github.com/microsoft/teams-ai/blob/main/js/packages/teams-ai/src/planners/LLMClient.ts#L135">here</a> or <a href="https://github.com/microsoft/teams-ai/blob/main/js/packages/teams-ai/src/augmentations/MonologueAugmentation.ts#L103">here</a> for example. So feel free to deep dive into the code to learn more.</p>
+<h3 id="await">Await</h3>
+<p>Always use <code>await</code> when sending activities to the user. Otherwise, you'll face errors like this:</p>
+<blockquote>
+<p>TypeError: Cannot perform 'set' on a proxy that has been revoked</p>
+</blockquote>
+<h3 id="aistopcommandname">AI.StopCommandName</h3>
+<p>When performing an <em>action</em>, think twice before using the <code>AI.StopCommandName</code> in the return statement. Use it when you don't want the AI system to handle response for you and if you want to actually stop the current plan initiated.</p>
+<p>Otherwise, you can let it continue the process, which could be useful if for example you're starting to create a list of things, then adding items in it sequentially. Or if the AI system can handle the response for you because it already knows the answer (see actions in the <code>bot-sequence.ts</code> file for such examples).</p>
+<h3 id="action-misspelling-and-users-intent-misunderstanding">Action misspelling and user's intent misunderstanding</h3>
+<p>If you misspelled an action in the code or forget to implement it, nothing will happen on the surface but the Terminal window in VS Code will mention this:</p>
+<blockquote>
+<p>An AI action named "getUserColleagues" was predicted but no handler was registered.</p>
+</blockquote>
+<p>In this use case, I've focused both prompt and functions on the <strong>user</strong>. I tried to do the same with the <strong>colleague</strong> but I met some issues from the LLM to understand my queries.</p>
+<h3 id="azure-openai-api-preview-version">Azure OpenAI API preview version</h3>
+<p>When using a model deployment, you're referring to a version ('2023-07-01-preview', '2023-12-01-preview', '2024-02-01'...). Each new version contains new parameters, new features.</p>
+<p>As Microsoft publish new preview versions each month, they also retire "old" ones. So be careful if you're using preview versions, you could receive an email from Microsoft, warning you that old ones will be retired:</p>
+<p><img alt="Azure OpenAI API preview version retirement" src="../../images/articles/20240327/teams-ai-azure-openai-api-retirement.png" /></p>
+<p>More info regarding API version deprecation <a href="https://learn.microsoft.com/azure/ai-services/openai/api-version-deprecation?WT.mc_id=M365-MVP-5005200">here</a></p>
+<h2 id="personal-feedback">Personal feedback</h2>
+<p>During my tests, at first I found that the <code>monologue</code> augmentation was the best for my use case. But then I realized that the <code>sequence</code> one could benefit from the completion feature which can provide answers if we give it context variables needed to perform actions. Useful if you require info that doesn't need to be queried.</p>
+<p>As I'm not a prompt expert neither an LLM or a Teams AI one, I've probably missed some key points on how to leverage the library as its best. But I'm really surprised how far we can go with this library and I'm looking forward to other's feedback!</p>
+<h2 id="thats-it">That's it</h2>
+<p>We've seen on the surface that Teams AI is a really powerful library but needs extra documentation beyond available samples. Below some personal expectations regarding new features:</p>
+<ul>
+<li>Support of stream mode (even if not part of Teams Client natively): <a href="https://github.com/microsoft/teams-ai/issues/185">https://github.com/microsoft/teams-ai/issues/185</a></li>
+<li>Native support of text-to-image &amp; image-to-text models, such as Dall-E</li>
+<li>OpenAI spec support as additional augmentation</li>
+</ul>
+<p>I hope that you've found in this article some additional info that will help you in your Teams AI journey. Feel free to reach out on Twitter or directly in the sample repo if there's something you'd like to fix / improve / add.</p>
+<p>Happy coding!</p>
+<h2 id="useful-links">Useful Links</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/microsoftteams/platform/bots/how-to/teams%20conversational%20ai/teams-conversation-ai-overview?WT.mc_id=M365-MVP-5005200" target="_blank">Teams AI library overview</a></li>
+<li><a href="https://github.com/microsoft/teams-ai/blob/main/getting-started/README.md" target="_blank">Teams AI Getting started</a></li>
+<li><a href="https://learn.microsoft.com/microsoftteams/platform/toolkit/provision?pivots=visual-studio-code-v5&amp;WT.mc_id=M365-MVP-5005200" target="_blank">Teams Toolkit cloud resources provisioning</a></li>
+<li><a href="https://learn.microsoft.com/microsoftteams/platform/toolkit/aad-manifest-customization?source=recommendations&amp;WT.mc_id=M365-MVP-5005200" target="_blank">Teams Toolkit - Update Microsoft Entra manifest</a></li>
+<li><a href="https://learn.microsoft.com/azure/ai-services/openai/quotas-limits?WT.mc_id=M365-MVP-5005200" target="_blank">Azure OpenAI Service quotas and limits</a></li>
+<li><a href="https://bbycroft.net/llm" target="_blank">LLM Visualization</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/michaelmaillot" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/michaelmaillot" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mvp.microsoft.com/PublicProfile/5005200" target="_blank" rel="noopener" title="mvp.microsoft.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M0 32h214.6v214.6H0V32zm233.4 0H448v214.6H233.4V32zM0 265.4h214.6V480H0V265.4zm233.4 0H448V480H233.4V265.4z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.bd41221c.min.js"></script>
+      
+    
+  </body>
+</html>
